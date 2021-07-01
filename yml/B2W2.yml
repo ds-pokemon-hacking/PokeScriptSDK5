@@ -1607,7 +1607,7 @@
         - targetZ
         - interval
     Brief: "TODO"
-    PSPackage: events.EVCamera
+    PSPackage: event.EVCamera
     PSName: MoveTo
 
 0x144:
