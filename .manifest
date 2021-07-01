@@ -1,0 +1,7 @@
+MultiRelease: false
+SingleTargetPlatform: EV_SWAN
+SourceDirectories:
+  - EV_SWAN: src
+
+ProductIdentifier: ctrmap.sdk5
+ProductName: "CTRMap PokéScript SDK (Generation V)"

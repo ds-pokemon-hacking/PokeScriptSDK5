@@ -1,0 +1,2016 @@
+0x0:
+    Name: Nop
+    Brief: "Does nothing."
+    PSPackage: pokescript.vm.VM
+
+0x1:
+    Name: Nop2
+    Brief: "Does nothing."
+    PSPackage: pokescript.vm.VM
+
+0x2:
+    Name: EndScript
+    IsEnd: true
+    IsScriptEnd: true
+    Brief: "Ends a script."
+    PSPackage: pokescript.vm.VM
+
+0x3:
+    Name: ReturnAfterDelay
+    Parameters:
+        - ushort
+    ParamNames:
+        - num
+    Brief: "Pauses execution for num frames. (30 frames in the overworld = 1 second)."
+    PSPackage: pokescript.vm.VM
+    PSName: Suspend
+
+0x4:
+    Name: CallRoutine
+    Parameters:
+        - int
+    ParamNames:
+        - addr
+    HasFunction: true
+    Brief: "Jumps to a relative script branch and transfers the program counter to it."
+    PSPackage: pokescript.vm.VM
+
+0x5:
+    Name: EndRoutine
+    IsEnd: true
+    Brief: "Ends the current script branch and returns the program counter to the original script (?)."
+    PSPackage: pokescript.vm.VM
+
+0x6:
+    Name: DerefAndReturn
+    Brief: "TODO"
+    PSPackage: pokescript.vm.VM
+
+0x7:
+    Name: PopDerefVar
+    Parameters:
+        - ushort
+    ParamNames:
+        - unused
+    Brief: "TODO"
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: PopAndDeref
+
+0x8:
+    Name: PushStackConst
+    Parameters:
+        - const ushort
+    ParamNames:
+        - var
+    Brief: "Pushes a variable onto the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: PushConst
+
+0x9:
+    Name: PushStackVar
+    Parameters:
+        - ushort
+    ParamNames:
+        - var
+    Brief: "Pushes a variable's value onto the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: Push
+
+0xa:
+    Name: PopStackVar
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - var
+    ReturnParams:
+        - var
+    ReturnTypes:
+        - ushort
+    Brief: "Removes a variable from the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: PopTo
+
+0xb:
+    Name: PopStack
+    Brief: "Clears the stack (?)."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: Pop
+
+0xc:
+    Name: AddVars
+    Brief: "Adds two variables on the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: StackAdd
+
+0xd:
+    Name: SubVars
+    Brief: "Subtracts two variables on the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: StackSub
+
+0xe:
+    Name: MultiplyVars
+    Brief: "Multiplies two variables on the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: StackMul
+
+0xf:
+    Name: DivideVars
+    Brief: "Divides two variables on the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: StackDiv
+
+0x10:
+    Name: PushFlag
+    Parameters:
+        - ushort
+    ParamNames:
+        - flag
+    Brief: "Stores the flag on the stack(?)."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: PushFlag
+
+0x11:
+    Name: CompareStack
+    Parameters:
+        - ushort
+    ParamNames:
+        - cond
+    Brief: "Compares the two topmost elements of the stack based on a condition and pushes the result back onto the stack."
+    PSPackage: pokescript.vm.StackCtrl
+    PSName: StackCmp
+
+0x12:
+    Name: AndDerefToVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - operand
+    Brief: "var &= operand"
+    PSPackage: pokescript.vm.Math
+    PSName: UpdateVarAnd
+
+0x13:
+    Name: OrDerefToVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - operand
+    Brief: "var |= operand"
+    PSPackage: pokescript.vm.Math
+    PSName: UpdateVarOr
+
+0x14:
+    Name: StoreU8Global
+    Parameters:
+        - byte
+        - byte
+    ParamNames:
+        - targetVar
+        - val
+    Brief: "Stores an 8-bit integer in a global variable (referenced by id)."
+    PSPackage: pokescript.vm.VMVars
+    PSName: SetVar8
+
+0x15:
+    Name: StoreU32Global
+    Parameters:
+        - byte
+        - int
+    ParamNames:
+        - targetVar
+        - val
+    Brief: "Stores a 32-bit integer in a global variable (referenced by id)."
+    PSPackage: pokescript.vm.VMVars
+    PSName: SetVar32
+
+0x16:
+    Name: MoveGlobalVars
+    Parameters:
+        - byte
+        - byte
+    ParamNames:
+        - targetVar
+        - sourceVar
+    Brief: "TODO"
+    PSPackage: pokescript.vm.VMVars
+    PSName: CopyVar
+
+0x17:
+    Name: CompareGlobalVars
+    Parameters:
+        - byte
+        - byte
+    ParamNames:
+        - var1
+        - var2
+    WritesCondition: true
+    Brief: "Compares the values of two global variables (referenced by id)."
+    PSPackage: pokescript.vm.VMVars
+    PSName: CompareGVarGVar
+
+0x18:
+    Name: CompareGlobalToParam
+    Parameters:
+        - byte
+        - byte
+    ParamNames:
+        - var
+        - value
+    WritesCondition: true
+    Brief: "Compares the values of a global variable and a user supplied variable."
+    PSPackage: pokescript.vm.VMVars
+    PSName: CompareGVarConst
+
+0x19:
+    Name: CompareVarToParam
+    Parameters:
+        - ref ushort
+        - const ushort
+    ParamNames:
+        - var
+        - param
+    WritesCondition: true
+    Brief: "Compares the values of a variable and a user supplied number."
+    PSPackage: pokescript.vm.Math
+    PSName: CompareVarConst
+
+0x1a:
+    Name: CompareVars
+    Parameters:
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - var
+        - var
+    WritesCondition: true
+    Brief: "Compares the values of two variables."
+    PSPackage: pokescript.vm.Math
+    PSName: CompareVarVar
+
+0x1b:
+    Name: AddVirtualMachine
+    Parameters:
+        - const ushort
+    ParamNames:
+        - id
+    Brief: "Adds a scripting virtual machine."
+    PSPackage: pokescript.vm.VM
+
+0x1c:
+    Name: CallStd
+    Parameters:
+        - const ushort
+    ParamNames:
+        - id
+    Brief: "Calls a standard function implemented by GameFreak."
+    PSPackage: system.ScriptSystem
+    PSName: GlobalCall
+
+0x1d:
+    Name: EndStd
+    Brief: "Stops the standard function."
+    PSPackage: system.ScriptSystem
+    PSName: GlobalEnd
+
+0x1e:
+    Name: UnconditionalJump
+    Parameters:
+        - int
+    ParamNames:
+        - addr
+    HasFunction: true
+    IsJump: true
+    Brief: "Jumps to and sets the program counter to a relative script branch (whose distance is specified in addr)."
+    PSPackage: pokescript.vm.VM
+
+0x1f:
+    Name: ConditionalJump
+    Parameters:
+        - byte
+        - int
+    ParamNames:
+        - cond
+        - addr
+    HasFunction: true
+    IsJump: true
+    HasCondition: true
+    Brief: "Jumps to and sets the program counter to a relative script branch (whose distance is specified in addr), if the given condition is true."
+    PSPackage: pokescript.vm.VM
+
+0x20:
+    Name: ConditionalCall
+    Parameters:
+        - byte
+        - int
+    ParamNames:
+        - cond
+        - addr
+    HasFunction: true
+    HasCondition: true
+    Brief: "Jumps to but doesn't set the program counter to a relative script branch (whose distance is specified in addr), if the given condition is true."
+    PSPackage: pokescript.vm.VM
+
+0x21:
+    Name: SetMapEventStatusFlag
+    Parameters:
+        - ushort
+    ParamNames:
+        - val
+    Brief: "TODO"
+
+0x22:
+    Name: StoreMapTypeChange
+    Parameters:
+        - ushort
+    ParamNames:
+        - var(?)
+    Brief: "TODO"
+
+0x23:
+    Name: SetFlag
+    Parameters:
+        - ushort
+    ParamNames:
+        - flag
+    Brief: "Sets a given system flag to TRUE (1)."
+    PSPackage: system.EventFlags
+    PSName: Set
+
+0x24:
+    Name: ClearFlag
+    Parameters:
+        - ushort
+    ParamNames:
+        - flag
+    Brief: "Clears the state of a given system flag."
+    PSPackage: system.EventFlags
+    PSName: Clear
+
+0x25:
+    Name: ReadAndStoreFlag
+    Parameters:
+        - ushort
+        - ref ushort
+    ParamNames:
+        - flag
+        - var
+    ReturnParams:
+        - var
+    ReturnTypes:
+        - bool
+    Brief: "Reads the value of a flag, and stores it in var."
+    PSPackage: system.EventFlags
+    PSName: Get
+
+0x26:
+    Name: AddToVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - val
+    Brief: "Accesses the second variable, grabs the value of the variable, then adds it to the value in the first variable."
+    PSPackage: pokescript.vm.Math
+    PSName: UpdateVarAdd
+
+0x27:
+    Name: SubFromVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - val
+    Brief: "Accesses the second variable, grabs the value of the variable, then subtracts it from the value in the first variable."
+    PSPackage: pokescript.vm.Math
+    PSName: UpdateVarSub
+
+0x28:
+    Name: StoreInVar
+    Parameters:
+        - ref ushort
+        - const ushort
+    ParamNames:
+        - var
+        - val
+    Brief: "Stores val in the specified variable."
+    PSPackage: pokescript.vm.Math
+    PSName: VarSetConst
+
+0x29:
+    Name: CopyVar
+    Parameters:
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - dest
+        - src
+    ReturnParams:
+        - dest
+    ReturnTypes:
+        - ushort
+    Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value"
+    PSPackage: system.EventWorks
+    PSName: WorkGet
+
+0x2a:
+    Name: StoreDerefVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - dest
+        - src
+    ReturnParams:
+        - dest
+    ReturnTypes:
+        - ushort
+    Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value (?)"
+    PSPackage: system.EventWorks
+    PSName: WorkSet
+
+0x2b:
+    Name: MultiplyVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - val
+    Brief: "Multiplies the value of var by val. Also known as: var.value *= val"
+    PSPackage: pokescript.vm.Math
+    PSName: UpdateVarMul
+
+0x2c:
+    Name: DivideVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - val
+    Brief: "Divides the value of var by val. Also known as: var.value /= val"
+    PSPackage: pokescript.vm.Math
+    PSName: UpdateVarDiv
+
+0x2d:
+    Name: ModulusVar
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - val
+    Brief: "Divides the value of var by val and returns the remainder of the operation. Also known as: var.value %= val"
+    PSPackage: pokescript.vm.Math
+    PSName: UpdateVarMod
+
+0x2e:
+    Name: LockAll
+    Brief: "Freezes all NPCs."
+    PSPackage: system.Interact
+
+0x2f:
+    Name: UnlockAll
+    Brief: "Unfreezes all NPCs."
+    PSPackage: system.Interact
+
+0x30:
+    Name: ExecuteSpecialEvent
+    Brief: "TODO"
+
+0x31:
+    Name: WaitKeypressAB
+    Brief: "Waits until \"A\" or \"B\" is pressed."
+    PSPackage: system.Interact
+
+0x32:
+    Name: WaitKeypress
+    Brief: "Waits until any key is pressed."
+    PSPackage: system.Interact
+
+0x33:
+    Name: MusicalMessage
+    Parameters:
+        - const ushort
+    ParamNames:
+        - id
+    Brief: "Opens a message with music."
+    PSPackage: event.dialogs.Message
+    PSName: Musical
+
+0x34:
+    Name: EventGrayMessage
+    Parameters:
+        - ushort
+        - const ushort
+    ParamNames:
+        - id
+        - pos
+    Brief: "Opens an event-gray message box."
+    PSPackage: event.dialogs.Message
+    PSName: EventGray
+
+0x35:
+    Name: NextEventGrayMessage
+    Parameters:
+        - ushort
+        - const ushort
+    ParamNames:
+        - id
+        - pos
+    Brief: "Opens another event-gray message box."
+    PSPackage: event.dialogs.Message
+    PSName: EventGrayNext
+
+0x36:
+    Name: CloseEventGrayMessage
+    Brief: "Closes an event-gray message box."
+    PSPackage: event.dialogs.Message
+    PSName: EventGrayClose
+
+0x37:
+    Name: CMD_37
+    Parameters:
+        - ushort
+    ParamNames:
+        - unk
+    Brief: "TODO"
+
+0x38:
+    Name: UnassociatedMessage
+    Parameters:
+        - ushort
+        - byte
+    ParamNames:
+        - id
+        - pos
+    Brief: "Opens a message which isn't associated with an NPC."
+    PSPackage: event.dialogs.Message
+    PSName: Unassociated
+
+0x39:
+    Name: CloseUnassociatedMessage
+    Brief: "Closes the message which isn't associated with an NPC."
+    PSPackage: event.dialogs.Message
+    PSName: UnassociatedClose
+
+0x3a:
+    Name: PositionalMessage
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - id
+        - x
+        - y
+        - type
+    Brief: "Opens a message at position (x, y)."
+    PSPackage: event.dialogs.Message
+    PSName: Positional
+
+0x3b:
+    Name: ClosePositionalMessage
+    Parameters:
+        - ushort
+    ParamNames:
+        - unk
+    Brief: "Closes the positional message."
+    PSPackage: event.dialogs.Message
+    PSName: PositionalClose
+
+0x3c:
+    Name: NPCMessage
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - textFile
+        - msgId
+        - npc
+        - pos
+        - type
+    Brief: "Opens a message with the tail to an NPC."
+    PSPackage: event.dialogs.Message
+    PSName: NPC
+
+0x3d:
+    Name: NonNPCMessage
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - textFile
+        - msgId
+        - pos
+        - type
+    Brief: "Opens a message without the tail."
+    PSPackage: event.dialogs.Message
+    PSName: NonNPC
+
+0x3e:
+    Name: CloseSpecificMessageOnKeypress
+    Brief: "Closes a message when a key is pressed."
+    PSPackage: event.dialogs.Message
+    PSName: CloseOnKeyPress
+
+0x3f:
+    Name: CloseMessageOnKeypress
+    Brief: "Closes a message when a key is pressed. Not sure what makes this different just yet."
+    PSPackage: event.dialogs.Message
+    PSName: CloseAllOnKeyPress
+
+0x40:
+    Name: ShowMoneyBox
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - x
+        - y
+    Brief: "Shows the money box at coords (x, y)."
+    PSPackage: event.dialogs.MoneyBox
+    PSName: Show
+
+0x41:
+    Name: CloseMoneyBox
+    Brief: "Closes the money box."
+    PSPackage: event.dialogs.MoneyBox
+    PSName: Close
+
+0x42:
+    Name: UpdateMoneyBox
+    Brief: "Updates the values in the money box."
+    PSPackage: event.dialogs.MoneyBox
+    PSName: Update
+
+0x43:
+    Name: BorderedMessage
+    Parameters:
+        - ushort
+        - const ushort
+    ParamNames:
+        - id
+        - pos
+    Brief: "Opens a message with a border."
+    PSPackage: event.dialogs.Message
+    PSName: Bordered
+
+0x44:
+    Name: CloseBorderedMessage
+    Brief: "Closes the bordered message."
+    PSPackage: event.dialogs.Message
+    PSName: BorderedClose
+
+0x45:
+    Name: CheckerMessage
+    Parameters:
+        - const ushort
+        - const ushort
+    ParamNames:
+        - msgId
+        - type
+    Brief: "Opens a message with a checkerboard background."
+    PSPackage: event.dialogs.Message
+    PSName: Checker
+
+0x46:
+    Name: CloseCheckerMessage
+    Brief: "Closes the checkerboard message."
+    PSPackage: event.dialogs.Message
+    PSName: CheckerClose
+
+0x47:
+    Name: YesNoBox
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - var
+    ReturnParams:
+        - var
+    ReturnTypes:
+        - bool
+    Brief: "Opens a box with two options, yes or no. The result of the choice made by the player is stored in var."
+    PSPackage: event.dialogs.YesNoBox
+    PSName: GetYesNoSelection
+
+0x48:
+    Name: GenderSpecificMessage
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - textFile
+        - id_m
+        - id_f
+        - npc
+        - pos
+        - type
+    Brief: "A message which changes depending on the player's gender."
+    PSPackage: event.dialogs.Message
+    PSName: NPCGendered
+
+0x49:
+    Name: VersionMessage
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - textFile
+        - id_b
+        - id_w
+        - npc
+        - pos
+        - type
+    Brief: "A message which changes depending on whether the game is Black or White."
+    PSPackage: event.dialogs.Message
+    PSName: NPCVersioned
+
+0x4a:
+    Name: SpikedMessage
+    Parameters:
+        - ushort
+        - byte
+    ParamNames:
+        - id
+        - pos
+    Brief: "Opens a message with a spiked border. Known as the angry message by some."
+    PSPackage: event.dialogs.Message
+    PSName: Spiked
+
+0x4b:
+    Name: CloseAllMessages
+    Brief: "Closes all messages on screen."
+    PSPackage: event.dialogs.Message
+    PSName: CloseAll
+
+0x4c:
+    Name: OTNameToStrbuf
+    Parameters:
+        - byte
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x4f:
+    Name: CMD_4F
+    Brief: "TODO"
+
+0x54:
+    Name: SetVarPartyPokemonNick
+    Parameters:
+        - byte
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x57:
+    Name: SetVarPoke
+    Parameters:
+        - byte
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x5c:
+    Name: SetVarNumberBound
+    Parameters:
+        - byte
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x64:
+    Name: ApplyMovement
+    Parameters:
+        - ushort
+        - int
+    ParamNames:
+        - id
+        - addr
+    HasMovement: true
+    Brief: "Gives a set of movements, located at addr, to the NPC with the id ID."
+    PSPackage: pokescript.vm.VM
+    PSName: ActionBranchInternal
+
+0x65:
+    Name: WaitMovement
+    Brief: "Waits for any NPC movement to stop before continuing script execution."
+    PSPackage: event.actors.Actions
+    PSName: WaitActionFinish
+
+0x66:
+    Name: StoreNPCPositionDeref
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x67:
+    Name: StoreNPCPosition
+    Parameters:
+        - ushort
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - npcId
+        - xStorage
+        - yStorage
+    ReturnParams:
+        - xStorage
+        - yStorage
+    ReturnTypes:
+        - ushort
+        - ushort
+    Brief: "Stores an NPC's XY grid location to two variables."
+    PSPackage: event.actors.Actors
+    PSName: GetActorPos/GetActorPosX/GetActorPosY
+
+0x68:
+    Name: StoreHeroPosition
+    Parameters:
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - xStorage
+        - yStorage
+    ReturnParams:
+        - xStorage
+        - yStorage
+    ReturnTypes:
+        - ushort
+        - ushort
+    Brief: "Stores the player's XY grid location to two variables."
+    PSPackage: event.actors.Player
+    PSName: GetPlayerPos/GetPlayerPosX/GetPlayerPosY/
+
+0x69:
+    Name: MakeNPC
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - x
+        - dir
+        - y
+        - id
+        - spr
+        - unk
+    Brief: "Spawns a new NPC with $id and $spr at $x $y $z."
+    PSPackage: event.actors.Actors
+    PSName: AddActor
+
+0x6a:
+    Name: CMD_6A
+    Parameters:
+        - ushort
+        - ref ushort
+    ParamNames:
+        - npcId
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+
+0x6b:
+    Name: ShowNPC
+    Parameters:
+        - ushort
+    ParamNames:
+        - id
+    Brief: "Shows the hidden NPC with the id ID."
+    PSPackage: event.actors.Actors
+    PSName: ShowActor
+
+0x6c:
+    Name: HideNPC
+    Parameters:
+        - ushort
+    ParamNames:
+        - id
+    Brief: "Hides the NPC with the id ID."
+    PSPackage: event.actors.Actors
+    PSName: HideActor
+
+0x6d:
+    Name: SetOWPosition
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - npcId
+        - x
+        - y
+        - z
+        - todo
+    Brief: "TODO"
+    PSPackage: event.actors.Actors
+    PSName: SetActorPos
+
+0x6e:
+    Name: StoreHeroOrientation
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: event.actors.Player
+    PSName: GetPlayerDir
+
+0x72:
+    Name: Lock
+    Parameters:
+        - ushort
+    ParamNames:
+        - id
+    Brief: "Freezes NPC specified by ID."
+    PSPackage: event.actors.Actors
+    PSName: LockActor
+
+0x74:
+    Name: FacePlayer
+    Brief: "Causes both the player and the NPC that this script is assigned to face each other."
+    PSPackage: event.actors.Actors
+
+0x75:
+    Name: CMD_75
+    Parameters:
+        - const ushort
+    ParamNames:
+        - arg1
+    Brief: "TODO"
+
+0x78:
+    Name: CMD_78
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - arg1
+    Brief: "TODO"
+
+0x79:
+    Name: CMD_79
+    Parameters:
+        - ushort
+        - ushort
+        - ref ushort
+    ParamNames:
+        - npcId
+        - paramIdx
+        - var
+    ReturnParams:
+        - var
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+
+0x7b:
+    Name: MoveNPCtoCoordinates
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - id
+        - num
+        - num
+        - num
+    Brief: "Moves NPC to specified XYZ coordinates on map (in that order)."
+
+0x7e:
+    Name: PlayTeleportEffect
+    Parameters:
+        - ushort
+    ParamNames:
+        - npcId
+    Brief: "TODO"
+    PSPackage: event.actors.ActorSequences
+    PSName: Teleport
+
+0x85:
+    Name: SoloTrainerBattle
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - trId1
+        - trId2
+        - flags
+    Brief: "TODO"
+    PSPackage: event.Battle
+    PSName: CallTrainerBattle
+
+0x86:
+    Name: DoubleTrainerBattle
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - allyId
+        - trId1
+        - trId2
+        - flags
+    Brief: "Begins a Multi Battle against two Trainers specified by params 2 and 3, with an ally specified by param 1. Win/loss logic is decided by parameter 4."
+    PSPackage: event.Battle
+    PSName: CallTrainerMultiBattle
+
+0x8a:
+    Name: GetBattleType
+    Parameters:
+        - ushort
+        - ref ushort
+    ParamNames:
+        - trId
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: event.Battle
+
+0x8b:
+    Name: PlayTrainerEyeBGM
+    Parameters:
+        - ushort
+    ParamNames:
+        - trId
+    Brief: "TODO"
+    PSPackage: event.Battle
+
+0x8c:
+    Name: CMD_8C
+    Brief: "TODO"
+
+0x8d:
+    Name: GetBattleResult
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - bool
+    Brief: "TODO"
+    PSPackage: event.Battle
+
+0x8e:
+    Name: DisableTrainer
+    Brief: "TODO"
+
+0x8f:
+    Name: BGMPlay
+    Parameters:
+        - ushort
+    ParamNames:
+        - id
+    Brief: "TODO"
+    PSPackage: system.Sound
+
+0x94:
+    Name: EventTrainerBattle
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - trId1
+        - trId2
+        - flags
+        - todo
+    Brief: "TODO"
+
+0x95:
+    Name: TrainerFlagSet
+    Parameters:
+        - ushort
+    ParamNames:
+        - trId
+    Brief: "TODO"
+    PSPackage: system.EventFlags
+
+0x96:
+    Name: TrainerFlagClear
+    Parameters:
+        - ushort
+    ParamNames:
+        - trId
+    Brief: "TODO"
+    PSPackage: system.EventFlags
+
+0x97:
+    Name: TrainerFlagGet
+    Parameters:
+        - ushort
+        - ref ushort
+    ParamNames:
+        - trId
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - bool
+    Brief: "TODO"
+    PSPackage: system.EventFlags
+
+0x98:
+    Name: BGMPlayConst
+    Parameters:
+        - const ushort
+    ParamNames:
+        - id
+    Brief: "Plays a music track corresponding to id in swan_sound_data.sdat."
+
+0x9e:
+    Name: FadeToDefaultMusic
+    Brief: "Fades out currently playing BGM track and plays the track assigned to the current map."
+
+0x9f:
+    Name: CMD_9F
+    Parameters:
+        - ushort
+    ParamNames:
+        - arg1
+    Brief: "TODO"
+
+0xa1:
+    Name: CMD_A1
+    Parameters:
+        - ushort
+    ParamNames:
+        - arg1
+    Brief: "TODO"
+
+0xa6:
+    Name: PlaySound
+    Parameters:
+        - ushort
+    ParamNames:
+        - id
+    Brief: "Plays a sound effect corresponding to id in swan_sound_data.sdat."
+
+0xa7:
+    Name: StopSound
+    Brief: "Stops a currently playing sound effect."
+
+0xa8:
+    Name: WaitSound
+    Brief: "Pauses execution until the sound effect ends."
+
+0xa9:
+    Name: PlayFanfare
+    Parameters:
+        - ushort
+    ParamNames:
+        - id
+    Brief: "Plays a fanfare corresponding to id in swan_sound_data.sdat."
+
+0xaa:
+    Name: WaitFanfare
+    Brief: "Pauses execution until the fanfare being played ends."
+
+0xab:
+    Name: PlayCry
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - pokeNo
+        - voiceNo
+    Brief: "Plays a cry corresponding to id in swan_sound_data.sdat."
+
+0xac:
+    Name: WaitCry
+    Brief: "Pauses execution until the cry being played ends."
+
+0xaf:
+    Name: SetWindowText
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0xb0:
+    Name: PauseAndClose
+    Brief: "TODO"
+
+0xb1:
+    Name: PauseAndClose2
+    Brief: "TODO"
+
+0xb2:
+    Name: Menu
+    Parameters:
+        - byte
+        - byte
+        - ushort
+        - byte
+        - const ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0xb3:
+    Name: FadeScreen
+    Parameters:
+        - const ushort
+        - const ushort
+        - const ushort
+        - const ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0xb4:
+    Name: WaitFade
+    Brief: "TODO"
+
+0xb7:
+    Name: CheckItemBagSpace
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - id
+        - val
+        - var
+    Brief: "TODO"
+
+0xc2:
+    Name: FastWarp
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0xc4:
+    Name: TeleportWarp
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0xcb:
+    Name: StoreRandomNumber
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - range
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+
+0xcf:
+    Name: StoreDay
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0xda:
+    Name: CMD_DA
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - arg1
+        - arg2
+        - arg3
+    Brief: "TODO"
+
+0xe0:
+    Name: StoreVersion
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0xe1:
+    Name: StoreGender
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0xe3:
+    Name: CMD_E3
+    Brief: "TODO"
+
+0xe7:
+    Name: ActivateRelocator
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0xf4:
+    Name: CMD_F4
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - arg2
+    Brief: "TODO"
+
+0xf9:
+    Name: AddMoney
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0xfa:
+    Name: TakeMoney
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0xfb:
+    Name: CheckMoney
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0xfd:
+    Name: AdjustHappiness
+    Parameters:
+        - ushort
+        - ushort
+        - const ushort
+    ParamNames:
+        - poke
+        - mode
+        - value
+    Brief: "Manipulates a Pokémon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
+
+0xfe:
+    Name: StoreSpecies
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0xff:
+    Name: StoreIfFormChange
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x103:
+    Name: CMD_103
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - var
+        - arg2
+    Brief: "TODO"
+
+0x104:
+    Name: HealPokemon
+    Brief: "TODO"
+
+0x105:
+    Name: RenamePokemon
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x10c:
+    Name: GivePokemon
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - result
+        - mon/var
+        - item
+        - lvl
+    Brief: "TODO"
+
+0x110:
+    Name: StorePokemonGender
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x125:
+    Name: CMD_125
+    Brief: "TODO"
+
+0x127:
+    Name: CMD_127
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x128:
+    Name: CMD_128
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x129:
+    Name: CMD_129
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x12a:
+    Name: CMD_12A
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x13b:
+    Name: CMD_13B
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x13d:
+    Name: CMD_13D
+    Brief: "TODO"
+
+0x13e:
+    Name: CMD_13E
+    Brief: "TODO"
+
+0x13f:
+    Name: MakeCamera
+    Brief: "TODO"
+
+0x140:
+    Name: StopCamera
+    Brief: "TODO"
+
+0x141:
+    Name: LockCamera
+    Brief: "TODO"
+
+0x142:
+    Name: ReleaseCamera
+    Brief: "TODO"
+
+0x143:
+    Name: MoveCamera
+    Parameters:
+        - fx16
+        - fx16
+        - fx32
+        - fx32
+        - fx32
+        - fx32
+        - const ushort
+    ParamNames:
+        - pitch
+        - yaw
+        - distance
+        - targetX
+        - targetY
+        - targetZ
+        - interval
+    Brief: "TODO"
+    PSPackage: events.EVCamera
+    PSName: MoveTo
+
+0x144:
+    Name: CMD_144
+    Brief: "TODO"
+
+0x145:
+    Name: EndCamera
+    Brief: "TODO"
+
+0x147:
+    Name: ResetCamera
+    Brief: "TODO"
+
+0x14a:
+    Name: FieldOpen
+    Brief: "Closes the Field module to free up resources for standalone events such as 3D cutscenes."
+
+0x14b:
+    Name: FieldClose
+    Brief: "Re-opens the Field module."
+
+0x151:
+    Name: ShowDiploma
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x153:
+    Name: CallPoke3Select
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - result
+    Brief: "Calls the starter selection and stores the result to a work value."
+
+0x154:
+    Name: Call3DDemo
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - seqId
+        - userParam
+    Brief: "Plays a 3D cutscene based on its ID and a user parameter for special cutscenes (ferris wheel)."
+
+0x155:
+    Name: OpenInterpoke
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x156:
+    Name: CallDendouDemo
+    Parameters:
+        - ushort
+    ParamNames:
+        - repeated
+    Brief: "Plays the Hall of Fame induction scene and the staff roll. The \"repeated\" param declares if the game should act like the HoF has already been entered before or not."
+
+0x175:
+    Name: CMD_175
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x197:
+    Name: CMD_197
+    Parameters:
+        - int
+        - int
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x19a:
+    Name: CMD_19A
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x19b:
+    Name: SetStatusCG
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x1a0:
+    Name: CMD_1A0
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x1a3:
+    Name: FlashBlackInstant
+    Brief: "TODO"
+
+0x1a4:
+    Name: Xtransceiver4
+    Brief: "TODO"
+
+0x1a5:
+    Name: Xtransceiver5
+    Brief: "TODO"
+
+0x1a6:
+    Name: CMD_1A6
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x1a7:
+    Name: Xtransceiver7
+    Brief: "TODO"
+
+0x1ab:
+    Name: FadeFromBlack
+    Brief: "Makes both screens black and fades out from it."
+
+0x1ac:
+    Name: FadeIntoBlack
+    Brief: "Fades both screens into black."
+
+0x1ad:
+    Name: FadeFromWhite
+    Brief: "Makes both screens white and fades out from it."
+
+0x1ae:
+    Name: FadeIntoWhite
+    Brief: "Fades both screens into white."
+
+0x1b1:
+    Name: CMD_1B1
+    Brief: "TODO"
+
+0x1d7:
+    Name: SetVarAffinityCheck
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x1d8:
+    Name: CMD_1D8
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x1f2:
+    Name: CMD_1F2
+    Brief: "TODO"
+
+0x209:
+    Name: CMD_209
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x227:
+    Name: CMD_227
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x23f:
+    Name: CMD_23F
+    Brief: "TODO"
+
+0x245:
+    Name: CMD_245
+    Parameters:
+        - ushort
+    ParamNames:
+        - arg1
+    Brief: "TODO"
+
+0x246:
+    Name: CMD_246
+    Parameters:
+        - const ushort
+    ParamNames:
+        - arg1
+    Brief: "TODO"
+
+0x24b:
+    Name: CMD_24B
+    Brief: "TODO"
+
+0x24c:
+    Name: CMD_24C
+    Brief: "TODO"
+
+0x24f:
+    Name: DetachNPCPair
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - id
+        - x
+        - y
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x250:
+    Name: AttachFollowNPC
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - id
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x253:
+    Name: CMD_253
+    Parameters:
+        - byte
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x262:
+    Name: CMD_262
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x263:
+    Name: CMD_263
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x273:
+    Name: GiveMedal
+    Parameters:
+        - ushort
+    ParamNames:
+        - medalId
+    Brief: "TODO"
+
+0x276:
+    Name: CMD_276
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x290:
+    Name: CMD_290
+    Parameters:
+        - byte
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x29f:
+    Name: DiscoverMedal
+    Parameters:
+        - ushort
+    ParamNames:
+        - medalId
+    Brief: "TODO"
+
+0x2a0:
+    Name: CMD_2A0
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - arg1
+        - arg2
+    Brief: "TODO"
+
+0x2d1:
+    Name: CMD_2D1
+    Parameters:
+        - ushort
+    ParamNames:
+        - todo
+    Brief: "TODO"
+
+0x2e5:
+    Name: GenerateHollowFromVars
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x2e8:
+    Name: CMD_2E8
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - bool
+        - arg2
+    Brief: "TODO"
+
+0x2e9:
+    Name: CMD_2E9
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - bool
+        - arg2
+    Brief: "TODO"
+
+0x2ee:
+    Name: Prop2EE
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - todo
+        - todo
+    Brief: "TODO"
+
+0x3e8:
+    Name: CMD_3E8
+    Brief: "TODO"
+
+0x3ee:
+    Name: CMD_3EE
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - arg1
+        - arg2
+        - arg3
+    Brief: "TODO"
+
+0x3f3:
+    Name: CMD_3F3
+    Brief: "TODO"
+
