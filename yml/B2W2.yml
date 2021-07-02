@@ -429,12 +429,8 @@
         - ref ushort
         - ushort
     ParamNames:
-        - dest
+        - dst
         - src
-    ReturnParams:
-        - dest
-    ReturnTypes:
-        - ushort
     Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value (?)"
     PSPackage: system.EventWorks
     PSName: WorkSet
@@ -1347,14 +1343,162 @@
     ReturnTypes:
         - ushort
     Brief: "TODO"
+    PSPackage: system.System
+    PSName: Random
+
+0xcc:
+    Name: StoreScrEnvTextFileNo
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: system.Runtime
+    PSName: GetTextFile
+
+0xcd:
+    Name: StoreDayPart
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: system.RTC
+    PSName: GetDayPart
 
 0xcf:
-    Name: StoreDay
+    Name: StoreDayOfWeek
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: system.RTC
+    PSName: GetDayOfWeek
+
+0xd0:
+    Name: StoreMonthAndDay
+    Parameters:
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - month
+        - day
+    ReturnParams:
+        - month
+        - day
+    ReturnTypes:
+        - ushort
+        - ushort
+    Brief: "TODO"
+    PSPackage: system.RTC
+    PSName: GetDate/GetMonthOfYear/GetDayOfMonth
+
+0xd1:
+    Name: StoreHourAndMinute
+    Parameters:
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - hour
+        - minute
+    ReturnParams:
+        - hour
+        - minute
+    ReturnTypes:
+        - ushort
+        - ushort
+    Brief: "TODO"
+    PSPackage: system.RTC
+    PSName: GetTime/GetHourOfDay/GetMinuteOfHour
+
+0xd2:
+    Name: StoreSeason
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: system.RTC
+    PSName: GetSeason
+
+0xd3:
+    Name: StoreStackCapacity
+    Brief: "TODO"
+
+0xd4:
+    Name: StorePlayerBirthdate
+    Parameters:
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - month
+        - day
+    ReturnParams:
+        - month
+        - day
+    ReturnTypes:
+        - ushort
+        - ushort
+    Brief: "TODO"
+    PSPackage: player.TrainerCard
+    PSName: GetBirthDate/GetBirthMonth/GetBirthDay
+
+0xd5:
+    Name: StoreGymBadgeStatus
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - badgeId
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: player.TrainerCard
+    PSName: HasBadge
+
+0xd6:
+    Name: GivePlayerBadge
     Parameters:
         - ushort
     ParamNames:
-        - todo
+        - badgeId
     Brief: "TODO"
+    PSPackage: player.TrainerCard
+    PSName: AddBadge
+
+0xd7:
+    Name: StoreCountPlayerBadges
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: player.TrainerCard
+    PSName: GetBadgeCount
 
 0xda:
     Name: CMD_DA
@@ -1396,41 +1540,239 @@
         - todo
     Brief: "TODO"
 
-0xf4:
-    Name: CMD_F4
+0xeb:
+    Name: StoreDaycareEggSeedStatus
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - result
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetEggSeedStatus
+
+0xec:
+    Name: BreedDaycarePokemon
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: BreedCurrent
+
+0xed:
+    Name: GenerateEggSeedToDaycare
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GenEggSeed
+
+0xee:
+    Name: StoreDaycarePokemonCount
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - result
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetPokemonCount
+
+0xef:
+    Name: StoreDaycareSpawnProbability
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - result
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetConceptionChance
+
+0xf0:
+    Name: DepositPartyPokeToDaycare
+    Parameters:
+        - ushort
+    ParamNames:
+        - poke
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: DepositPokemon
+
+0xf1:
+    Name: WithdrawDaycarePokeToParty
+    Parameters:
+        - ushort
+    ParamNames:
+        - dcPoke
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: WithdrawPokemon
+
+0xf2:
+    Name: StoreDaycareSpecies
     Parameters:
         - ref ushort
         - ushort
     ParamNames:
-        - var
-        - arg2
+        - result
+        - dcPoke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
     Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetPokemonSpecies
+
+0xf3:
+    Name: StoreDaycareForme
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - dcPoke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetPokemonForme
+
+0xf4:
+    Name: StoreDaycareLevel
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - dcPoke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetPokemonGrowLevel
+
+0xf5:
+    Name: StoreDaycareLevelDiff
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - dcPoke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetPokemonGrowLvDelta
+
+0xf6:
+    Name: StoreDaycareFee
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - dcPoke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetWithdrawalFee
+
+0xf7:
+    Name: SetupDaycareEnvironment
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - todo
+    ReturnParams:
+        - todo
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+
+0xf8:
+    Name: StoreDaycareGender
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - dcPoke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.Daycare
+    PSName: GetPokemonGender
 
 0xf9:
     Name: AddMoney
     Parameters:
         - ushort
     ParamNames:
-        - todo
+        - amount
     Brief: "TODO"
+    PSPackage: player.Wallet
+    PSName: AddMoney
 
 0xfa:
     Name: TakeMoney
     Parameters:
         - ushort
     ParamNames:
-        - todo
+        - amount
     Brief: "TODO"
+    PSPackage: player.Wallet
+    PSName: SubMoney
 
 0xfb:
     Name: CheckMoney
     Parameters:
-        - ushort
+        - ref ushort
         - ushort
     ParamNames:
-        - todo
-        - todo
+        - result
+        - neededAmount
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - bool
+    Brief: "Checks if the player has a sufficient amount of money."
+    PSPackage: player.Wallet
+    PSName: CanAfford
+
+0xfc:
+    Name: GetHappiness
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - poke
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
     Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetHappiness
 
 0xfd:
     Name: AdjustHappiness
@@ -1443,52 +1785,174 @@
         - mode
         - value
     Brief: "Manipulates a Pokémon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
+    PSPackage: pokemon.PokeParam
+    PSName: SetHappiness
 
 0xfe:
     Name: StoreSpecies
     Parameters:
-        - ushort
+        - ref ushort
         - ushort
     ParamNames:
-        - todo
-        - todo
+        - storage
+        - poke
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
     Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetSpecies
 
 0xff:
-    Name: StoreIfFormChange
-    Parameters:
-        - ushort
-        - ushort
-    ParamNames:
-        - todo
-        - todo
-    Brief: "TODO"
-
-0x103:
-    Name: CMD_103
+    Name: StoreForme
     Parameters:
         - ref ushort
         - ushort
     ParamNames:
-        - var
-        - arg2
+        - storage
+        - poke
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
     Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetForme
+
+0x100:
+    Name: CheckPartyPokerus
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParty
+    PSName: IsPokerusAny
+
+0x101:
+    Name: CheckPokeHPFull
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - poke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - bool
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: IsFullHealth
+
+0x102:
+    Name: CheckPokeIsEgg
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - poke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - bool
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: IsEgg
+
+0x103:
+    Name: CheckPartyCountByType
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - type
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "Returns the number of Pokémon in the party that match a certain conditon. (All/NonEgg/Battling-capable/Eggs/SanityEggs)"
+    PSPackage: pokemon.PokeParty
+    PSName: GetPokeCountByAttribute
 
 0x104:
     Name: HealPokemon
-    Brief: "TODO"
+    Brief: "Fully heals the player's party."
+    PSPackage: pokemon.PokeParty
+    PSName: RecoverAll
 
 0x105:
     Name: RenamePokemon
+    Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - result
+        - poke
+        - todo
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - bool
+    Brief: "Pops up a dialog for renaming a party Pokémon and stores its result."
+    PSPackage: pokemon.PokeParam
+    PSName: Rename
+
+0x108:
+    Name: StoreLearnedMovesCount
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - poke
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetLearnedMoveCount
+
+0x10a:
+    Name: StoreMove
+    Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - storage
+        - poke
+        - moveIdx
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetMove
+
+0x10b:
+    Name: LearnMove
     Parameters:
         - ushort
         - ushort
         - ushort
     ParamNames:
-        - todo
-        - todo
-        - todo
-    Brief: "TODO"
+        - poke
+        - moveIdx
+        - moveNo
+    Brief: "Teaches a move to a Pokémon. (wazaID == 0 > unlearn)"
+    PSPackage: pokemon.PokeParam
+    PSName: SetMove
 
 0x10c:
     Name: GivePokemon
@@ -1506,7 +1970,25 @@
         - success
     ReturnTypes:
         - bool
-    Brief: "Adds a Pokémon to the player's party. Fails if the party is full."
+    Brief: "A convenience method for AddPoke."
+    PSPackage: pokemon.PokeParty
+    PSName: AddPokeSimple
+
+0x10d:
+    Name: CheckPartyHasCondition
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - cond
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "Returns the index of the first Pokémon that is either an egg (1) or fainted (2)."
+    PSPackage: pokemon.PokeParty
+    PSName: GetPokeByCondition
 
 0x10e:
     Name: GivePokemonEx
@@ -1534,18 +2016,244 @@
         - success
     ReturnTypes:
         - bool
-    Brief: "TODO"
+    Brief: "Adds a Pokémon to the player's party. Fails if the party is full."
+    PSPackage: pokemon.PokeParty
+    PSName: AddPoke
+
+0x10f:
+    Name: GiveEgg
+    Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - success
+        - species
+        - forme
+    ReturnParams:
+        - success
+    ReturnTypes:
+        - bool
+    Brief: "Adds a Pokémon Egg to the player's party. Fails if the party is full."
+    PSPackage: pokemon.PokeParty
+    PSName: AddEgg
 
 0x110:
-    Name: StorePokemonGender
+    Name: StorePokemonField
+    Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - storage
+        - poke
+        - fieldID
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetParam
+
+0x111:
+    Name: SetPokeIV
     Parameters:
         - ushort
         - ushort
         - ushort
     ParamNames:
+        - poke
+        - fieldID
+        - value
+    Brief: "Sets the IV of a Pokémon to a given value. The IV field is 70 to 75."
+    PSPackage: pokemon.PokeParam
+    PSName: SetIV
+
+0x112:
+    Name: GetPokeEVTotal
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - poke
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "Returns the sum of all EVs of a party Pokémon."
+    PSPackage: pokemon.PokeParam
+    PSName: GetEVTotal
+
+0x113:
+    Name: GetIsPokeFromThisCartridge
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - result
+        - poke
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - bool
+    Brief: "Checks if the party Pokémon belongs to the player and was caught in this game version."
+    PSPackage: pokemon.PokeParam
+    PSName: IsFromThisGame
+
+0x114:
+    Name: StoreSpeciesCountInParty
+    Parameters:
+        - ushort
+        - ref ushort
+    ParamNames:
+        - species
+        - storage
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParty
+    PSName: GetPokeCountBySpecies
+
+0x115:
+    Name: StorePokemonHasMove
+    Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - storage
+        - moveNo
+        - poke
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "Checks if a party Pokémon knows a given move."
+    PSPackage: pokemon.PokeParam
+    PSName: HasMove
+
+0x116:
+    Name: StorePartyHasMove
+    Parameters:
+        - ref ushort
+        - ushort
+    ParamNames:
+        - storage
+        - moveNo
+    ReturnParams:
+        - storage
+    ReturnTypes:
+        - ushort
+    Brief: "Checks if any party Pokémon knows a given move."
+    PSPackage: pokemon.PokeParty
+    PSName: HasMoveAny
+
+0x117:
+    Name: SetPokemonForme
+    Parameters:
+        - ushort
+        - ushort
+    ParamNames:
+        - poke
+        - forme
+    Brief: "Changes a party Pokémon's forme."
+    PSPackage: pokemon.PokeParam
+    PSName: SetForme
+
+0x118:
+    Name: GetFirstPartyPokeOfSpecies
+    Parameters:
+        - ushort
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - species
+        - success
+        - storage
+    ReturnParams:
+        - success
+        - storage
+    ReturnTypes:
+        - bool
+        - ushort
+    Brief: "Gets the index of the first Pokémon of a species in the party."
+    PSPackage: pokemon.PokeParty
+    PSName: GetPokeBySpecies
+
+0x119:
+    Name: StoreIsPokemonFromWhiteForest
+    Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - result
+        - poke
         - todo
-        - todo
-        - todo
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - bool
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: IsFromWhiteForest
+
+0x11a:
+    Name: StorePokemonHatchDate
+    Parameters:
+        - ref ushort
+        - ref ushort
+        - ref ushort
+    ParamNames:
+        - year
+        - month
+        - day
+    ReturnParams:
+        - year
+        - month
+        - day
+    ReturnTypes:
+        - ushort
+        - ushort
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetHatchDate/GetHatchYear/GetHatchMonth/GetHatchDay
+
+0x11b:
+    Name: StorePokemonTypes
+    Parameters:
+        - ref ushort
+        - ref ushort
+        - ushort
+    ParamNames:
+        - type1
+        - type2
+        - poke
+    ReturnParams:
+        - type1
+        - type2
+    ReturnTypes:
+        - ushort
+        - ushort
+    Brief: "TODO"
+    PSPackage: pokemon.PokeParam
+    PSName: GetTypes/GetPrimaryType/GetSecondaryType
+
+0x11c:
+    Name: SetRotomForme
+    Parameters:
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - poke
+        - moveIdx
+        - forme
     Brief: "TODO"
 
 0x125:
