@@ -2390,6 +2390,10 @@
         - ref ushort
     ParamNames:
         - result
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - ushort
     Brief: "Calls the starter selection and stores the result to a work value."
 
 0x154:
@@ -2684,6 +2688,18 @@
     ParamNames:
         - arg1
         - arg2
+    Brief: "TODO"
+
+0x2a1:
+    Name: CMD_2A1
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - arg1
+    ReturnParams:
+        - arg1
+    ReturnTypes:
+        - ushort
     Brief: "TODO"
 
 0x2d1:
