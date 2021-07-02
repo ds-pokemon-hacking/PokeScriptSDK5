@@ -326,9 +326,13 @@
 0x22:
     Name: StoreMapTypeChange
     Parameters:
-        - ushort
+        - ref ushort
     ParamNames:
-        - var(?)
+        - var
+    ReturnParams:
+        - var
+    ReturnTypes:
+        - ushort
     Brief: "TODO"
 
 0x23:
@@ -1489,15 +1493,47 @@
 0x10c:
     Name: GivePokemon
     Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+        - ushort
+    ParamNames:
+        - success
+        - species
+        - forme
+        - lvl
+    ReturnParams:
+        - success
+    ReturnTypes:
+        - bool
+    Brief: "Adds a Pokémon to the player's party. Fails if the party is full."
+
+0x10e:
+    Name: GivePokemonEx
+    Parameters:
+        - ref ushort
+        - ushort
+        - ushort
+        - ushort
+        - ushort
         - ushort
         - ushort
         - ushort
         - ushort
     ParamNames:
-        - result
-        - mon/var
-        - item
+        - success
+        - species
+        - forme
         - lvl
+        - abil
+        - gender
+        - shiny
+        - item
+        - ball
+    ReturnParams:
+        - success
+    ReturnTypes:
+        - bool
     Brief: "TODO"
 
 0x110:
