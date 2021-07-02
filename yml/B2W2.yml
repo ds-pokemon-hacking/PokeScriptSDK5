@@ -484,6 +484,8 @@
 0x30:
     Name: ExecuteSpecialEvent
     Brief: "TODO"
+    PSPackage: system.Runtime
+    PSName: FinishAllEvents
 
 0x31:
     Name: WaitKeypressAB
@@ -1117,6 +1119,15 @@
     Brief: "TODO"
     PSPackage: system.Sound
 
+0x90:
+    Name: TrainerBGMPlay
+    Parameters:
+        - ushort
+    ParamNames:
+        - trID
+    Brief: "TODO"
+    PSPackage: system.Sound
+
 0x94:
     Name: EventTrainerBattle
     Parameters:
@@ -1172,9 +1183,24 @@
         - id
     Brief: "Plays a music track corresponding to id in swan_sound_data.sdat."
 
+0x9b:
+    Name: BGMIsPlaying
+    Parameters:
+        - ref ushort
+    ParamNames:
+        - result
+    ReturnParams:
+        - result
+    ReturnTypes:
+        - bool
+    Brief: "TODO"
+    PSPackage: system.Sound
+
 0x9e:
     Name: FadeToDefaultMusic
     Brief: "Fades out currently playing BGM track and plays the track assigned to the current map."
+    PSPackage: system.Sound
+    PSName: BGMReturn
 
 0x9f:
     Name: CMD_9F
@@ -1199,14 +1225,20 @@
     ParamNames:
         - id
     Brief: "Plays a sound effect corresponding to id in swan_sound_data.sdat."
+    PSPackage: system.Sound
+    PSName: SEPlay
 
 0xa7:
     Name: StopSound
     Brief: "Stops a currently playing sound effect."
+    PSPackage: system.Sound
+    PSName: SEStop
 
 0xa8:
     Name: WaitSound
     Brief: "Pauses execution until the sound effect ends."
+    PSPackage: system.Sound
+    PSName: SEWait
 
 0xa9:
     Name: PlayFanfare
@@ -1215,10 +1247,14 @@
     ParamNames:
         - id
     Brief: "Plays a fanfare corresponding to id in swan_sound_data.sdat."
+    PSPackage: system.Sound
+    PSName: MEPlay
 
 0xaa:
     Name: WaitFanfare
     Brief: "Pauses execution until the fanfare being played ends."
+    PSPackage: system.Sound
+    PSName: MEWait
 
 0xab:
     Name: PlayCry
@@ -1229,10 +1265,14 @@
         - pokeNo
         - voiceNo
     Brief: "Plays a cry corresponding to id in swan_sound_data.sdat."
+    PSPackage: system.Sound
+    PSName: VoicePlay
 
 0xac:
     Name: WaitCry
     Brief: "Pauses execution until the cry being played ends."
+    PSPackage: system.Sound
+    PSName: VoiceWait
 
 0xaf:
     Name: SetWindowText
