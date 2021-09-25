@@ -20,7 +20,7 @@
   Name: ReturnAfterDelay
   Parameters:
     - Name: num
-      Type: ushort
+      Type: const ushort
   Brief: "Pauses execution for num frames. (30 frames in the overworld = 1 second)."
   PSPackage: system.Runtime
   PSName: Suspend
@@ -62,7 +62,7 @@
   Name: PushValue
   Parameters:
     - Name: var
-      Type: ushort
+      Type: const ushort
   Brief: "Pushes a variable onto the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: PushConst
@@ -128,7 +128,7 @@
   Name: StackCmp
   Parameters:
     - Name: cond
-      Type: ushort
+      Type: const ushort
   Brief: "Compares the two topmost elements of the stack based on a condition and pushes the result back onto the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: StackCmp
@@ -218,7 +218,7 @@
     - Name: var
       Type: ref ushort
     - Name: param
-      Type: ushort
+      Type: const ushort
   WritesCondition: true
   Brief: "Compares the values of a variable and a user supplied number."
   PSPackage: pokescript.vm.Math
@@ -240,7 +240,7 @@
   Name: SpawnVM
   Parameters:
     - Name: id
-      Type: ushort
+      Type: const ushort
   Brief: "Adds a scripting virtual machine."
   PSPackage: pokescript.vm.VM
 
@@ -248,7 +248,7 @@
   Name: CallGlobal
   Parameters:
     - Name: id
-      Type: ushort
+      Type: const ushort
   Brief: "Calls a standard function implemented by GameFreak."
   PSPackage: system.Runtime
   PSName: GlobalCall
@@ -299,7 +299,7 @@
   Name: SetMapEventStatusFlag
   Parameters:
     - Name: val
-      Type: ushort
+      Type: const ushort
   Brief: "TODO"
 
 0x22:
@@ -368,7 +368,7 @@
     - Name: var
       Type: ref ushort
     - Name: val
-      Type: ushort
+      Type: const ushort
   Brief: "Stores val in the specified variable."
   PSPackage: pokescript.vm.Math
   PSName: VarSetConst
@@ -462,7 +462,7 @@
   Name: MusicalMessage
   Parameters:
     - Name: id
-      Type: ushort
+      Type: const ushort
   Brief: "Opens a message with music."
   PSPackage: event.dialogs.Message
   PSName: Musical
@@ -473,7 +473,7 @@
     - Name: id
       Type: ushort
     - Name: pos
-      Type: ushort
+      Type: const ushort
   Brief: "Opens an event-gray message box."
   PSPackage: event.dialogs.Message
   PSName: EventGray
@@ -484,7 +484,7 @@
     - Name: id
       Type: ushort
     - Name: pos
-      Type: ushort
+      Type: const ushort
   Brief: "Opens another event-gray message box."
   PSPackage: event.dialogs.Message
   PSName: EventGrayNext
@@ -538,7 +538,7 @@
   Name: ClosePositionalMessage
   Parameters:
     - Name: unk
-      Type: ushort
+      Type: const ushort
   Brief: "Closes the positional message."
   PSPackage: event.dialogs.Message
   PSName: PositionalClose
@@ -616,7 +616,7 @@
     - Name: id
       Type: ushort
     - Name: pos
-      Type: ushort
+      Type: const ushort
   Brief: "Opens a message with a border."
   PSPackage: event.dialogs.Message
   PSName: Bordered
@@ -631,10 +631,11 @@
   Name: CheckerMessage
   Parameters:
     - Name: msgId
-      Type: ushort
+      Type: const ushort
     - Name: type
       Type: byte
     - Type: byte
+    - Type: const ushort
   Brief: "Opens a message with a checkerboard background."
   PSPackage: event.dialogs.Message
   PSName: Checker
@@ -1038,17 +1039,17 @@
   Parameters:
     - Name: x
       Type: ushort
-    - Name: dir
-      Type: ushort
     - Name: y
       Type: ushort
-    - Name: id
+    - Name: dir
       Type: ushort
-    - Name: spr
+    - Name: uid
       Type: ushort
-    - Name: unk
+    - Name: objCode
       Type: ushort
-  Brief: "Spawns a new NPC with $id and $spr at $x $y $z."
+    - Name: moveCode
+      Type: ushort
+  Brief: "Spawns a new NPC with $id and $objcode at $x $y $z with MoveCode $moveCode."
   PSPackage: event.actors.Actors
   PSName: AddActor
 
@@ -1206,7 +1207,7 @@
   Name: WaitActorMovement
   Parameters:
     - Name: arg1
-      Type: ushort
+      Type: const ushort
   Brief: "TODO"
 
 0x76:
@@ -1512,14 +1513,14 @@
   Name: BGMPlayConst
   Parameters:
     - Name: id
-      Type: ushort
+      Type: const ushort
   Brief: "Plays a music track corresponding to id in swan_sound_data.sdat."
 
 0x9b:
   Name: BGMIsPlaying
   Parameters:
     - Name: unused_id
-      Type: ushort
+      Type: const ushort
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -1637,6 +1638,7 @@
     - Type: byte
     - Type: ushort
     - Type: byte
+    - Type: const ushort
   Brief: "TODO"
 
 0xae:
@@ -1646,15 +1648,16 @@
     - Type: byte
     - Type: ushort
     - Type: byte
+    - Type: const ushort
   Brief: "TODO"
 
 0xaf:
   Name: SetMultiboxText
   Parameters:
     - Name: msgId1
-      Type: ushort
+      Type: const ushort
     - Name: msgId2
-      Type: ushort
+      Type: const ushort
     - Type: ushort
   Brief: "TODO"
 
@@ -1681,6 +1684,11 @@
 
 0xb3:
   Name: FadeScreen
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0xb4:
@@ -1807,22 +1815,47 @@
 
 0xbe:
   Name: Warp
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0xbf:
   Name: SpinWarp
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0xc0:
   Name: CMD_C0
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0xc1:
   Name: FallSwirlWarp
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0xc2:
   Name: FastWarp
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0xc3:
@@ -1831,6 +1864,12 @@
 
 0xc4:
   Name: TeleportWarp
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0xc5:
@@ -2370,7 +2409,7 @@
     - Name: mode
       Type: ushort
     - Name: value
-      Type: ushort
+      Type: const ushort
   Brief: "Manipulates a Pokémon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
   PSPackage: pokemon.PokeParty
   PSName: SetHappiness
@@ -2479,6 +2518,11 @@
 
 0x107:
   Name: SelectEggForSpinTrade
+  Parameters:
+    - Type: const ushort
+    - Type: ref ushort
+    - Type: ref ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x108:
@@ -3066,9 +3110,9 @@
   Name: MoveCamera
   Parameters:
     - Name: pitch
-      Type: ushort
+      Type: const ushort
     - Name: yaw
-      Type: ushort
+      Type: const ushort
     - Name: distance
       Type: int
     - Name: targetX
@@ -3078,13 +3122,15 @@
     - Name: targetZ
       Type: int
     - Name: interval
-      Type: ushort
+      Type: const ushort
   Brief: "TODO"
   PSPackage: event.EVCamera
   PSName: MoveTo
 
 0x144:
   Name: CMD_144
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x145:
@@ -3097,11 +3143,14 @@
   Name: CommonCamera
   Parameters:
     - Name: id
-      Type: ushort
+      Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x147:
   Name: ResetCamera
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
   PSPackage: event.EVCamera
   PSName: Reset
@@ -3208,6 +3257,7 @@
   Name: CallXtransceiver
   Parameters:
     - Type: ushort
+    - Type: const ushort
   Brief: "TODO"
   PSPackage: event.FieldDemo
   PSName: CallXTransceiver
@@ -3418,10 +3468,14 @@
 
 0x17c:
   Name: CMD_17C
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x17d:
   Name: CMD_17D
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x186:
@@ -3430,30 +3484,45 @@
 
 0x187:
   Name: CMD_187
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x18c:
   Name: CMD_18C
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x18d:
   Name: CMD_18D
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x18e:
   Name: CMD_18E
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x18f:
   Name: CMD_18F
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x190:
   Name: CMD_190
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x191:
   Name: CMD_191
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x197:
@@ -3474,6 +3543,8 @@
 
 0x19a:
   Name: CGearWarning
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x19b:
@@ -3498,6 +3569,9 @@
   Name: CMD_1A1
   Parameters:
     - Type: ushort
+    - Type: const ushort
+    - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x1a2:
@@ -3673,6 +3747,10 @@
 
 0x1c9:
   Name: ShowGlowing
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x1ca:
@@ -3697,6 +3775,9 @@
 
 0x1ce:
   Name: CMD_1CE
+  Parameters:
+    - Type: const ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x1cf:
@@ -4370,6 +4451,7 @@
   Name: CMD_230
   Parameters:
     - Type: ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x231:
@@ -4402,6 +4484,9 @@
 
 0x235:
   Name: CMD_235
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x236:
@@ -4422,6 +4507,8 @@
 
 0x238:
   Name: CMD_238
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x239:
@@ -4478,18 +4565,24 @@
   Name: CMD_245
   Parameters:
     - Name: arg1
-      Type: ushort
+      Type: const ushort
   Brief: "TODO"
 
 0x246:
   Name: CMD_246
   Parameters:
     - Name: arg1
-      Type: ushort
+      Type: const ushort
   Brief: "TODO"
 
 0x247:
   Name: CMD_247
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x248:
@@ -4605,28 +4698,42 @@
 
 0x25c:
   Name: CMD_25C
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x25d:
   Name: CMD_25D
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x25f:
   Name: CMD_25F
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x262:
   Name: CMD_262
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x263:
   Name: CMD_263
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x264:
   Name: CMD_264
   Parameters:
     - Type: ref ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x265:
@@ -4796,6 +4903,9 @@
 
 0x28a:
   Name: CMD_28A
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x28b:
@@ -4804,6 +4914,8 @@
 
 0x28e:
   Name: CMD_28E
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x28f:
@@ -4820,10 +4932,14 @@
 
 0x291:
   Name: CMD_291
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x292:
   Name: CMD_292
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x293:
@@ -4935,6 +5051,8 @@
 
 0x2a5:
   Name: CMD_2A5
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x2a6:
@@ -4943,6 +5061,8 @@
 
 0x2a7:
   Name: CMD_2A7
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x2a8:
@@ -5107,6 +5227,8 @@
 
 0x2c5:
   Name: CMD_2C5
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x2c6:
@@ -5154,6 +5276,9 @@
 
 0x2d3:
   Name: CMD_2D3
+  Parameters:
+    - Type: const ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x2d4:
@@ -5211,6 +5336,8 @@
   Name: CMD_2DC
   Parameters:
     - Type: ushort
+    - Type: const ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x2dd:
