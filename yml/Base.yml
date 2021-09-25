@@ -1230,7 +1230,7 @@
   Brief: "TODO"
 
 0x79:
-  Name: GetActorLineOfSight
+  Name: GetActorUserParam
   Parameters:
     - Name: npcId
       Type: ushort
@@ -1242,7 +1242,7 @@
       ReturnType: ushort
   Brief: "TODO"
   PSPackage: event.actors.Actors
-  PSName: GetLineOfSight
+  PSName: GetUserParam
 
 0x7a:
   Name: CMD_7A
