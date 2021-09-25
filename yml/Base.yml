@@ -335,6 +335,7 @@
     - Name: var
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "Reads the value of a flag, and stores it in var."
   PSPackage: system.EventFlags
   PSName: Get
@@ -378,6 +379,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: src
       Type: ref ushort
   Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value"
@@ -649,6 +651,7 @@
     - Name: var
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "Opens a box with two options, yes or no. The result of the choice made by the player is stored in var."
   PSPackage: event.dialogs.YesNoBox
   PSName: GetYesNoSelection
@@ -993,6 +996,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: npcId
       Type: ushort
   Brief: "TODO"
@@ -1005,9 +1009,11 @@
     - Name: xStorage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: yStorage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "Gets an Actor's MoveCode."
   PSPackage: event.actors.Actors
   PSName: GetGPos/GetGPosX/GetGPosZ
@@ -1018,9 +1024,11 @@
     - Name: xStorage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: yStorage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "Stores the player's XY grid location to two variables."
   PSPackage: event.actors.Player
   PSName: GetGPos/GetGPosX/GetGPosZ
@@ -1052,6 +1060,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
 
 0x6b:
@@ -1095,6 +1104,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: event.actors.Player
   PSName: GetDirection
@@ -1105,9 +1115,11 @@
     - Name: pActorId
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: pSuccess
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: event.actors.Player
   PSName: GetFacingActor/GetFacingActorID/HasFacingActor
@@ -1118,9 +1130,11 @@
     - Name: pActorId
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: pSuccess
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: x
       Type: ushort
     - Name: y
@@ -1137,12 +1151,15 @@
     - Name: lineId
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: posFront
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: posSide
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "Gets the player's rail position."
   PSPackage: event.actors.Player
   PSName: GetRailPos
@@ -1155,18 +1172,21 @@
     - Name: lineId
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: posFront
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: posSide
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "Gets an Actor's rail position. Behavior is undefined if the actor is on grid."
   PSPackage: event.actors.Actors
   PSName: GetRailPos
 
 0x73:
-  Name: ActorMoveCodeSet
+  Name: SetActorMoveCode
   Parameters:
     - Name: npcId
       Type: ushort
@@ -1219,6 +1239,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: event.actors.Actors
   PSName: GetLineOfSight
@@ -1284,6 +1305,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
 
 0x80:
@@ -1361,12 +1383,15 @@
     - Name: pIdBeforeBtl
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: pIdDefeated
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: pIdReject
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: event.Battle
   PSName: GetTrainerFieldMessageIDs/GetTrainerClashMsgID/GetTrainerDefeatMsgID/GetTrainerRejectBtlMsgID
@@ -1379,6 +1404,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: event.Battle
 
@@ -1401,6 +1427,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: event.Battle
 
@@ -1477,6 +1504,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: system.EventFlags
 
@@ -1495,6 +1523,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: system.Sound
 
@@ -1647,6 +1676,7 @@
     - Name: pDlgResult
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
 
 0xb3:
@@ -1667,6 +1697,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: GiveItem
@@ -1681,6 +1712,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: TakeItem
@@ -1695,6 +1727,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: CheckCapacity
@@ -1709,6 +1742,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: CheckItemQuantity
@@ -1721,6 +1755,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: CheckItem
@@ -1733,6 +1768,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: ItemIsTM
@@ -1745,6 +1781,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: ItemGetNaturalGiftID
@@ -1763,6 +1800,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: ItemGetStatChange
@@ -1839,6 +1877,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: range
       Type: ushort
   Brief: "TODO"
@@ -1851,6 +1890,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.Runtime
   PSName: GetTextFile
@@ -1861,6 +1901,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.RTC
   PSName: GetDayPart
@@ -1877,6 +1918,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.RTC
   PSName: GetDayOfWeek
@@ -1887,9 +1929,11 @@
     - Name: month
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: day
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.RTC
   PSName: GetDate/GetMonthOfYear/GetDayOfMonth
@@ -1900,9 +1944,11 @@
     - Name: hour
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: minute
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.RTC
   PSName: GetTime/GetHourOfDay/GetMinuteOfHour
@@ -1913,6 +1959,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.RTC
   PSName: GetSeason
@@ -1929,9 +1976,11 @@
     - Name: month
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: day
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.TrainerCard
   PSName: GetBirthDate/GetBirthMonth/GetBirthDay
@@ -1942,6 +1991,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: badgeId
       Type: ushort
   Brief: "TODO"
@@ -1963,6 +2013,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.TrainerCard
   PSName: GetBadgeCount
@@ -1975,6 +2026,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.EventWorks
   PSName: ReserveWorkGet
@@ -2018,6 +2070,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.Pokedex
   PSName: GetDexCount
@@ -2042,6 +2095,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: pokemon.Pokedex
   PSName: IsSpeciesRegistered
@@ -2052,6 +2106,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.Game
   PSName: GetVersion
@@ -2062,6 +2117,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.TrainerCard
   PSName: GetSex
@@ -2121,6 +2177,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetEggSeedStatus
@@ -2143,6 +2200,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetPokemonCount
@@ -2153,6 +2211,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetConceptionChance
@@ -2181,6 +2240,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: dcPoke
       Type: ushort
   Brief: "TODO"
@@ -2193,6 +2253,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: dcPoke
       Type: ushort
   Brief: "TODO"
@@ -2205,6 +2266,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: dcPoke
       Type: ushort
   Brief: "TODO"
@@ -2217,6 +2279,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: dcPoke
       Type: ushort
   Brief: "TODO"
@@ -2229,6 +2292,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: dcPoke
       Type: ushort
   Brief: "TODO"
@@ -2247,6 +2311,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: dcPoke
       Type: ushort
   Brief: "TODO"
@@ -2277,6 +2342,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: neededAmount
       Type: ushort
   Brief: "Checks if the player has a sufficient amount of money."
@@ -2289,6 +2355,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "TODO"
@@ -2314,6 +2381,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "TODO"
@@ -2326,6 +2394,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "TODO"
@@ -2338,6 +2407,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: IsPokerusAny
@@ -2348,6 +2418,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "TODO"
@@ -2360,6 +2431,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "TODO"
@@ -2372,6 +2444,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: type
       Type: ushort
   Brief: "Returns the number of Pokémon in the party that match a certain conditon. (All/NonEgg/Battling-capable/Eggs/SanityEggs)"
@@ -2390,6 +2463,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: poke
       Type: ushort
     - Type: ushort
@@ -2413,6 +2487,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "TODO"
@@ -2436,6 +2511,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
     - Name: moveIdx
@@ -2463,6 +2539,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: species
       Type: ushort
     - Name: forme
@@ -2479,6 +2556,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: cond
       Type: ushort
   Brief: "Returns the index of the first Pokémon that is either an egg (1) or fainted (2)."
@@ -2491,6 +2569,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: species
       Type: ushort
     - Name: forme
@@ -2517,6 +2596,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: species
       Type: ushort
     - Name: forme
@@ -2531,6 +2611,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
     - Name: fieldID
@@ -2558,6 +2639,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "Returns the sum of all EVs of a party Pokémon."
@@ -2570,6 +2652,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "Checks if the party Pokémon belongs to the player and was caught in this game version."
@@ -2584,6 +2667,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetPokeCountBySpecies
@@ -2594,6 +2678,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: moveNo
       Type: ushort
     - Name: poke
@@ -2608,6 +2693,7 @@
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: moveNo
       Type: ushort
   Brief: "Checks if any party Pokémon knows a given move."
@@ -2633,9 +2719,11 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: storage
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "Gets the index of the first Pokémon of a species in the party."
   PSPackage: pokemon.PokeParty
   PSName: GetPokeBySpecies
@@ -2646,6 +2734,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: poke
       Type: ushort
     - Type: ushort
@@ -2659,12 +2748,15 @@
     - Name: year
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: month
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: day
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
@@ -2676,9 +2768,11 @@
     - Name: type1
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: type2
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: poke
       Type: ushort
   Brief: "TODO"
@@ -2728,6 +2822,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: cond
       Type: ushort
   Brief: "Gets the number of Pokémon in the PC box that match a certain criteria. (0/1/2/3/4/5=All/Normal/Ditto/Non-normal/Free slots/0)"
@@ -2740,6 +2835,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: species
       Type: ushort
     - Name: forme
@@ -2756,6 +2852,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: species
       Type: ushort
     - Name: forme
@@ -3091,6 +3188,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "Calls the starter selection and stores the result to a work value."
   PSPackage: event.dialogs.PokemonDialog
   PSName: CallPoke3Select
@@ -3270,19 +3368,25 @@
   PSPackage: event.Battle
 
 0x175:
-  Name: CallWildLose
+  Name: CallWildVictory
   Brief: "TODO"
   PSPackage: event.Battle
 
 0x176:
-  Name: MapVMChangeForBattle
+  Name: CallWildLose
   Brief: "TODO"
+  PSPackage: event.Battle
 
 0x177:
   Name: SimplifyBattleResultForVariable
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: WildBattleIsVictory
 
 0x178:
   Name: GetWildBattleResult
@@ -3290,6 +3394,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: event.Battle
 
@@ -3555,6 +3660,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: pokemon.Pokedex
   PSName: DexIsEnabledNational
@@ -4179,6 +4285,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
     - Name: partyIdx
       Type: ushort
   Brief: "TODO"
@@ -4195,6 +4302,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetIV
@@ -4428,6 +4536,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: partyIdx
       Type: ushort
   Brief: "TODO"
@@ -4860,6 +4969,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: system.Game
   PSName: GetDifficulty
@@ -4937,6 +5047,7 @@
   Parameters:
     - Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.Pedometer
   PSName: GetStepCount
@@ -4981,6 +5092,7 @@
     - Name: pRepelType
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
 
 0x2c3:
@@ -5050,6 +5162,7 @@
     - Name: dest
       Type: ref ushort
       IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: GetTMCount
@@ -5163,6 +5276,7 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
+      ReturnType: bool
     - Name: species
       Type: ushort
     - Name: level
