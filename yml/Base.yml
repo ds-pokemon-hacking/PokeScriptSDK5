@@ -1162,7 +1162,7 @@
       ReturnType: ushort
   Brief: "Gets the player's rail position."
   PSPackage: event.actors.Player
-  PSName: GetRailPos
+  PSName: GetRailPos/GetRailLineID/GetRailPosFront/GetRailPosSide
 
 0x72:
   Name: ActorGetRailPos
@@ -1183,7 +1183,7 @@
       ReturnType: ushort
   Brief: "Gets an Actor's rail position. Behavior is undefined if the actor is on grid."
   PSPackage: event.actors.Actors
-  PSName: GetRailPos
+  PSName: GetRailPos/GetRailLineID/GetRailPosFront/GetRailPosSide
 
 0x73:
   Name: SetActorMoveCode
