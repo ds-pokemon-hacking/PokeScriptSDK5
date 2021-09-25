@@ -1,0 +1,13 @@
+0x3e8:
+  Name: CMD_3E8
+  Parameters:
+    - Type: byte
+      IsReturn: true
+    - Type: ref ushort
+      IsReturn: true
+  Brief: "TODO"
+
+0x3e9:
+  Name: CMD_3E9
+  Brief: "TODO"
+

@@ -1,0 +1,42 @@
+0x3e8:
+  Name: CMD_3E8
+  Brief: "TODO"
+
+0x3e9:
+  Name: CMD_3E9
+  Brief: "TODO"
+
+0x3ea:
+  Name: CMD_3EA
+  Brief: "TODO"
+
+0x3eb:
+  Name: CMD_3EB
+  Brief: "TODO"
+
+0x3ec:
+  Name: CMD_3EC
+  Parameters:
+    - Type: ref ushort
+      IsReturn: true
+  Brief: "TODO"
+
+0x3ed:
+  Name: CMD_3ED
+  Parameters:
+    - Type: ref ushort
+      IsReturn: true
+  Brief: "TODO"
+
+0x3ee:
+  Name: CMD_3EE
+  Brief: "TODO"
+
+0x3ef:
+  Name: CMD_3EF
+  Brief: "TODO"
+
+0x3f0:
+  Name: CMD_3F0
+  Brief: "TODO"
+
