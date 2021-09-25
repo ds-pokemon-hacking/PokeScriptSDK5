@@ -18,14 +18,12 @@
   Name: CMD_3EC
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ed:
   Name: CMD_3ED
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ee:

@@ -2,23 +2,16 @@
   Name: CMD_3E8
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3e9:
   Name: CMD_3E9
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 

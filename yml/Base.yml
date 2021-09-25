@@ -21,7 +21,6 @@
   Parameters:
     - Name: num
       Type: ushort
-      IsReturn: true
   Brief: "Pauses execution for num frames. (30 frames in the overworld = 1 second)."
   PSPackage: system.Runtime
   PSName: Suspend
@@ -31,7 +30,6 @@
   Parameters:
     - Name: addr
       Type: int
-      IsReturn: true
   CommandType: Call
   Brief: "Jumps to a relative script branch and transfers the program counter to it."
   PSPackage: pokescript.vm.VM
@@ -48,7 +46,6 @@
   Name: DerefAndReturn
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokescript.vm.VM
 
@@ -57,7 +54,6 @@
   Parameters:
     - Name: unused
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokescript.vm.StackCtrl
   PSName: PopAndDeref
@@ -67,7 +63,6 @@
   Parameters:
     - Name: var
       Type: ushort
-      IsReturn: true
   Brief: "Pushes a variable onto the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: PushConst
@@ -77,7 +72,6 @@
   Parameters:
     - Name: var
       Type: ushort
-      IsReturn: true
   Brief: "Pushes a variable's value onto the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: Push
@@ -87,7 +81,6 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
   Brief: "Removes a variable from the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: PopTo
@@ -127,7 +120,6 @@
   Parameters:
     - Name: flag
       Type: ushort
-      IsReturn: true
   Brief: "Stores the flag on the stack(?)."
   PSPackage: pokescript.vm.StackCtrl
   PSName: PushFlag
@@ -137,7 +129,6 @@
   Parameters:
     - Name: cond
       Type: ushort
-      IsReturn: true
   Brief: "Compares the two topmost elements of the stack based on a condition and pushes the result back onto the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: StackCmp
@@ -147,10 +138,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: operand
       Type: ushort
-      IsReturn: true
   Brief: "var &= operand"
   PSPackage: pokescript.vm.Math
   PSName: UpdateVarAnd
@@ -160,10 +149,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: operand
       Type: ushort
-      IsReturn: true
   Brief: "var |= operand"
   PSPackage: pokescript.vm.Math
   PSName: UpdateVarOr
@@ -173,10 +160,8 @@
   Parameters:
     - Name: targetVar
       Type: byte
-      IsReturn: true
     - Name: val
       Type: byte
-      IsReturn: true
   Brief: "Stores an 8-bit integer in a global variable (referenced by id)."
   PSPackage: pokescript.vm.VMVars
   PSName: SetVar8
@@ -186,10 +171,8 @@
   Parameters:
     - Name: targetVar
       Type: byte
-      IsReturn: true
     - Name: val
       Type: int
-      IsReturn: true
   Brief: "Stores a 32-bit integer in a global variable (referenced by id)."
   PSPackage: pokescript.vm.VMVars
   PSName: SetVar32
@@ -199,10 +182,8 @@
   Parameters:
     - Name: targetVar
       Type: byte
-      IsReturn: true
     - Name: sourceVar
       Type: byte
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokescript.vm.VMVars
   PSName: CopyVar
@@ -212,10 +193,8 @@
   Parameters:
     - Name: var1
       Type: byte
-      IsReturn: true
     - Name: var2
       Type: byte
-      IsReturn: true
   WritesCondition: true
   Brief: "Compares the values of two global variables (referenced by id)."
   PSPackage: pokescript.vm.VMVars
@@ -226,10 +205,8 @@
   Parameters:
     - Name: var
       Type: byte
-      IsReturn: true
     - Name: value
       Type: byte
-      IsReturn: true
   WritesCondition: true
   Brief: "Compares the values of a global variable and a user supplied variable."
   PSPackage: pokescript.vm.VMVars
@@ -240,10 +217,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: param
       Type: ushort
-      IsReturn: true
   WritesCondition: true
   Brief: "Compares the values of a variable and a user supplied number."
   PSPackage: pokescript.vm.Math
@@ -254,10 +229,8 @@
   Parameters:
     - Name: var1
       Type: ref ushort
-      IsReturn: true
     - Name: var2
       Type: ref ushort
-      IsReturn: true
   WritesCondition: true
   Brief: "Compares the values of two variables."
   PSPackage: pokescript.vm.Math
@@ -268,7 +241,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Adds a scripting virtual machine."
   PSPackage: pokescript.vm.VM
 
@@ -277,7 +249,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Calls a standard function implemented by GameFreak."
   PSPackage: system.Runtime
   PSName: GlobalCall
@@ -293,7 +264,6 @@
   Parameters:
     - Name: addr
       Type: int
-      IsReturn: true
   CommandType: Jump
   Brief: "Jumps to and sets the program counter to a relative script branch (whose distance is specified in addr)."
   PSPackage: pokescript.vm.VM
@@ -304,10 +274,8 @@
   Parameters:
     - Name: cond
       Type: byte
-      IsReturn: true
     - Name: addr
       Type: int
-      IsReturn: true
   CommandType: Jump
   HasCondition: true
   Brief: "Jumps to and sets the program counter to a relative script branch (whose distance is specified in addr), if the given condition is true."
@@ -319,10 +287,8 @@
   Parameters:
     - Name: cond
       Type: byte
-      IsReturn: true
     - Name: addr
       Type: int
-      IsReturn: true
   CommandType: Call
   HasCondition: true
   Brief: "Jumps to but doesn't set the program counter to a relative script branch (whose distance is specified in addr), if the given condition is true."
@@ -334,7 +300,6 @@
   Parameters:
     - Name: val
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x22:
@@ -342,7 +307,6 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x23:
@@ -350,7 +314,6 @@
   Parameters:
     - Name: flag
       Type: ushort
-      IsReturn: true
   Brief: "Sets a given system flag to TRUE (1)."
   PSPackage: system.EventFlags
   PSName: Set
@@ -360,7 +323,6 @@
   Parameters:
     - Name: flag
       Type: ushort
-      IsReturn: true
   Brief: "Clears the state of a given system flag."
   PSPackage: system.EventFlags
   PSName: Clear
@@ -370,7 +332,6 @@
   Parameters:
     - Name: flag
       Type: ushort
-      IsReturn: true
     - Name: var
       Type: ref ushort
       IsReturn: true
@@ -383,10 +344,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: val
       Type: ushort
-      IsReturn: true
   Brief: "Accesses the second variable, grabs the value of the variable, then adds it to the value in the first variable."
   PSPackage: pokescript.vm.Math
   PSName: UpdateVarAdd
@@ -396,10 +355,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: val
       Type: ushort
-      IsReturn: true
   Brief: "Accesses the second variable, grabs the value of the variable, then subtracts it from the value in the first variable."
   PSPackage: pokescript.vm.Math
   PSName: UpdateVarSub
@@ -409,10 +366,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: val
       Type: ushort
-      IsReturn: true
   Brief: "Stores val in the specified variable."
   PSPackage: pokescript.vm.Math
   PSName: VarSetConst
@@ -425,7 +380,6 @@
       IsReturn: true
     - Name: src
       Type: ref ushort
-      IsReturn: true
   Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value"
   PSPackage: system.EventWorks
   PSName: WorkGet
@@ -435,10 +389,8 @@
   Parameters:
     - Name: dst
       Type: ref ushort
-      IsReturn: true
     - Name: src
       Type: ushort
-      IsReturn: true
   Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value (?)"
   PSPackage: system.EventWorks
   PSName: WorkSet
@@ -448,10 +400,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: val
       Type: ushort
-      IsReturn: true
   Brief: "Multiplies the value of var by val. Also known as: var.value *= val"
   PSPackage: pokescript.vm.Math
   PSName: UpdateVarMul
@@ -461,10 +411,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: val
       Type: ushort
-      IsReturn: true
   Brief: "Divides the value of var by val. Also known as: var.value /= val"
   PSPackage: pokescript.vm.Math
   PSName: UpdateVarDiv
@@ -474,10 +422,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
-      IsReturn: true
     - Name: val
       Type: ushort
-      IsReturn: true
   Brief: "Divides the value of var by val and returns the remainder of the operation. Also known as: var.value %= val"
   PSPackage: pokescript.vm.Math
   PSName: UpdateVarMod
@@ -515,7 +461,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Opens a message with music."
   PSPackage: event.dialogs.Message
   PSName: Musical
@@ -525,10 +470,8 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: ushort
-      IsReturn: true
   Brief: "Opens an event-gray message box."
   PSPackage: event.dialogs.Message
   PSName: EventGray
@@ -538,10 +481,8 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: ushort
-      IsReturn: true
   Brief: "Opens another event-gray message box."
   PSPackage: event.dialogs.Message
   PSName: EventGrayNext
@@ -557,7 +498,6 @@
   Parameters:
     - Name: unk
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x38:
@@ -565,10 +505,8 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: byte
-      IsReturn: true
   Brief: "Opens a message which isn't associated with an NPC."
   PSPackage: event.dialogs.Message
   PSName: Unassociated
@@ -584,16 +522,12 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: x
       Type: ushort
-      IsReturn: true
     - Name: y
       Type: ushort
-      IsReturn: true
     - Name: type
       Type: ushort
-      IsReturn: true
   Brief: "Opens a message at position (x, y). The coordinates are based on screen hardware tiles. "
   PSPackage: event.dialogs.Message
   PSName: Positional
@@ -603,7 +537,6 @@
   Parameters:
     - Name: unk
       Type: ushort
-      IsReturn: true
   Brief: "Closes the positional message."
   PSPackage: event.dialogs.Message
   PSName: PositionalClose
@@ -613,19 +546,14 @@
   Parameters:
     - Name: textFile
       Type: ushort
-      IsReturn: true
     - Name: msgId
       Type: ushort
-      IsReturn: true
     - Name: npc
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: ushort
-      IsReturn: true
     - Name: type
       Type: ushort
-      IsReturn: true
   Brief: "Prints a message with a tail for an NPC. Its screen position is manually determined."
   PSPackage: event.dialogs.Message
   PSName: NPC
@@ -635,16 +563,12 @@
   Parameters:
     - Name: textFile
       Type: ushort
-      IsReturn: true
     - Name: msgId
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: ushort
-      IsReturn: true
     - Name: type
       Type: ushort
-      IsReturn: true
   Brief: "Prints a message with a tail for an NPC. Its screen position is automatically determined."
   PSPackage: event.dialogs.Message
   PSName: NonNPC
@@ -666,10 +590,8 @@
   Parameters:
     - Name: x
       Type: ushort
-      IsReturn: true
     - Name: y
       Type: ushort
-      IsReturn: true
   Brief: "Shows the money box at coords (x, y)."
   PSPackage: event.dialogs.MoneyBox
   PSName: Show
@@ -691,10 +613,8 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: ushort
-      IsReturn: true
   Brief: "Opens a message with a border."
   PSPackage: event.dialogs.Message
   PSName: Bordered
@@ -710,12 +630,9 @@
   Parameters:
     - Name: msgId
       Type: ushort
-      IsReturn: true
     - Name: type
       Type: byte
-      IsReturn: true
     - Type: byte
-      IsReturn: true
   Brief: "Opens a message with a checkerboard background."
   PSPackage: event.dialogs.Message
   PSName: Checker
@@ -741,22 +658,16 @@
   Parameters:
     - Name: textFile
       Type: ushort
-      IsReturn: true
     - Name: id_m
       Type: ushort
-      IsReturn: true
     - Name: id_f
       Type: ushort
-      IsReturn: true
     - Name: npc
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: ushort
-      IsReturn: true
     - Name: type
       Type: ushort
-      IsReturn: true
   Brief: "A message which changes depending on the player's gender."
   PSPackage: event.dialogs.Message
   PSName: NPCGendered
@@ -766,22 +677,16 @@
   Parameters:
     - Name: textFile
       Type: ushort
-      IsReturn: true
     - Name: id_b
       Type: ushort
-      IsReturn: true
     - Name: id_w
       Type: ushort
-      IsReturn: true
     - Name: npc
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: ushort
-      IsReturn: true
     - Name: type
       Type: ushort
-      IsReturn: true
   Brief: "A message which changes depending on whether the game is Black or White."
   PSPackage: event.dialogs.Message
   PSName: NPCVersioned
@@ -791,10 +696,8 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: pos
       Type: byte
-      IsReturn: true
   Brief: "Opens a message with a spiked border. Known as the angry message by some."
   PSPackage: event.dialogs.Message
   PSName: Spiked
@@ -810,7 +713,6 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPlayerName
@@ -820,10 +722,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: itemIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadItemName
@@ -833,16 +733,12 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: itemIdx
       Type: ushort
-      IsReturn: true
     - Name: amount
       Type: ushort
-      IsReturn: true
     - Name: article
       Type: byte
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadItemNameEx
@@ -852,10 +748,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: itemIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadItemNameWithArticle
@@ -865,10 +759,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: tmIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadTMMoveName
@@ -878,10 +770,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: moveId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadMoveName
@@ -891,10 +781,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: itemIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadItemPocketName
@@ -904,10 +792,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: partyIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPartyPokeSpecies
@@ -917,10 +803,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: partyIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPartyPokeName
@@ -930,10 +814,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: daycareIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadDaycarePokeSpecies
@@ -943,10 +825,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: typeIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPokeTypeName
@@ -956,10 +836,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: speciesIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPokeSpecies
@@ -969,10 +847,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: speciesIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPokeSpeciesWithArticle
@@ -982,10 +858,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: locationIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPlaceName
@@ -995,10 +869,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: trendIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadTrendName
@@ -1008,10 +880,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: speciesIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadDaycarePokeName
@@ -1021,13 +891,10 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: value
       Type: ushort
-      IsReturn: true
     - Name: nLeadingZero
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadNumber
@@ -1037,11 +904,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadMusicalInfo
@@ -1051,9 +915,7 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadCountry
@@ -1063,9 +925,7 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadHobbyName
@@ -1075,9 +935,7 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadPassPowerName
@@ -1087,7 +945,6 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadTrainerClassName
@@ -1097,7 +954,6 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadTrainerClassWithArticle
@@ -1107,10 +963,8 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-      IsReturn: true
     - Name: answerIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.text.WordSet
   PSName: LoadSurveyAnswer
@@ -1120,10 +974,8 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: addr
       Type: int
-      IsReturn: true
   CommandType: CallActionSeq
   Brief: "Makes the NPC with the ID $id perform a series of actions, relatively located at $addr."
   PSPackage: pokescript.vm.VM
@@ -1143,7 +995,6 @@
       IsReturn: true
     - Name: npcId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x67:
@@ -1151,7 +1002,6 @@
   Parameters:
     - Name: npcId
       Type: ushort
-      IsReturn: true
     - Name: xStorage
       Type: ref ushort
       IsReturn: true
@@ -1180,22 +1030,16 @@
   Parameters:
     - Name: x
       Type: ushort
-      IsReturn: true
     - Name: dir
       Type: ushort
-      IsReturn: true
     - Name: y
       Type: ushort
-      IsReturn: true
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: spr
       Type: ushort
-      IsReturn: true
     - Name: unk
       Type: ushort
-      IsReturn: true
   Brief: "Spawns a new NPC with $id and $spr at $x $y $z."
   PSPackage: event.actors.Actors
   PSName: AddActor
@@ -1205,7 +1049,6 @@
   Parameters:
     - Name: npcId
       Type: ushort
-      IsReturn: true
     - Name: storage
       Type: ref ushort
       IsReturn: true
@@ -1216,7 +1059,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Shows the hidden NPC with the id ID."
   PSPackage: event.actors.Actors
   PSName: ShowActor
@@ -1226,7 +1068,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Hides the NPC with the id ID."
   PSPackage: event.actors.Actors
   PSName: HideActor
@@ -1236,19 +1077,14 @@
   Parameters:
     - Name: npcId
       Type: ushort
-      IsReturn: true
     - Name: x
       Type: ushort
-      IsReturn: true
     - Name: y
       Type: ushort
-      IsReturn: true
     - Name: z
       Type: ushort
-      IsReturn: true
     - Name: dir
       Type: ushort
-      IsReturn: true
   Brief: "Sets an Actor's grid position and direction."
   PSPackage: event.actors.Actors
   PSName: SetGPos
@@ -1287,13 +1123,10 @@
       IsReturn: true
     - Name: x
       Type: ushort
-      IsReturn: true
     - Name: y
       Type: ushort
-      IsReturn: true
     - Name: z
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.actors.Actors
   PSName: FindByGPos/FindIDByGPos/IsActorAtGPos
@@ -1319,7 +1152,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: lineId
       Type: ref ushort
       IsReturn: true
@@ -1338,10 +1170,8 @@
   Parameters:
     - Name: npcId
       Type: ushort
-      IsReturn: true
     - Name: moveCode
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.actors.Actors
   PSName: SetMoveCode
@@ -1357,20 +1187,15 @@
   Parameters:
     - Name: arg1
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x76:
   Name: CMD_76
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x77:
@@ -1382,7 +1207,6 @@
   Parameters:
     - Name: arg1
       Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x79:
@@ -1390,10 +1214,8 @@
   Parameters:
     - Name: npcId
       Type: ushort
-      IsReturn: true
     - Name: paramIdx
       Type: ushort
-      IsReturn: true
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -1405,7 +1227,6 @@
   Name: CMD_7A
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x7b:
@@ -1413,16 +1234,12 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: x
       Type: ushort
-      IsReturn: true
     - Name: y
       Type: ushort
-      IsReturn: true
     - Name: z
       Type: ushort
-      IsReturn: true
   Brief: "Moves NPC to specified XYZ coordinates on map (in that order)."
   PSPackage: event.actors.Actors
   PSName: SetGPos
@@ -1431,11 +1248,8 @@
   Name: CMD_7C
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x7d:
@@ -1443,16 +1257,12 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: lineId
       Type: ushort
-      IsReturn: true
     - Name: posFront
       Type: ushort
-      IsReturn: true
     - Name: posSide
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.actors.Actors
   PSName: SetRailPos
@@ -1462,7 +1272,6 @@
   Parameters:
     - Name: npcId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.actors.ActorSequences
   PSName: Teleport
@@ -1472,7 +1281,6 @@
   Parameters:
     - Name: trId
       Type: ushort
-      IsReturn: true
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -1482,7 +1290,6 @@
   Name: CMD_80
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x81:
@@ -1493,23 +1300,19 @@
   Name: CMD_82
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x83:
   Name: CMD_83
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x84:
   Name: CMD_84
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x85:
@@ -1517,13 +1320,10 @@
   Parameters:
     - Name: trId1
       Type: ushort
-      IsReturn: true
     - Name: trId2
       Type: ushort
-      IsReturn: true
     - Name: flags
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.Battle
   PSName: CallTrainerBattle
@@ -1533,16 +1333,12 @@
   Parameters:
     - Name: allyId
       Type: ushort
-      IsReturn: true
     - Name: trId1
       Type: ushort
-      IsReturn: true
     - Name: trId2
       Type: ushort
-      IsReturn: true
     - Name: flags
       Type: ushort
-      IsReturn: true
   Brief: "Begins a Multi Battle against two Trainers specified by params 2 and 3, with an ally specified by param 1. Win/loss logic is decided by parameter 4."
   PSPackage: event.Battle
   PSName: CallTrainerMultiBattle
@@ -1552,13 +1348,10 @@
   Parameters:
     - Name: trId
       Type: ushort
-      IsReturn: true
     - Name: msgType
       Type: ushort
-      IsReturn: true
     - Name: npcId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.Battle
 
@@ -1583,7 +1376,6 @@
   Parameters:
     - Name: trId
       Type: ushort
-      IsReturn: true
     - Name: storage
       Type: ref ushort
       IsReturn: true
@@ -1595,7 +1387,6 @@
   Parameters:
     - Name: trId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.Battle
 
@@ -1622,7 +1413,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.Sound
 
@@ -1631,7 +1421,6 @@
   Parameters:
     - Name: trID
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.Sound
 
@@ -1639,18 +1428,14 @@
   Name: GetTrainerHasDefeatAction
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x93:
   Name: StoreItemGiftToVar
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x94:
@@ -1658,16 +1443,12 @@
   Parameters:
     - Name: trId1
       Type: ushort
-      IsReturn: true
     - Name: trId2
       Type: ushort
-      IsReturn: true
     - Name: flags
       Type: ushort
-      IsReturn: true
     - Name: evPkmIdx
       Type: ushort
-      IsReturn: true
   Brief: "Starts a trainer battle using a special event Pokémon."
   PSPackage: event.Battle
   PSName: CallEventTrainerBattle
@@ -1677,7 +1458,6 @@
   Parameters:
     - Name: trId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.EventFlags
 
@@ -1686,7 +1466,6 @@
   Parameters:
     - Name: trId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.EventFlags
 
@@ -1695,7 +1474,6 @@
   Parameters:
     - Name: trId
       Type: ushort
-      IsReturn: true
     - Name: storage
       Type: ref ushort
       IsReturn: true
@@ -1707,7 +1485,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Plays a music track corresponding to id in swan_sound_data.sdat."
 
 0x9b:
@@ -1715,7 +1492,6 @@
   Parameters:
     - Name: unused_id
       Type: ushort
-      IsReturn: true
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -1733,7 +1509,6 @@
   Parameters:
     - Name: arg1
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xa0:
@@ -1745,39 +1520,32 @@
   Parameters:
     - Name: arg1
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xa2:
   Name: CMD_A2
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xa3:
   Name: CMD_A3
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xa4:
   Name: CMD_A4
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xa5:
   Name: CMD_A5
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xa6:
@@ -1785,7 +1553,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Plays a sound effect corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
   PSName: SEPlay
@@ -1807,7 +1574,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "Plays a fanfare corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
   PSName: MEPlay
@@ -1823,10 +1589,8 @@
   Parameters:
     - Name: pokeNo
       Type: ushort
-      IsReturn: true
     - Name: voiceNo
       Type: ushort
-      IsReturn: true
   Brief: "Plays a cry corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
   PSName: VoicePlay
@@ -1841,26 +1605,18 @@
   Name: CMD_AD
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0xae:
   Name: CMD_AE
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0xaf:
@@ -1868,12 +1624,9 @@
   Parameters:
     - Name: msgId1
       Type: ushort
-      IsReturn: true
     - Name: msgId2
       Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xb0:
@@ -1888,13 +1641,9 @@
   Name: Multibox
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: byte
-      IsReturn: true
     - Name: pDlgResult
       Type: ref ushort
       IsReturn: true
@@ -1913,10 +1662,8 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: amount
       Type: ushort
-      IsReturn: true
     - Name: success
       Type: ref ushort
       IsReturn: true
@@ -1929,10 +1676,8 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: amount
       Type: ushort
-      IsReturn: true
     - Name: success
       Type: ref ushort
       IsReturn: true
@@ -1945,10 +1690,8 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: amount
       Type: ushort
-      IsReturn: true
     - Name: result
       Type: ref ushort
       IsReturn: true
@@ -1961,10 +1704,8 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: amount
       Type: ushort
-      IsReturn: true
     - Name: result
       Type: ref ushort
       IsReturn: true
@@ -1977,7 +1718,6 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: result
       Type: ref ushort
       IsReturn: true
@@ -1990,7 +1730,6 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: result
       Type: ref ushort
       IsReturn: true
@@ -2003,7 +1742,6 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: result
       Type: ref ushort
       IsReturn: true
@@ -2015,7 +1753,6 @@
   Name: CMD_BC
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xbd:
@@ -2023,7 +1760,6 @@
   Parameters:
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: result
       Type: ref ushort
       IsReturn: true
@@ -2069,7 +1805,6 @@
   Name: WaterfallAnimation
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.actors.HMSequences
   PSName: Waterfall
@@ -2084,7 +1819,6 @@
   Name: PlayAnimation
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.actors.ActorSequences
   PSName: PlayAnimation
@@ -2097,7 +1831,6 @@
   Name: CMD_CA
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xcb:
@@ -2108,7 +1841,6 @@
       IsReturn: true
     - Name: range
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.System
   PSName: Random
@@ -2137,7 +1869,6 @@
   Name: CMD_CE
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xcf:
@@ -2190,7 +1921,6 @@
   Name: DefinitelyNotStoreStackCapacity
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xd4:
@@ -2214,7 +1944,6 @@
       IsReturn: true
     - Name: badgeId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: player.TrainerCard
   PSName: HasBadge
@@ -2224,7 +1953,6 @@
   Parameters:
     - Name: badgeId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: player.TrainerCard
   PSName: AddBadge
@@ -2244,7 +1972,6 @@
   Parameters:
     - Name: wkNo
       Type: ushort
-      IsReturn: true
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -2256,7 +1983,6 @@
   Name: CMD_D9
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xda:
@@ -2264,13 +1990,10 @@
   Parameters:
     - Name: arg1
       Type: ushort
-      IsReturn: true
     - Name: arg2
       Type: ushort
-      IsReturn: true
     - Name: arg3
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xdb:
@@ -2281,15 +2004,10 @@
   Name: CMD_DC
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xdd:
@@ -2297,7 +2015,6 @@
   Parameters:
     - Name: caughtOnly
       Type: ushort
-      IsReturn: true
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -2309,10 +2026,8 @@
   Name: StoreDexForm
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Pokedex
   PSName: RegisterSpecies
@@ -2322,10 +2037,8 @@
   Parameters:
     - Name: caughtOnly
       Type: ushort
-      IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -2357,7 +2070,6 @@
   Name: CMD_E2
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xe3:
@@ -2368,48 +2080,39 @@
   Name: CMD_E4
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xe5:
   Name: CMD_E5
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xe6:
   Name: CMD_E6
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xe7:
   Name: ActivateRelocator
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xe8:
   Name: CMD_E8
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xea:
   Name: CMD_EA
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xeb:
@@ -2459,7 +2162,6 @@
   Parameters:
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: DepositPokemon
@@ -2469,7 +2171,6 @@
   Parameters:
     - Name: dcPoke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: WithdrawPokemon
@@ -2482,7 +2183,6 @@
       IsReturn: true
     - Name: dcPoke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetPokemonSpecies
@@ -2495,7 +2195,6 @@
       IsReturn: true
     - Name: dcPoke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetPokemonForme
@@ -2508,7 +2207,6 @@
       IsReturn: true
     - Name: dcPoke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetPokemonGrowLevel
@@ -2521,7 +2219,6 @@
       IsReturn: true
     - Name: dcPoke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetPokemonGrowLvDelta
@@ -2534,7 +2231,6 @@
       IsReturn: true
     - Name: dcPoke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetWithdrawalFee
@@ -2543,7 +2239,6 @@
   Name: SetupDaycareEnvironment
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0xf8:
@@ -2554,7 +2249,6 @@
       IsReturn: true
     - Name: dcPoke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetPokemonGender
@@ -2564,7 +2258,6 @@
   Parameters:
     - Name: amount
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: player.Wallet
   PSName: AddMoney
@@ -2574,7 +2267,6 @@
   Parameters:
     - Name: amount
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: player.Wallet
   PSName: SubMoney
@@ -2587,7 +2279,6 @@
       IsReturn: true
     - Name: neededAmount
       Type: ushort
-      IsReturn: true
   Brief: "Checks if the player has a sufficient amount of money."
   PSPackage: player.Wallet
   PSName: CanAfford
@@ -2600,7 +2291,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetHappiness
@@ -2610,13 +2300,10 @@
   Parameters:
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Name: mode
       Type: ushort
-      IsReturn: true
     - Name: value
       Type: ushort
-      IsReturn: true
   Brief: "Manipulates a Pokémon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
   PSPackage: pokemon.PokeParty
   PSName: SetHappiness
@@ -2629,7 +2316,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetSpecies
@@ -2642,7 +2328,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetForme
@@ -2665,7 +2350,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: IsFullHealth
@@ -2678,7 +2362,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: IsEgg
@@ -2691,7 +2374,6 @@
       IsReturn: true
     - Name: type
       Type: ushort
-      IsReturn: true
   Brief: "Returns the number of Pokémon in the party that match a certain conditon. (All/NonEgg/Battling-capable/Eggs/SanityEggs)"
   PSPackage: pokemon.PokeParty
   PSName: GetPokeCountByAttribute
@@ -2710,9 +2392,7 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "Pops up a dialog for renaming a party Pokémon and stores its result."
   PSPackage: event.dialogs.PokemonDialog
   PSName: CallRename
@@ -2721,7 +2401,6 @@
   Name: StoreEggHatchSlot
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x107:
@@ -2736,7 +2415,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetLearnedMoveCount
@@ -2745,13 +2423,9 @@
   Name: ShowPokemonSummary
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.dialogs.PokemonDialog
   PSName: CallSummary
@@ -2764,10 +2438,8 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Name: moveIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetMove
@@ -2777,13 +2449,10 @@
   Parameters:
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Name: moveIdx
       Type: ushort
-      IsReturn: true
     - Name: moveNo
       Type: ushort
-      IsReturn: true
   Brief: "Teaches a move to a Pokémon. (wazaID == 0 > unlearn)"
   PSPackage: pokemon.PokeParty
   PSName: SetMove
@@ -2796,13 +2465,10 @@
       IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
     - Name: lvl
       Type: ushort
-      IsReturn: true
   Brief: "A convenience method for AddPoke."
   PSPackage: pokemon.PokeParty
   PSName: AddPoke
@@ -2815,7 +2481,6 @@
       IsReturn: true
     - Name: cond
       Type: ushort
-      IsReturn: true
   Brief: "Returns the index of the first Pokémon that is either an egg (1) or fainted (2)."
   PSPackage: pokemon.PokeParty
   PSName: GetPokeByCondition
@@ -2828,28 +2493,20 @@
       IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
     - Name: lvl
       Type: ushort
-      IsReturn: true
     - Name: abil
       Type: ushort
-      IsReturn: true
     - Name: gender
       Type: ushort
-      IsReturn: true
     - Name: shiny
       Type: ushort
-      IsReturn: true
     - Name: item
       Type: ushort
-      IsReturn: true
     - Name: ball
       Type: ushort
-      IsReturn: true
   Brief: "Adds a Pokémon to the player's party. Fails if the party is full."
   PSPackage: pokemon.PokeParty
   PSName: AddPokeEx
@@ -2862,10 +2519,8 @@
       IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
   Brief: "Adds a Pokémon Egg to the player's party. Fails if the party is full."
   PSPackage: pokemon.PokeParty
   PSName: AddEgg
@@ -2878,10 +2533,8 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Name: fieldID
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetParam
@@ -2891,13 +2544,10 @@
   Parameters:
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Name: fieldID
       Type: ushort
-      IsReturn: true
     - Name: value
       Type: ushort
-      IsReturn: true
   Brief: "Sets the IV of a Pokémon to a given value. The IV field is 70 to 75."
   PSPackage: pokemon.PokeParty
   PSName: SetIV
@@ -2910,7 +2560,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "Returns the sum of all EVs of a party Pokémon."
   PSPackage: pokemon.PokeParty
   PSName: GetEVTotal
@@ -2923,7 +2572,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "Checks if the party Pokémon belongs to the player and was caught in this game version."
   PSPackage: pokemon.PokeParty
   PSName: IsFromThisGame
@@ -2933,7 +2581,6 @@
   Parameters:
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: storage
       Type: ref ushort
       IsReturn: true
@@ -2949,10 +2596,8 @@
       IsReturn: true
     - Name: moveNo
       Type: ushort
-      IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "Checks if a party Pokémon knows a given move."
   PSPackage: pokemon.PokeParam
   PSName: HasMove
@@ -2965,7 +2610,6 @@
       IsReturn: true
     - Name: moveNo
       Type: ushort
-      IsReturn: true
   Brief: "Checks if any party Pokémon knows a given move."
   PSPackage: pokemon.PokeParty
   PSName: HasMoveAny
@@ -2975,10 +2619,8 @@
   Parameters:
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
   Brief: "Changes a party Pokémon's forme."
   PSPackage: pokemon.PokeParty
   PSName: SetForme
@@ -2988,7 +2630,6 @@
   Parameters:
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: success
       Type: ref ushort
       IsReturn: true
@@ -3007,9 +2648,7 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: IsFromWhiteForest
@@ -3027,7 +2666,6 @@
       Type: ref ushort
       IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetHatchDate/GetHatchYear/GetHatchMonth/GetHatchDay
@@ -3043,7 +2681,6 @@
       IsReturn: true
     - Name: poke
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetTypes/GetPrimaryType/GetSecondaryType
@@ -3053,45 +2690,36 @@
   Parameters:
     - Name: poke
       Type: ushort
-      IsReturn: true
     - Name: moveIdx
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x11d:
   Name: CMD_11D
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x11e:
   Name: CMD_11E
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x11f:
   Name: CMD_11F
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x120:
   Name: CMD_120
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x121:
@@ -3102,7 +2730,6 @@
       IsReturn: true
     - Name: cond
       Type: ushort
-      IsReturn: true
   Brief: "Gets the number of Pokémon in the PC box that match a certain criteria. (0/1/2/3/4/5=All/Normal/Ditto/Non-normal/Free slots/0)"
   PSPackage: pokemon.PSS
   PSName: GetCount
@@ -3115,13 +2742,10 @@
       IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
     - Name: level
       Type: ushort
-      IsReturn: true
   Brief: "Adds a Pokémon to the Pokémon Storage System Box and registers it in the Pokédex. Fails if box is full (cap at 720)."
   PSPackage: pokemon.PSS
   PSName: UploadPokemon
@@ -3134,28 +2758,20 @@
       IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
     - Name: level
       Type: ushort
-      IsReturn: true
     - Name: abilChoice
       Type: ushort
-      IsReturn: true
     - Name: gender
       Type: ushort
-      IsReturn: true
     - Name: shiny
       Type: ushort
-      IsReturn: true
     - Name: heldItem
       Type: ushort
-      IsReturn: true
     - Name: ball
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PSS
   PSName: UploadPokemonEx
@@ -3164,9 +2780,7 @@
   Name: CMD_124
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x125:
@@ -3177,119 +2791,94 @@
   Name: CMD_126
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x127:
   Name: CMD_127
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x128:
   Name: CMD_128
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x129:
   Name: CMD_129
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x12a:
   Name: CMD_12A
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x12b:
   Name: CMD_12B
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x12c:
   Name: CMD_12C
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x12d:
   Name: CMD_12D
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x12e:
   Name: CMD_12E
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x12f:
   Name: CMD_12F
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x130:
   Name: PlayPCLogonSFX
   Brief: "TODO"
-  PSPackage: events.PC
+  PSPackage: event.PC
   PSName: PlaySFXLogon
 
 0x131:
   Name: ShowPCText
   Brief: "TODO"
-  PSPackage: events.PC
+  PSPackage: event.PC
   PSName: CallPC
 
 0x132:
   Name: PlayPCLogoffSFX
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
-  PSPackage: events.PC
+  PSPackage: event.PC
   PSName: PlaySFXLogoff
 
 0x134:
@@ -3301,9 +2890,7 @@
   Parameters:
     - Name: type
       Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.FieldControl
   PSName: SetWeather
@@ -3312,7 +2899,6 @@
   Name: SaveGame
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.Game
   PSName: SaveData
@@ -3321,32 +2907,26 @@
   Name: CMD_138
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x139:
   Name: BeginNetworkScripting
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x13a:
   Name: StoreCommunicationStatus
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x13b:
   Name: CMD_13B
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x13c:
@@ -3390,25 +2970,18 @@
   Parameters:
     - Name: pitch
       Type: ushort
-      IsReturn: true
     - Name: yaw
       Type: ushort
-      IsReturn: true
     - Name: distance
       Type: int
-      IsReturn: true
     - Name: targetX
       Type: int
-      IsReturn: true
     - Name: targetY
       Type: int
-      IsReturn: true
     - Name: targetZ
       Type: int
-      IsReturn: true
     - Name: interval
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.EVCamera
   PSName: MoveTo
@@ -3428,7 +3001,6 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x147:
@@ -3441,32 +3013,21 @@
   Name: CMD_148
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x149:
   Name: Shop
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0x14a:
@@ -3489,45 +3050,35 @@
   Name: CMD_14D
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x14e:
   Name: CMD_14E
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x14f:
   Name: CMD_14F
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x150:
   Name: ShowMailbox
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x151:
   Name: DisplayDiploma
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x152:
@@ -3549,10 +3100,8 @@
   Parameters:
     - Name: seqId
       Type: ushort
-      IsReturn: true
     - Name: userParam
       Type: ushort
-      IsReturn: true
   Brief: "Plays a 3D cutscene based on its ID and a user parameter for special cutscenes (ferris wheel)."
   PSPackage: event.FieldDemo
   PSName: Call3DDemo
@@ -3561,7 +3110,6 @@
   Name: CallXtransceiver
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.FieldDemo
   PSName: CallXTransceiver
@@ -3571,7 +3119,6 @@
   Parameters:
     - Name: repeated
       Type: ushort
-      IsReturn: true
   Brief: "Plays the Hall of Fame induction scene and the staff roll. The \"repeated\" param declares if the game should act like the HoF has already been entered before or not."
   PSPackage: event.FieldDemo
   PSName: CallGameClear
@@ -3580,7 +3127,6 @@
   Name: CMD_157
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x158:
@@ -3591,7 +3137,6 @@
   Name: CMD_159
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x15a:
@@ -3602,14 +3147,12 @@
   Name: CMD_15B
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x15c:
   Name: CMD_15C
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x15d:
@@ -3628,16 +3171,13 @@
   Name: ConnectToWiFiBattle
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x161:
   Name: ConnectToWiFiVideo
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x162:
@@ -3648,74 +3188,57 @@
   Name: Musical
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0x164:
   Name: CMD_164
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x165:
   Name: CMD_165
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x166:
   Name: CMD_166
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: byte
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x167:
   Name: CMD_167
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x168:
   Name: CMD_168
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x169:
   Name: CMD_169
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x16a:
   Name: MusicalMain
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x16e:
@@ -3726,14 +3249,12 @@
   Name: CMD_170
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x172:
   Name: CMD_172
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x174:
@@ -3741,13 +3262,10 @@
   Parameters:
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: level
       Type: ushort
-      IsReturn: true
     - Name: flags
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.Battle
 
@@ -3764,7 +3282,6 @@
   Name: SimplifyBattleResultForVariable
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x178:
@@ -3785,16 +3302,13 @@
   Name: CMD_17A
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x17b:
   Name: CMD_17B
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x17c:
@@ -3841,14 +3355,12 @@
   Name: EnableCGear
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x198:
   Name: ShowStartMenu
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x199:
@@ -3863,35 +3375,30 @@
   Name: ZapAnimation
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x19c:
   Name: PkmnSpriteBlueBarAnim
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x19d:
   Name: AlderFly
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1a1:
   Name: CMD_1A1
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1a2:
   Name: CMD_1A2
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1a3:
@@ -3962,18 +3469,14 @@
   Name: CMD_1AF
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1b0:
   Name: CMD_1B0
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1b1:
@@ -3984,43 +3487,34 @@
   Name: CMD_1B2
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1b3:
   Name: CMD_1B3
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1b4:
   Name: CallFieldTrade
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1b5:
   Name: VerifyTradePokemon
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1c1:
   Name: TemporaryStoreScreenPosition
   Parameters:
     - Type: int
-      IsReturn: true
   Brief: "TODO"
 
 0x1c2:
@@ -4031,29 +3525,22 @@
   Name: CMD_1C3
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1c4:
   Name: StoreDexTypes
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1c5:
   Name: CMD_1C5
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1c6:
@@ -4094,14 +3581,12 @@
   Name: CMD_1CC
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1cd:
   Name: CMD_1CD
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1ce:
@@ -4112,174 +3597,127 @@
   Name: CMD_1CF
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d0:
   Name: CMD_1D0
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d1:
   Name: CMD_1D1
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d2:
   Name: CMD_1D2
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d3:
   Name: StoreFreeTutorMoveIfTeachable
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d4:
   Name: CMD_1D4
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d5:
   Name: StoreUpcomingLevelUpMove
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d6:
   Name: CMD_1D6
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d7:
   Name: SetVarAffinityCheck
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d8:
   Name: CMD_1D8
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1d9:
   Name: CMD_1D9
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1da:
   Name: CMD_1DA
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1db:
   Name: CMD_1DB
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1dc:
   Name: CMD_1DC
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1dd:
   Name: CMD_1DD
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1de:
   Name: CMD_1DE
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1df:
@@ -4290,13 +3728,9 @@
   Name: CMD_1E0
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1e1:
@@ -4311,28 +3745,19 @@
   Name: CMD_1E3
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1e4:
   Name: CMD_1E4
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1e5:
@@ -4351,36 +3776,28 @@
   Name: CMD_1E8
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1e9:
   Name: CMD_1E9
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1ea:
   Name: CMD_1EA
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1eb:
   Name: CMD_1EB
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1ec:
@@ -4391,51 +3808,43 @@
   Name: CMD_1ED
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1ee:
   Name: CMD_1EE
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1ef:
   Name: CMD_1EF
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f0:
   Name: CMD_1F0
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f1:
   Name: CMD_1F1
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f2:
   Name: CMD_1F2
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f3:
   Name: PlaySavingPencilAnimation
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.actors.ActorSequences
   PSName: PlaySaveAnimation
@@ -4444,110 +3853,80 @@
   Name: CMD_1F4
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f5:
   Name: CMD_1F5
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f6:
   Name: CMD_1F6
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f7:
   Name: CMD_1F7
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f8:
   Name: CMD_1F8
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1f9:
   Name: CMD_1F9
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1fa:
   Name: CMD_1FA
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1fb:
   Name: CheckIfPlayerHasOneOfAnyItemSet
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1fc:
   Name: CMD_1FC
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1fd:
   Name: CMD_1FD
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x1fe:
@@ -4558,87 +3937,71 @@
   Name: CMD_1FF
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x200:
   Name: CMD_200
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x201:
   Name: CMD_201
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x202:
   Name: CMD_202
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x203:
   Name: CMD_203
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x204:
   Name: StoreLengthFromLastSession
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x205:
   Name: PasserbyGreeting
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x206:
   Name: CMD_206
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x207:
   Name: CMD_207
   Parameters:
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0x208:
   Name: CMD_208
   Parameters:
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0x209:
   Name: CMD_209
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x20a:
@@ -4649,7 +4012,6 @@
   Name: CMD_20B
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x20c:
@@ -4660,140 +4022,105 @@
   Name: StoreSpecialPokeForm
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x20e:
   Name: CMD_20E
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x20f:
   Name: CMD_20F
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x210:
   Name: CMD_210
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x211:
   Name: CMD_211
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x212:
   Name: CMD_212
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x213:
   Name: CMD_213
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x214:
   Name: CMD_214
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x215:
   Name: CMD_215
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x216:
   Name: StoreOneshotDRT
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x217:
   Name: CMD_217
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x218:
   Name: CMD_218
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x219:
   Name: CMD_219
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x21a:
   Name: CMD_21A
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x21b:
@@ -4804,57 +4131,46 @@
   Name: CMD_21C
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x21d:
   Name: GeneratePokemonFromNPC
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x21e:
   Name: PrepareFieldForEnvironmentChange
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x21f:
   Name: CMD_21F
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x220:
   Name: CMD_220
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x221:
   Name: CMD_221
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x222:
   Name: CMD_222
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x223:
@@ -4865,7 +4181,6 @@
       IsReturn: true
     - Name: partyIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetHiddenPowerType
@@ -4875,10 +4190,8 @@
   Parameters:
     - Name: partyIdx
       Type: ushort
-      IsReturn: true
     - Name: statNo
       Type: ushort
-      IsReturn: true
     - Name: dest
       Type: ref ushort
       IsReturn: true
@@ -4890,116 +4203,93 @@
   Name: StoreRandomTechnicalMachineMove
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x226:
   Name: CMD_226
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x227:
   Name: CMD_227
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x228:
   Name: CMD_228
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x22a:
   Name: CMD_22A
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x22b:
   Name: CMD_22B
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x22d:
   Name: CMD_22D
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x22e:
   Name: CMD_22E
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x22f:
   Name: CMD_22F
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x230:
   Name: CMD_230
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x231:
   Name: CMD_231
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x232:
   Name: CMD_232
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x233:
   Name: CMD_233
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x234:
   Name: CMD_234
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x235:
@@ -5010,22 +4300,16 @@
   Name: CMD_236
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x237:
   Name: CMD_237
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x238:
@@ -5036,16 +4320,13 @@
   Name: CMD_239
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x23a:
   Name: CMD_23A
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x23b:
@@ -5064,11 +4345,8 @@
   Name: StoreDayCareGender2
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x23f:
@@ -5079,16 +4357,13 @@
   Name: CMD_240
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x241:
   Name: CMD_241
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x245:
@@ -5096,7 +4371,6 @@
   Parameters:
     - Name: arg1
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x246:
@@ -5104,7 +4378,6 @@
   Parameters:
     - Name: arg1
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x247:
@@ -5115,37 +4388,26 @@
   Name: CMD_248
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x249:
   Name: CMD_249
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x24a:
   Name: CMD_24A
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x24b:
@@ -5168,7 +4430,6 @@
       IsReturn: true
     - Name: partyIdx
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: IsFullPP
@@ -5178,22 +4439,16 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Name: x
       Type: ushort
-      IsReturn: true
     - Name: y
       Type: ushort
-      IsReturn: true
     - Name: z
       Type: ushort
-      IsReturn: true
     - Name: speed
       Type: ushort
-      IsReturn: true
     - Name: faceDirection
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x250:
@@ -5201,16 +4456,11 @@
   Parameters:
     - Name: id
       Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Name: scrId
       Type: ushort
-      IsReturn: true
   Brief: "scrId can be 0 to keep current script ID."
   PSPackage: event.actors.Follow
   PSName: AttachActor
@@ -5219,30 +4469,25 @@
   Name: CMD_251
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x252:
   Name: CMD_252
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x253:
   Name: CMD_253
   Parameters:
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0x25a:
   Name: CMD_25A
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x25b:
@@ -5273,21 +4518,18 @@
   Name: CMD_264
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x265:
   Name: CMD_265
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x266:
   Name: CMD_266
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x267:
@@ -5298,7 +4540,6 @@
   Name: CMD_268
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x269:
@@ -5309,45 +4550,35 @@
   Name: StoreMedalNameAsString
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x26d:
   Name: StoreMedalRankAsString
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x26e:
   Name: EvaluateMedals
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x271:
   Name: CMD_271
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x272:
   Name: CMD_272
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x273:
@@ -5355,7 +4586,6 @@
   Parameters:
     - Name: medalId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: player.Medals
   PSName: Give
@@ -5368,20 +4598,15 @@
   Name: CMD_275
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x276:
   Name: CMD_276
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x277:
@@ -5392,11 +4617,8 @@
   Name: OffscreenAttributedMessageBox
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x279:
@@ -5407,80 +4629,60 @@
   Name: CMD_27A
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x27b:
   Name: CMD_27B
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x27c:
   Name: CMD_27C
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x27d:
   Name: CMD_27D
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x27e:
   Name: CMD_27E
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x27f:
   Name: CMD_27F
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x284:
   Name: ShowFlyMap
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x285:
   Name: InputPokemonName
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x28a:
@@ -5499,14 +4701,12 @@
   Name: CMD_28F
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x290:
   Name: CMD_290
   Parameters:
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0x291:
@@ -5521,16 +4721,13 @@
   Name: CMD_293
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x294:
   Name: CMD_294
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x295:
@@ -5546,16 +4743,12 @@
   Parameters:
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: level
       Type: ushort
-      IsReturn: true
     - Name: forme
       Type: ushort
-      IsReturn: true
     - Name: flags
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: event.Battle
   PSName: CallWildBattleEx
@@ -5564,43 +4757,34 @@
   Name: EmptyLoad
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x299:
   Name: CMD_299
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x29a:
   Name: CMD_29A
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x29b:
   Name: CMD_29B
   Parameters:
     - Type: byte
-      IsReturn: true
   Brief: "TODO"
 
 0x29e:
   Name: CMD_29E
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x29f:
@@ -5608,7 +4792,6 @@
   Parameters:
     - Name: medalId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: player.Medals
   PSName: Register
@@ -5618,10 +4801,8 @@
   Parameters:
     - Name: arg1
       Type: ref ushort
-      IsReturn: true
     - Name: arg2
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2a1:
@@ -5629,7 +4810,6 @@
   Parameters:
     - Name: arg1
       Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2a2:
@@ -5672,7 +4852,6 @@
   Name: CMD_2AE
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2af:
@@ -5690,7 +4869,6 @@
   Parameters:
     - Name: keyId
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: system.Game
   PSName: GiveKey
@@ -5699,59 +4877,47 @@
   Name: CMD_2B1
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2b2:
   Name: CMD_2B2
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2b3:
   Name: CMD_2B3
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2b4:
   Name: CMD_2B4
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2b5:
   Name: CMD_2B5
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2b6:
   Name: CMD_2B6
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2b7:
   Name: CMD_2B7
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2b8:
@@ -5783,40 +4949,30 @@
   Name: CMD_2BC
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2bd:
   Name: CMD_2BD
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2be:
   Name: CMD_2BE
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2c0:
   Name: CMD_2C0
   Parameters:
     - Type: ref ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2c2:
@@ -5831,7 +4987,6 @@
   Name: CMD_2C3
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2c4:
@@ -5854,27 +5009,21 @@
   Name: CMD_2CA
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2cb:
   Name: CMD_2CB
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2cf:
   Name: CMD_2CF
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2d0:
@@ -5885,7 +5034,6 @@
   Name: CMD_2D1
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2d2:
@@ -5910,78 +5058,64 @@
   Name: CMD_2D5
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2d7:
   Name: CMD_2D7
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2d8:
   Name: CMD_2D8
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2d9:
   Name: CMD_2D9
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2da:
   Name: CMD_2DA
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2db:
   Name: CMD_2DB
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2dc:
   Name: CMD_2DC
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2dd:
   Name: CheckUnityTowerPeople
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2de:
   Name: SetPlayerSurvey
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2df:
   Name: StorePlayerSurvey
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2e1:
@@ -5996,13 +5130,9 @@
   Name: GenerateHollowFromVars
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2e6:
@@ -6014,10 +5144,8 @@
   Parameters:
     - Name: bool
       Type: ushort
-      IsReturn: true
     - Name: arg2
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2e9:
@@ -6025,10 +5153,8 @@
   Parameters:
     - Name: bool
       Type: ushort
-      IsReturn: true
     - Name: arg2
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2ea:
@@ -6039,19 +5165,14 @@
       IsReturn: true
     - Name: species
       Type: ushort
-      IsReturn: true
     - Name: level
       Type: ushort
-      IsReturn: true
     - Name: nature
       Type: ushort
-      IsReturn: true
     - Name: abilChoice
       Type: ushort
-      IsReturn: true
     - Name: sex
       Type: ushort
-      IsReturn: true
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: AddPokeN
@@ -6060,40 +5181,32 @@
   Name: CMD_2ED
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2ee:
   Name: Prop2EE
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2ef:
   Name: CMD_2EF
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2f1:
   Name: SetDreamRadar
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x2f2:
   Name: StatusDreamRadar
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 

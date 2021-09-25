@@ -2,7 +2,6 @@
   Name: CMD_3E8
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3e9:

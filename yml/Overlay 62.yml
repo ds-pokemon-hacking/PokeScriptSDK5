@@ -5,199 +5,157 @@
   Name: CMD_3E9
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ea:
   Name: CMD_3EA
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3eb:
   Name: CMD_3EB
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ec:
   Name: CMD_3EC
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ed:
   Name: CMD_3ED
   Parameters:
     - Type: byte
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ee:
   Name: CMD_3EE
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ef:
   Name: CMD_3EF
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f0:
   Name: CMD_3F0
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f1:
   Name: CMD_3F1
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f2:
   Name: CMD_3F2
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f3:
   Name: CMD_3F3
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f4:
   Name: CMD_3F4
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f5:
   Name: CMD_3F5
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f6:
   Name: CMD_3F6
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f7:
   Name: CMD_3F7
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f8:
   Name: CMD_3F8
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3f9:
   Name: CMD_3F9
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3fa:
   Name: CMD_3FA
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3fb:
   Name: CMD_3FB
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3fc:
   Name: CMD_3FC
   Parameters:
     - Type: ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3fd:
   Name: CMD_3FD
   Parameters:
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3fe:
   Name: CMD_3FE
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x3ff:
   Name: CMD_3FF
   Parameters:
     - Type: ushort
-      IsReturn: true
     - Type: ref ushort
-      IsReturn: true
   Brief: "TODO"
 
 0x400:
