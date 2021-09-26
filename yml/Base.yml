@@ -3103,32 +3103,32 @@
   PSName: Stop
 
 0x141:
-  Name: SetCamera
-  Brief: "TODO"
+  Name: UnbindCamera
+  Brief: "Unbinds the event camera from the player character."
   PSPackage: event.EVCamera
-  PSName: Set
+  PSName: Unbind
 
 0x142:
-  Name: ReleaseCamera
-  Brief: "TODO"
+  Name: RebindCamera
+  Brief: "Binds the event camera back to the player character, if the configuration allows it."
   PSPackage: event.EVCamera
-  PSName: Release
+  PSName: Rebind
 
 0x143:
   Name: MoveCamera
   Parameters:
     - Name: pitch
-      Type: const ushort
+      Type: fx16
     - Name: yaw
-      Type: const ushort
+      Type: fx16
     - Name: distance
-      Type: int
+      Type: fx32
     - Name: targetX
-      Type: int
+      Type: fx32
     - Name: targetY
-      Type: int
+      Type: fx32
     - Name: targetZ
-      Type: int
+      Type: fx32
     - Name: interval
       Type: const ushort
   Brief: "TODO"
@@ -3138,27 +3138,32 @@
 0x144:
   Name: CMD_144
   Parameters:
-    - Type: const ushort
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
 
 0x145:
-  Name: EndCamera
+  Name: WaitCamera
   Brief: "TODO"
   PSPackage: event.EVCamera
-  PSName: End
+  PSName: Wait
 
 0x146:
   Name: CommonCamera
   Parameters:
     - Name: id
       Type: const ushort
-    - Type: const ushort
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: MoveToCommon
 
 0x147:
   Name: ResetCamera
   Parameters:
-    - Type: const ushort
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
   PSPackage: event.EVCamera
   PSName: Reset
