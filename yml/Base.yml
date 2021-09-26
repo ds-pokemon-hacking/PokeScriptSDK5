@@ -198,7 +198,7 @@
   WritesCondition: true
   Brief: "Compares the values of two global variables (referenced by id)."
   PSPackage: pokescript.vm.VMVars
-  PSName: CompareGVarGVar
+  PSName: CmpGVarGVar
 
 0x18:
   Name: CmpGlobalConst
@@ -210,7 +210,7 @@
   WritesCondition: true
   Brief: "Compares the values of a global variable and a user supplied variable."
   PSPackage: pokescript.vm.VMVars
-  PSName: CompareGVarConst
+  PSName: CmpGVarConst
 
 0x19:
   Name: CmpVarConst
@@ -222,7 +222,7 @@
   WritesCondition: true
   Brief: "Compares the values of a variable and a user supplied number."
   PSPackage: pokescript.vm.Math
-  PSName: CompareVarConst
+  PSName: CmpVarConst
 
 0x1a:
   Name: CmpVars
@@ -234,27 +234,33 @@
   WritesCondition: true
   Brief: "Compares the values of two variables."
   PSPackage: pokescript.vm.Math
-  PSName: CompareVarVar
+  PSName: CmpVarVar
 
 0x1b:
-  Name: SpawnVM
+  Name: CallGlobalAsync
   Parameters:
     - Name: id
       Type: const ushort
-  Brief: "Adds a scripting virtual machine."
-  PSPackage: pokescript.vm.VM
+  CommandType: Call
+  ExternCall: true
+  Brief: "Calls a common script alongside the currently running script."
+  PSPackage: system.Runtime
+  PSName: GlobalCallAsync
 
 0x1c:
   Name: CallGlobal
   Parameters:
     - Name: id
       Type: const ushort
-  Brief: "Calls a standard function implemented by GameFreak."
+  CommandType: Call
+  ExternCall: true
+  Brief: "Calls a common script and waits until it completes."
   PSPackage: system.Runtime
   PSName: GlobalCall
 
 0x1d:
   Name: EndGlobal
+  CommandType: End
   Brief: "Stops the standard function."
   PSPackage: system.Runtime
   PSName: GlobalEnd
@@ -296,11 +302,13 @@
   PSName: _CallIf
 
 0x21:
-  Name: SetMapEventStatusFlag
+  Name: ReserveScript
   Parameters:
     - Name: val
       Type: const ushort
-  Brief: "TODO"
+  Brief: "Reserves the next executed SCRID to a constant value."
+  PSPackage: system.Runtime
+  PSName: ReserveScript
 
 0x22:
   Name: StoreMapTypeChange
@@ -349,7 +357,7 @@
       Type: ushort
   Brief: "Accesses the second variable, grabs the value of the variable, then adds it to the value in the first variable."
   PSPackage: pokescript.vm.Math
-  PSName: UpdateVarAdd
+  PSName: Add
 
 0x27:
   Name: SubFromVar
@@ -360,7 +368,7 @@
       Type: ushort
   Brief: "Accesses the second variable, grabs the value of the variable, then subtracts it from the value in the first variable."
   PSPackage: pokescript.vm.Math
-  PSName: UpdateVarSub
+  PSName: Sub
 
 0x28:
   Name: SetVar
@@ -371,7 +379,7 @@
       Type: const ushort
   Brief: "Stores val in the specified variable."
   PSPackage: pokescript.vm.Math
-  PSName: VarSetConst
+  PSName: SetConst
 
 0x29:
   Name: WorkGet
@@ -406,7 +414,7 @@
       Type: ushort
   Brief: "Multiplies the value of var by val. Also known as: var.value *= val"
   PSPackage: pokescript.vm.Math
-  PSName: UpdateVarMul
+  PSName: Mul
 
 0x2c:
   Name: UpdateVarDiv
@@ -417,7 +425,7 @@
       Type: ushort
   Brief: "Divides the value of var by val. Also known as: var.value /= val"
   PSPackage: pokescript.vm.Math
-  PSName: UpdateVarDiv
+  PSName: Div
 
 0x2d:
   Name: UpdateVarModulus
@@ -428,7 +436,7 @@
       Type: ushort
   Brief: "Divides the value of var by val and returns the remainder of the operation. Also known as: var.value %= val"
   PSPackage: pokescript.vm.Math
-  PSName: UpdateVarMod
+  PSName: Mod
 
 0x2e:
   Name: LockAll
