@@ -484,7 +484,7 @@
       Type: const ushort
   Brief: "Opens an event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: EventGray
+  PSName: SystemMsg
 
 0x35:
   Name: NextEventGrayMessage
@@ -495,13 +495,13 @@
       Type: const ushort
   Brief: "Opens another event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: EventGrayNext
+  PSName: SystemMsgAlt
 
 0x36:
   Name: CloseEventGrayMessage
   Brief: "Closes an event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: EventGrayClose
+  PSName: CloseSystemMsg
 
 0x37:
   Name: CMD_37
@@ -519,13 +519,13 @@
       Type: byte
   Brief: "Opens a message which isn't associated with an NPC."
   PSPackage: event.dialogs.Message
-  PSName: Unassociated
+  PSName: UnboundMsg
 
 0x39:
   Name: CloseUnassociatedMessage
   Brief: "Closes the message which isn't associated with an NPC."
   PSPackage: event.dialogs.Message
-  PSName: UnassociatedClose
+  PSName: CloseUnboundMsg
 
 0x3a:
   Name: PositionalMessage
@@ -540,7 +540,7 @@
       Type: ushort
   Brief: "Opens a message at position (x, y). The coordinates are based on screen hardware tiles. "
   PSPackage: event.dialogs.Message
-  PSName: Positional
+  PSName: PositionalMsg
 
 0x3b:
   Name: ClosePositionalMessage
@@ -549,10 +549,10 @@
       Type: const ushort
   Brief: "Closes the positional message."
   PSPackage: event.dialogs.Message
-  PSName: PositionalClose
+  PSName: ClosePositionalMsg
 
 0x3c:
-  Name: NPCMessage
+  Name: NPCMessageEx
   Parameters:
     - Name: textFile
       Type: ushort
@@ -564,12 +564,12 @@
       Type: ushort
     - Name: type
       Type: ushort
-  Brief: "Prints a message with a tail for an NPC. Its screen position is manually determined."
+  Brief: "Prints a message with a tail for an NPC. The NPC is manually determined."
   PSPackage: event.dialogs.Message
-  PSName: NPC
+  PSName: NPCMsgEx
 
 0x3d:
-  Name: AutoPosNPCMessage
+  Name: NPCMessage
   Parameters:
     - Name: textFile
       Type: ushort
@@ -579,21 +579,21 @@
       Type: ushort
     - Name: type
       Type: ushort
-  Brief: "Prints a message with a tail for an NPC. Its screen position is automatically determined."
+  Brief: "Prints a message with a tail for an NPC. The NPC is automatically determined."
   PSPackage: event.dialogs.Message
-  PSName: NonNPC
+  PSName: NPCMsg
 
 0x3e:
   Name: CloseMessage
   Brief: "Closes a message when a key is pressed."
   PSPackage: event.dialogs.Message
-  PSName: CloseOnKey
+  PSName: CloseNPCMsg
 
 0x3f:
   Name: CloseAllMessages
   Brief: "Closes a message when a key is pressed. Not sure what makes this different just yet."
   PSPackage: event.dialogs.Message
-  PSName: CloseAllOnKey
+  PSName: CloseAll
 
 0x40:
   Name: ShowMoneyBox
@@ -627,13 +627,13 @@
       Type: const ushort
   Brief: "Opens a message with a border."
   PSPackage: event.dialogs.Message
-  PSName: Bordered
+  PSName: BorderedMsg
 
 0x44:
   Name: CloseBorderedMessage
   Brief: "Closes the bordered message."
   PSPackage: event.dialogs.Message
-  PSName: BorderedClose
+  PSName: CloseBorderedMsg
 
 0x45:
   Name: CheckerMessage
@@ -646,13 +646,13 @@
     - Type: const ushort
   Brief: "Opens a message with a checkerboard background."
   PSPackage: event.dialogs.Message
-  PSName: Checker
+  PSName: CheckerMsg
 
 0x46:
   Name: CloseCheckerMessage
   Brief: "Closes the checkerboard message."
   PSPackage: event.dialogs.Message
-  PSName: CheckerClose
+  PSName: CloseCheckerMsg
 
 0x47:
   Name: YesNoBox
@@ -682,7 +682,7 @@
       Type: ushort
   Brief: "A message which changes depending on the player's gender."
   PSPackage: event.dialogs.Message
-  PSName: NPCGendered
+  PSName: NPCMsgGendered
 
 0x49:
   Name: VersionMessage
@@ -701,7 +701,7 @@
       Type: ushort
   Brief: "A message which changes depending on whether the game is Black or White."
   PSPackage: event.dialogs.Message
-  PSName: NPCVersioned
+  PSName: NPCMsgVersioned
 
 0x4a:
   Name: SpikedMessage
@@ -712,7 +712,7 @@
       Type: byte
   Brief: "Opens a message with a spiked border. Known as the angry message by some."
   PSPackage: event.dialogs.Message
-  PSName: Spiked
+  PSName: SpikedMsg
 
 0x4b:
   Name: CloseAllMessages2
@@ -3107,15 +3107,15 @@
 
 0x13f:
   Name: InitCamera
-  Brief: "TODO"
+  Brief: "Initializes the event camera. This stores the current coordinates for use with Reset. If this function is not called, the Reset function will be broken and the camera will not be able to return to the default values."
   PSPackage: event.EVCamera
   PSName: Init
 
 0x140:
-  Name: FreezeCamera
-  Brief: "TODO"
+  Name: EndCamera
+  Brief: "Releases the event camera."
   PSPackage: event.EVCamera
-  PSName: Stop
+  PSName: End
 
 0x141:
   Name: UnbindCamera
@@ -3151,11 +3151,13 @@
   PSName: MoveTo
 
 0x144:
-  Name: CMD_144
+  Name: ReturnCamera
   Parameters:
     - Name: interval
       Type: const ushort
-  Brief: "TODO"
+  Brief: "Resets the camera to coordinates saved when EVCamera.Init was last called."
+  PSPackage: event.EVCamera
+  PSName: Return
 
 0x145:
   Name: WaitCamera
@@ -3179,7 +3181,7 @@
   Parameters:
     - Name: interval
       Type: const ushort
-  Brief: "TODO"
+  Brief: "Resets the camera to data read from the default camera NARC."
   PSPackage: event.EVCamera
   PSName: Reset
 
@@ -3581,6 +3583,8 @@
     - Name: effectNo
       Type: ushort
   Brief: "Plays a general field effect. F.e. the Kyurem blizzard."
+  PSPackage: event.Effects
+  PSName: PlayFieldEffect
 
 0x19c:
   Name: PkmnSpriteBlueBarAnim
@@ -4598,11 +4602,13 @@
   Brief: "TODO"
 
 0x246:
-  Name: CMD_246
+  Name: BGMFadeOut
   Parameters:
-    - Name: arg1
+    - Name: interval
       Type: const ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: BGMFadeOut
 
 0x247:
   Name: CMD_247
