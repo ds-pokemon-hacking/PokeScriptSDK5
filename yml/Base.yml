@@ -1445,20 +1445,22 @@
   Brief: "TODO"
 
 0x8f:
-  Name: BGMPlay
+  Name: TrainerClassBGMPlay
   Parameters:
     - Name: id
       Type: ushort
-  Brief: "TODO"
+  Brief: "Plays a trainer eye clash BGM by a trainer class ID."
   PSPackage: system.Sound
+  PSName: BGMPlayTrainerClass
 
 0x90:
-  Name: TrainerClassBGMPlay
+  Name: TrainerBGMPlay
   Parameters:
     - Name: trID
       Type: ushort
-  Brief: "TODO"
+  Brief: "Plays a trainer eye clash BGM by a trainer ID."
   PSPackage: system.Sound
+  PSName: BGMPlayTrainer
 
 0x92:
   Name: GetTrainerHasDefeatAction
@@ -1518,11 +1520,12 @@
   PSPackage: system.EventFlags
 
 0x98:
-  Name: BGMPlayConst
+  Name: BGMPlay
   Parameters:
     - Name: id
       Type: const ushort
   Brief: "Plays a music track corresponding to id in swan_sound_data.sdat."
+  PSPackage: system.Sound
 
 0x9b:
   Name: BGMIsPlaying
