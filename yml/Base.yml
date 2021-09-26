@@ -587,13 +587,13 @@
   Name: CloseMessage
   Brief: "Closes a message when a key is pressed."
   PSPackage: event.dialogs.Message
-  PSName: CloseOnKeyPress
+  PSName: CloseOnKey
 
 0x3f:
   Name: CloseAllMessages
   Brief: "Closes a message when a key is pressed. Not sure what makes this different just yet."
   PSPackage: event.dialogs.Message
-  PSName: CloseAllOnKeyPress
+  PSName: CloseAllOnKey
 
 0x40:
   Name: ShowMoneyBox
@@ -718,7 +718,7 @@
   Name: CloseAllMessages2
   Brief: "Closes all messages on screen."
   PSPackage: event.dialogs.Message
-  PSName: CloseAll
+  PSName: WaitAdvance
 
 0x4c:
   Name: NameToStrbuf
@@ -1693,15 +1693,23 @@
 0xb3:
   Name: FadeScreen
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-  Brief: "TODO"
+    - Name: mode
+      Type: const ushort
+    - Name: startCol
+      Type: const ushort
+    - Name: endCol
+      Type: const ushort
+    - Name: interval
+      Type: const ushort
+  Brief: "Mode - 1=Engine A/Black, 2=Engine B/Black, 4=Engine A/White, 8=Engine B/White. Can be ORed together."
+  PSPackage: system.Fade
+  PSName: FadeEx
 
 0xb4:
   Name: WaitForFadeScreen
   Brief: "TODO"
+  PSPackage: system.Fade
+  PSName: FadeExWait
 
 0xb5:
   Name: AddItem
@@ -4656,15 +4664,17 @@
       Type: ushort
     - Name: x
       Type: ushort
-    - Name: y
-      Type: ushort
     - Name: z
       Type: ushort
-    - Name: speed
+    - Name: flags
+      Type: ushort
+    - Name: acmd
       Type: ushort
     - Name: faceDirection
       Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.Actions
+  PSName: WalkRoute
 
 0x250:
   Name: AttachFollowNPC
