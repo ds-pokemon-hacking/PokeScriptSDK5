@@ -1881,12 +1881,19 @@
 0xc4:
   Name: TeleportWarp
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
+    - Name: zoneId
+      Type: const ushort
+    - Name: x
+      Type: const ushort
+    - Name: y
+      Type: const ushort
+    - Name: z
+      Type: const ushort
+    - Name: dir
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: ChangeMap
 
 0xc5:
   Name: SurfAnimation
@@ -3569,10 +3576,11 @@
   Brief: "TODO"
 
 0x19b:
-  Name: ZapAnimation
+  Name: PlayFieldEffect
   Parameters:
-    - Type: ushort
-  Brief: "TODO"
+    - Name: effectNo
+      Type: ushort
+  Brief: "Plays a general field effect. F.e. the Kyurem blizzard."
 
 0x19c:
   Name: PkmnSpriteBlueBarAnim

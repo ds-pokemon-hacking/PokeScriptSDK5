@@ -11,29 +11,27 @@
   Brief: "TODO"
 
 0x3ea:
-  Name: CMD_3EA
+  Name: ControlKyuremFatality
   Parameters:
-    - Type: const ushort
-  Brief: "TODO"
+    - Name: state
+      Type: const ushort
+  Brief: "Glaciate effect. State 0 = Play, State 1 = Shatter"
 
 0x3eb:
   Name: CMD_3EB
   Parameters:
-    - Type: ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x3ec:
-  Name: CMD_3EC
+  Name: PlayNElevation
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: mode
+      Type: ushort
+  Brief: "Mode 0 = Ascent, Mode 1 = Descent"
 
 0x3ed:
   Name: CMD_3ED
-  Parameters:
-    - Type: ushort
   Brief: "TODO"
 
 0x3ee:
@@ -42,17 +40,10 @@
     - Type: ushort
     - Type: ushort
     - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
   Brief: "TODO"
 
 0x3ef:
   Name: CMD_3EF
-  Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
   Brief: "TODO"
 
 0x3f1:
