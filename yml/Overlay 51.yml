@@ -24,7 +24,14 @@
 
 0x3ec:
   Name: CMD_3EC
+  Parameters:
+    - Type: ushort
+    - Type: const ushort
+    - Type: const ushort
+    - Type: ushort
+  Brief: "TODO"
 
 0x3ed:
   Name: CMD_3ED
+  Brief: "TODO"
 
