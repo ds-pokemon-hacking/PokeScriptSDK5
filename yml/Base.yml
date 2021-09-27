@@ -484,7 +484,7 @@
       Type: const ushort
   Brief: "Opens an event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: SystemMsg
+  PSName: InfoMsg
 
 0x35:
   Name: NextEventGrayMessage
@@ -495,13 +495,13 @@
       Type: const ushort
   Brief: "Opens another event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: SystemMsgAlt
+  PSName: InfoMsgAlt
 
 0x36:
   Name: CloseEventGrayMessage
   Brief: "Closes an event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: CloseSystemMsg
+  PSName: CloseInfoMsg
 
 0x37:
   Name: CMD_37

@@ -1,24 +1,30 @@
 0x3e8:
   Name: CMD_3E8
   Parameters:
-    - Type: const ushort
     - Type: ushort
   Brief: "TODO"
 
 0x3e9:
   Name: CMD_3E9
-  Parameters:
-    - Type: const ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: const ushort
   Brief: "TODO"
 
 0x3ea:
   Name: CMD_3EA
+  Parameters:
+    - Type: const ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3eb:
   Name: CMD_3EB
+  Parameters:
+    - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
+
+0x3ec:
+  Name: CMD_3EC
+
+0x3ed:
+  Name: CMD_3ED
 
