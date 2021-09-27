@@ -28,6 +28,8 @@
 
 0x3ed:
   Name: CMD_3ED
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x3ee:

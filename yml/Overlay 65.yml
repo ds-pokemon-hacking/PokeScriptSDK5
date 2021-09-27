@@ -20,22 +20,22 @@
 
 0x3ee:
   Name: CMD_3EE
-  Parameters:
-    - Type: ushort
-    - Type: ushort
   Brief: "TODO"
 
 0x3ef:
   Name: CMD_3EF
-  Parameters:
-    - Type: ushort
   Brief: "TODO"
 
 0x3f0:
   Name: CMD_3F0
+  Parameters:
+    - Type: ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x3f1:
   Name: CMD_3F1
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 

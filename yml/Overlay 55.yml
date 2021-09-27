@@ -1,13 +1,9 @@
 0x3e8:
   Name: CMD_3E8
-  Parameters:
-    - Type: ref ushort
   Brief: "TODO"
 
 0x3e9:
   Name: CMD_3E9
-  Parameters:
-    - Type: ushort
   Brief: "TODO"
 
 0x3ea:
@@ -30,13 +26,12 @@
 
 0x3ed:
   Name: CMD_3ED
-  Parameters:
-    - Type: ushort
   Brief: "TODO"
 
 0x3ee:
   Name: CMD_3EE
   Parameters:
+    - Type: ushort
     - Type: ref ushort
   Brief: "TODO"
 
@@ -44,6 +39,7 @@
   Name: CMD_3EF
   Parameters:
     - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3f0:
@@ -68,8 +64,6 @@
   Name: CMD_3F3
   Parameters:
     - Type: ushort
-    - Type: ushort
-    - Type: ref ushort
   Brief: "TODO"
 
 0x3f4:
@@ -81,22 +75,25 @@
 0x3f5:
   Name: CMD_3F5
   Parameters:
-    - Type: byte
     - Type: ushort
   Brief: "TODO"
 
 0x3f6:
   Name: CMD_3F6
   Parameters:
-    - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3f7:
   Name: CMD_3F7
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x3f8:
   Name: CMD_3F8
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3f9:
@@ -105,14 +102,22 @@
 
 0x3fa:
   Name: CMD_3FA
+  Parameters:
+    - Type: ushort
+    - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3fb:
   Name: CMD_3FB
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x3fc:
   Name: CMD_3FC
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3fe:
@@ -121,26 +126,41 @@
 
 0x3ff:
   Name: CMD_3FF
+  Parameters:
+    - Type: ref ushort
+    - Type: ref ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x400:
   Name: CMD_400
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x401:
   Name: CMD_401
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x402:
   Name: CMD_402
+  Parameters:
+    - Type: ref ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x403:
   Name: CMD_403
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x404:
   Name: CMD_404
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x405:
@@ -157,14 +177,21 @@
 
 0x408:
   Name: CMD_408
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x409:
   Name: CMD_409
+  Parameters:
+    - Type: ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x40a:
   Name: CMD_40A
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x40b:
@@ -181,6 +208,8 @@
 
 0x40e:
   Name: CMD_40E
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x40f:
@@ -189,22 +218,34 @@
 
 0x410:
   Name: CMD_410
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x411:
   Name: CMD_411
+  Parameters:
+    - Type: ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x412:
-  Name: CMD_412
+  Name: CMD_411
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x413:
   Name: CMD_413
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x414:
   Name: CMD_414
+  Parameters:
+    - Type: byte
+    - Type: ushort
   Brief: "TODO"
 
 0x415:
@@ -213,34 +254,53 @@
 
 0x416:
   Name: CMD_416
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x417:
   Name: CMD_417
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x418:
   Name: CMD_418
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x419:
   Name: CMD_419
+  Parameters:
+    - Type: ref ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x41a:
   Name: CMD_41A
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x41b:
   Name: CMD_41B
+  Parameters:
+    - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x41c:
   Name: CMD_41C
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x41d:
   Name: CMD_41D
+  Parameters:
+    - Type: ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x41e:
@@ -249,25 +309,38 @@
 
 0x41f:
   Name: CMD_41F
+  Parameters:
+    - Type: ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x420:
   Name: CMD_420
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 
 0x421:
   Name: CMD_421
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x422:
   Name: CMD_422
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x423:
   Name: CMD_423
+  Parameters:
+    - Type: ref ushort
   Brief: "TODO"
 
 0x424:
   Name: CMD_424
+  Parameters:
+    - Type: ushort
   Brief: "TODO"
 

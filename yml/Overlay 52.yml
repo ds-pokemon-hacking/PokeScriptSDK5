@@ -24,39 +24,31 @@
 
 0x3ec:
   Name: CMD_3EC
-  Parameters:
-    - Type: const ushort
   Brief: "TODO"
 
 0x3ed:
   Name: CMD_3ED
   Parameters:
     - Type: const ushort
-    - Type: const ushort
   Brief: "TODO"
 
 0x3ee:
   Name: CMD_3EE
-  Parameters:
-    - Type: const ushort
   Brief: "TODO"
 
 0x3ef:
   Name: CMD_3EF
-  Parameters:
-    - Type: const ushort
   Brief: "TODO"
 
 0x3f0:
   Name: CMD_3F0
   Parameters:
     - Type: const ushort
+    - Type: const ushort
   Brief: "TODO"
 
 0x3f1:
   Name: CMD_3F1
-  Parameters:
-    - Type: const ushort
   Brief: "TODO"
 
 0x3f2:
@@ -67,6 +59,8 @@
 
 0x3f3:
   Name: CMD_3F3
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x3f4:
@@ -79,6 +73,8 @@
 
 0x3f6:
   Name: CMD_3F6
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x3f7:
@@ -99,10 +95,14 @@
 
 0x3fb:
   Name: CMD_3FB
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x3fc:
   Name: CMD_3FC
+  Parameters:
+    - Type: const ushort
   Brief: "TODO"
 
 0x3fd:

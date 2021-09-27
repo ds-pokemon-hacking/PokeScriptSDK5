@@ -71,28 +71,22 @@
 
 0x3f3:
   Name: CMD_3F3
-  Parameters:
-    - Type: ref ushort
   Brief: "TODO"
 
 0x3f4:
   Name: CMD_3F4
-  Parameters:
-    - Type: ushort
   Brief: "TODO"
 
 0x3f5:
   Name: CMD_3F5
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
     - Type: ref ushort
   Brief: "TODO"
 
 0x3f6:
   Name: CMD_3F6
   Parameters:
-    - Type: ref ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x3f7:
@@ -100,12 +94,12 @@
   Parameters:
     - Type: ushort
     - Type: ref ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3f8:
   Name: CMD_3F8
   Parameters:
-    - Type: ushort
     - Type: ref ushort
   Brief: "TODO"
 
@@ -113,7 +107,6 @@
   Name: CMD_3F9
   Parameters:
     - Type: ushort
-    - Type: ref ushort
     - Type: ref ushort
   Brief: "TODO"
 
@@ -127,6 +120,8 @@
 0x3fb:
   Name: CMD_3FB
   Parameters:
+    - Type: ushort
+    - Type: ref ushort
     - Type: ref ushort
   Brief: "TODO"
 
@@ -134,6 +129,7 @@
   Name: CMD_3FC
   Parameters:
     - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x3fd:
@@ -146,24 +142,28 @@
   Name: CMD_3FE
   Parameters:
     - Type: ushort
-    - Type: ushort
-    - Type: ref ushort
-    - Type: ref ushort
   Brief: "TODO"
 
 0x3ff:
   Name: CMD_3FF
   Parameters:
-    - Type: ushort
     - Type: ref ushort
   Brief: "TODO"
 
 0x400:
   Name: CMD_400
+  Parameters:
+    - Type: ushort
+    - Type: ushort
+    - Type: ref ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x401:
   Name: CMD_401
+  Parameters:
+    - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x402:
