@@ -315,6 +315,8 @@
   Parameters:
     - Name: var
       Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
 
 0x23:
@@ -441,12 +443,14 @@
 0x2e:
   Name: LockAll
   Brief: "Freezes all NPCs."
-  PSPackage: system.Interact
+  PSPackage: event.actors.Actors
+  PSName: PauseAll
 
 0x2f:
   Name: UnlockAll
   Brief: "Unfreezes all NPCs."
-  PSPackage: system.Interact
+  PSPackage: event.actors.Actors
+  PSName: UnpauseAll
 
 0x30:
   Name: FinishAllEvents
@@ -504,11 +508,13 @@
   PSName: CloseInfoMsg
 
 0x37:
-  Name: CMD_37
+  Name: SetLoadingIcon
   Parameters:
-    - Name: unk
+    - Name: hide
       Type: ushort
-  Brief: "TODO"
+  Brief: "Shows/hides a loading spinner at the current message box."
+  PSPackage: event.dialogs.Message
+  PSName: SetLoadingSpinner
 
 0x38:
   Name: UnassociatedMessage
@@ -870,7 +876,7 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-    - Name: locationIdx
+    - Name: zoneId
       Type: ushort
   Brief: "TODO"
   PSPackage: system.text.WordSet
@@ -1009,6 +1015,8 @@
     - Name: npcId
       Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.Actors
+  PSName: GetMoveCode
 
 0x67:
   Name: StoreActorPosition
@@ -1071,6 +1079,8 @@
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.actors.Actors
+  PSName: GetSpawnFlag
 
 0x6b:
   Name: ShowActor
@@ -1219,13 +1229,19 @@
   Brief: "TODO"
 
 0x76:
-  Name: CMD_76
+  Name: AnimatePlayerY
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: direction
+      Type: ushort
+    - Name: duration
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: isYPositive
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.Player
+  PSName: AnimateY
 
 0x77:
   Name: CMD_77
@@ -1256,11 +1272,12 @@
 0x7a:
   Name: CMD_7A
   Parameters:
-    - Type: ushort
-  Brief: "TODO"
+    - Name: npcId
+      Type: ushort
+  Brief: "Overlay 131 - rail_slipdown.c"
 
 0x7b:
-  Name: SetActorPos
+  Name: JumpActorToPosition
   Parameters:
     - Name: id
       Type: ushort
@@ -1272,15 +1289,20 @@
       Type: ushort
   Brief: "Moves NPC to specified XYZ coordinates on map (in that order)."
   PSPackage: event.actors.Actors
-  PSName: SetGPos
+  PSName: JumpToGPos
 
 0x7c:
-  Name: CMD_7C
+  Name: SetPlayerRailPos
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: lineId
+      Type: ushort
+    - Name: posFront
+      Type: ushort
+    - Name: posSide
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.Player
+  PSName: SetRailPos
 
 0x7d:
   Name: SetActorRailPos
@@ -1307,7 +1329,7 @@
   PSName: Teleport
 
 0x7f:
-  Name: StoreTrainerClass
+  Name: StoreTrainerID
   Parameters:
     - Name: trId
       Type: ushort
@@ -1316,6 +1338,8 @@
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: GetTrainerClass
 
 0x80:
   Name: CMD_80
@@ -1328,23 +1352,37 @@
   Brief: "TODO"
 
 0x82:
-  Name: CMD_82
+  Name: StoreIDOfScriptParentActor
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
+    - Name: index
+      Type: ushort
+    - Name: pDest
+      Type: ref ushort
   Brief: "TODO"
+  PSPackage: system.Runtime
+  PSName: GetExecutorActor
 
 0x83:
-  Name: CMD_83
+  Name: GetScriptTrainerBtlType
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.Trainer
+  PSName: GetBtlType
 
 0x84:
-  Name: CMD_84
+  Name: GetScriptTrainerID
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.Trainer
+  PSName: GetTrainerID
 
 0x85:
   Name: TrainerBattle
@@ -1384,7 +1422,8 @@
     - Name: npcId
       Type: ushort
   Brief: "TODO"
-  PSPackage: event.Battle
+  PSPackage: event.Trainer
+  PSName: DispFieldMessage
 
 0x88:
   Name: GetTrainerFieldMessageIDs
@@ -1402,8 +1441,8 @@
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Battle
-  PSName: GetTrainerFieldMessageIDs/GetTrainerClashMsgID/GetTrainerDefeatMsgID/GetTrainerRejectBtlMsgID
+  PSPackage: event.Trainer
+  PSName: GetFieldMessageIDs/GetClashMsgID/GetDefeatMsgID/GetRejectBtlMsgID
 
 0x8a:
   Name: GetBattleType
@@ -1415,15 +1454,17 @@
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Battle
+  PSPackage: event.Trainer
+  PSName: GetBtlType
 
 0x8b:
-  Name: PlayTrainerEyeBGM
+  Name: TrainerBGMPlayPush
   Parameters:
     - Name: trId
       Type: ushort
   Brief: "TODO"
-  PSPackage: event.Battle
+  PSPackage: system.Sound
+  PSName: BGMPlayTrainerPush
 
 0x8c:
   Name: CallTrainerLose
@@ -1441,13 +1482,13 @@
   PSPackage: event.Battle
 
 0x8e:
-  Name: RestoreOverworldAfterBattle
+  Name: CallTrainerVictory
   Brief: "TODO"
 
 0x8f:
-  Name: TrainerClassBGMPlay
+  Name: TrainerClassBGMPlayPush
   Parameters:
-    - Name: id
+    - Name: classId
       Type: ushort
   Brief: "Plays a trainer eye clash BGM by a trainer class ID."
   PSPackage: system.Sound
@@ -1543,14 +1584,16 @@
   Name: SwitchToMapMusic
   Brief: "Fades out currently playing BGM track and plays the track assigned to the current map."
   PSPackage: system.Sound
-  PSName: BGMReturn
+  PSName: BGMChangeMap
 
 0x9f:
-  Name: CMD_9F
+  Name: BGMPlayPush
   Parameters:
-    - Name: arg1
+    - Name: bgmId
       Type: ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: BGMPlayPush
 
 0xa0:
   Name: WaitForSequencePlayer
@@ -1643,55 +1686,78 @@
   PSName: VoiceWait
 
 0xad:
-  Name: CMD_AD
+  Name: MultiboxCommonTopLeftAnchor
   Parameters:
-    - Type: byte
-    - Type: byte
-    - Type: ushort
-    - Type: byte
-    - Type: const ushort
-  Brief: "TODO"
+    - Name: x
+      Type: byte
+    - Name: y
+      Type: byte
+    - Name: defaultIdx
+      Type: ushort
+    - Name: cancellable
+      Type: byte
+    - Name: pDlgResult
+      Type: ref ushort
+  Brief: "Uses common text file 410 instead of zonedata text."
+  PSPackage: event.dialogs.ListMenu
+  PSName: InitCommon
 
 0xae:
-  Name: CMD_AE
+  Name: MultiboxTopLeftAnchor
   Parameters:
-    - Type: byte
-    - Type: byte
-    - Type: ushort
-    - Type: byte
-    - Type: const ushort
+    - Name: x
+      Type: byte
+    - Name: y
+      Type: byte
+    - Name: defaultIdx
+      Type: ushort
+    - Name: cancellable
+      Type: byte
+    - Name: pDlgResult
+      Type: ref ushort
   Brief: "TODO"
+  PSPackage: event.dialogs.ListMenu
+  PSName: InitLocalLeftAnchor
 
 0xaf:
   Name: SetMultiboxText
   Parameters:
-    - Name: msgId1
+    - Name: optionMsg
       Type: const ushort
-    - Name: msgId2
+    - Name: hintMsg
       Type: const ushort
-    - Type: ushort
+    - Name: uid
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.dialogs.ListMenu
+  PSName: AddItem
 
 0xb0:
   Name: PauseAndClose
   Brief: "TODO"
+  PSPackage: event.dialogs.ListMenu
+  PSName: ShowDialog
 
 0xb1:
   Name: PauseAndClose2
   Brief: "TODO"
 
 0xb2:
-  Name: Multibox
+  Name: MultiboxTopRightAnchor
   Parameters:
-    - Type: byte
-    - Type: byte
-    - Type: ushort
-    - Type: byte
+    - Name: x
+      Type: byte
+    - Name: y
+      Type: byte
+    - Name: defaultIdx
+      Type: ushort
+    - Name: cancellable
+      Type: byte
     - Name: pDlgResult
       Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.dialogs.ListMenu
+  PSName: InitLocalRightAnchor
 
 0xb3:
   Name: FadeScreen
@@ -1827,7 +1893,7 @@
     - Name: result
       Type: ref ushort
       IsReturn: true
-      ReturnType: bool
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.Bag
   PSName: ItemGetStatChange
@@ -1835,10 +1901,14 @@
 0xbe:
   Name: Warp
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
+    - Name: zoneId
+      Type: const ushort
+    - Name: x
+      Type: const ushort
+    - Name: z
+      Type: const ushort
+    - Name: dir
+      Type: const ushort
   Brief: "TODO"
 
 0xbf:
@@ -1851,14 +1921,21 @@
   Brief: "TODO"
 
 0xc0:
-  Name: CMD_C0
+  Name: EntranceWarpRail
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
+    - Name: zoneId
+      Type: const ushort
+    - Name: railNo
+      Type: const ushort
+    - Name: posFront
+      Type: const ushort
+    - Name: posSide
+      Type: const ushort
+    - Name: dir
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: ChangeMapRail
 
 0xc1:
   Name: FallSwirlWarp
@@ -1919,12 +1996,13 @@
   PSName: Cut
 
 0xc8:
-  Name: PlayAnimation
+  Name: DiveAnimation
   Parameters:
-    - Type: ushort
+    - Name: isOut
+      Type: ushort
   Brief: "TODO"
-  PSPackage: event.actors.ActorSequences
-  PSName: PlayAnimation
+  PSPackage: event.actors.HMSequences
+  PSName: Dive
 
 0xc9:
   Name: CMD_C9
@@ -2030,10 +2108,15 @@
   PSName: GetSeason
 
 0xd3:
-  Name: DefinitelyNotStoreStackCapacity
+  Name: StoreZoneID
   Parameters:
-    - Type: ref ushort
+    - Name: storage
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: GetZoneID
 
 0xd4:
   Name: StorePlayerBirthdate
@@ -2118,13 +2201,18 @@
   Brief: "TODO"
 
 0xdc:
-  Name: CMD_DC
+  Name: SetDiveOutTargetLocation
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: zoneId
+      Type: ushort
+    - Name: invDir
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: z
+      Type: ushort
   Brief: "TODO"
 
 0xdd:
@@ -2944,52 +3032,79 @@
   PSName: UploadPokemonEx
 
 0x124:
-  Name: CMD_124
+  Name: BMHndAnmPlay
   Parameters:
     - Type: ushort
     - Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: HndPlayAnm
 
 0x125:
   Name: CMD_125
   Brief: "TODO"
+  PSPackage: event.StaticProp
 
 0x126:
-  Name: CMD_126
+  Name: BMChangeMdlID
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: bmType
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: z
+      Type: ushort
+    - Name: mdlId
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: ChangeMdlID
 
 0x127:
-  Name: CMD_127
+  Name: BMCreateHandleByGPos
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: bmType
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: z
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: CreateHandle
 
 0x128:
-  Name: CMD_128
+  Name: BMReleaseHandle
   Parameters:
-    - Type: ushort
+    - Name: handle
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: ReleaseHandle
 
 0x129:
-  Name: CMD_129
+  Name: BMHndAudioVisualAnmPlay
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: handle
+      Type: ushort
+    - Name: anmId
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: HndPlayAudioVisualAnm
 
 0x12a:
-  Name: CMD_12A
+  Name: BMHndAnmWait
   Parameters:
-    - Type: ushort
+    - Name: handle
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: HndWaitAnm
 
 0x12b:
   Name: CMD_12B
@@ -2998,35 +3113,51 @@
     - Type: ushort
     - Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
 
 0x12c:
-  Name: CMD_12C
+  Name: BMHndAnmPause
   Parameters:
-    - Type: ushort
+    - Name: handle
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: HndPauseAnm
 
 0x12d:
-  Name: CMD_12D
+  Name: BMSetVisible
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: bmType
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: z
+      Type: ushort
+    - Name: visible
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: SetVisible
 
 0x12e:
-  Name: CMD_12E
+  Name: BMAnmPlayDefault
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: bmType
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: z
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
+  PSName: PlayAnmDefault
 
 0x12f:
   Name: CMD_12F
   Parameters:
     - Type: ushort
   Brief: "TODO"
+  PSPackage: event.StaticProp
 
 0x130:
   Name: PlayPCLogonSFX
@@ -3038,7 +3169,7 @@
   Name: ShowPCText
   Brief: "TODO"
   PSPackage: event.PC
-  PSName: CallPC
+  PSName: SetPCAnimation
 
 0x132:
   Name: PlayPCLogoffSFX
@@ -3189,17 +3320,23 @@
   PSName: Reset
 
 0x148:
-  Name: CMD_148
+  Name: ShakeCamera
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: intensityH
+      Type: ushort
+    - Name: intensityW
+      Type: ushort
+    - Name: loopLength
+      Type: ushort
+    - Name: loopCount
+      Type: ushort
     - Type: ushort
     - Type: ushort
     - Type: ushort
     - Type: ushort
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: Shake
 
 0x149:
   Name: Shop
@@ -3241,10 +3378,11 @@
   Brief: "TODO"
 
 0x14f:
-  Name: CMD_14F
+  Name: CallPC
   Parameters:
     - Type: ref ushort
-    - Type: ushort
+    - Name: type
+      Type: ushort
   Brief: "TODO"
 
 0x150:
@@ -3305,24 +3443,34 @@
   PSName: CallGameClear
 
 0x157:
-  Name: CMD_157
+  Name: InitActorAnimation
   Parameters:
-    - Type: ushort
+    - Name: actorId
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.ActorMotion
+  PSName: Init
 
 0x158:
-  Name: CMD_158
+  Name: FreeActorAnimation
   Brief: "TODO"
+  PSPackage: event.actors.ActorMotion
+  PSName: Free
 
 0x159:
-  Name: CMD_159
+  Name: PlayActorAnimation
   Parameters:
-    - Type: ushort
+    - Name: anmId
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.ActorMotion
+  PSName: Play
 
 0x15a:
-  Name: CMD_15A
+  Name: WaitForActorAnimation
   Brief: "TODO"
+  PSPackage: event.actors.ActorMotion
+  PSName: Wait
 
 0x15b:
   Name: CMD_15B
@@ -3620,7 +3768,7 @@
   Name: EndBlackout
   Brief: "TODO"
   PSPackage: system.Fade
-  PSName: InBlack
+  PSName: InBlackQ
 
 0x1a4:
   Name: BeginBlackout
@@ -3632,13 +3780,13 @@
   Name: EndWhiteout
   Brief: "TODO"
   PSPackage: system.Fade
-  PSName: InWhite
+  PSName: InWhiteQ
 
 0x1a6:
   Name: BeginWhiteout
   Brief: "TODO"
   PSPackage: system.Fade
-  PSName: OutWhite
+  PSName: OutWhiteQ
 
 0x1a7:
   Name: EndFadeExecution
@@ -3650,7 +3798,7 @@
   Name: EndBlackoutDuplicate
   Brief: "TODO"
   PSPackage: system.Fade
-  PSName: InBlack_
+  PSName: InBlackQ_
 
 0x1aa:
   Name: CMD_1AA
@@ -3660,25 +3808,25 @@
   Name: EndBlackoutFast
   Brief: "Makes both screens black and fades out from it."
   PSPackage: system.Fade
-  PSName: InBlackQ
+  PSName: InBlack
 
 0x1ac:
   Name: BeginBlackoutFast
   Brief: "Fades both screens into black."
   PSPackage: system.Fade
-  PSName: OutBlackQ
+  PSName: OutBlack
 
 0x1ad:
   Name: EndWhiteoutFast
   Brief: "Makes both screens white and fades out from it."
   PSPackage: system.Fade
-  PSName: InWhiteQ
+  PSName: InWhite
 
 0x1ae:
   Name: BeginWhiteoutFast
   Brief: "Fades both screens into white."
   PSPackage: system.Fade
-  PSName: OutWhiteQ
+  PSName: OutWhite
 
 0x1af:
   Name: CMD_1AF
@@ -3714,17 +3862,28 @@
 0x1b4:
   Name: CallFieldTrade
   Parameters:
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: tradeNo
+      Type: ushort
+    - Name: partyIdx
+      Type: ushort
+  Brief: "TradeNo = index into a/1/6/3."
+  PSPackage: event.FieldTrade
+  PSName: CallTrade
 
 0x1b5:
   Name: VerifyTradePokemon
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: tradeNo
+      Type: ushort
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.FieldTrade
+  PSName: IsEligible
 
 0x1c1:
   Name: TemporaryStoreScreenPosition
@@ -3878,32 +4037,51 @@
   Brief: "TODO"
 
 0x1d7:
-  Name: SetVarAffinityCheck
+  Name: BGParamPosChange
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: bgIndex
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: z
+      Type: ushort
+  Brief: "Sets the location of a BG zone entity."
+  PSPackage: event.ObjInit
+  PSName: InitInteractibleGPos
 
 0x1d8:
-  Name: CMD_1D8
+  Name: DoorParamPosChange
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: warpIndex
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: z
+      Type: ushort
+  Brief: "Sets the location of a Warp zone entity."
+  PSPackage: event.ObjInit
+  PSName: InitWarpGPos
 
 0x1d9:
-  Name: CMD_1D9
+  Name: MdlParamPosChange
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: npcIndex
+      Type: ushort
+    - Name: dir
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: z
+      Type: ushort
+  Brief: "Sets the location and direction of an NPC zone entity. Note that this function only works in initialization scripts before Actors are spawned."
+  PSPackage: event.ObjInit
+  PSName: InitActorGPos
 
 0x1da:
   Name: CMD_1DA
@@ -4297,13 +4475,19 @@
   Brief: "TODO"
 
 0x214:
-  Name: CMD_214
+  Name: ShowPokemonPreviewBox
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: species
+      Type: ushort
+    - Name: forme
+      Type: ushort
+    - Name: sex
+      Type: ushort
+    - Name: shiny
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.DemoWindow
+  PSName: ShowPokemon
 
 0x215:
   Name: CMD_215
@@ -4510,20 +4694,28 @@
   Brief: "TODO"
 
 0x234:
-  Name: CMD_234
+  Name: FallDownToPosition
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: npcId
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: z
+      Type: ushort
+    - Name: dir
+      Type: ushort
   Brief: "TODO"
 
 0x235:
-  Name: CMD_235
+  Name: BGMChange
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
+    - Name: bgmId
+      Type: const ushort
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: BGMChange
 
 0x236:
   Name: CMD_236
@@ -4542,10 +4734,13 @@
   Brief: "TODO"
 
 0x238:
-  Name: CMD_238
+  Name: SwitchToMapMusicEx
   Parameters:
-    - Type: const ushort
-  Brief: "TODO"
+    - Name: interval
+      Type: const ushort
+  Brief: "Interval = now bgm fade out time"
+  PSPackage: system.Sound
+  PSName: BGMChangeMapEx
 
 0x239:
   Name: CMD_239
@@ -4581,8 +4776,10 @@
   Brief: "TODO"
 
 0x23f:
-  Name: CMD_23F
+  Name: ShowPlaceNameGraphics
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: CallPlaceNameDisp
 
 0x240:
   Name: CMD_240
@@ -4600,9 +4797,9 @@
 0x245:
   Name: CMD_245
   Parameters:
-    - Name: arg1
+    - Name: interval
       Type: const ushort
-  Brief: "TODO"
+  Brief: "Like BGMFadeOut, but does not set special event state."
 
 0x246:
   Name: BGMFadeOut
@@ -4614,23 +4811,36 @@
   PSName: BGMFadeOut
 
 0x247:
-  Name: CMD_247
+  Name: TeleportWarpRail
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
+    - Name: zoneId
+      Type: const ushort
+    - Name: railNo
+      Type: const ushort
+    - Name: posFront
+      Type: const ushort
+    - Name: posSide
+      Type: const ushort
+    - Name: dir
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: ChangeMapRail
 
 0x248:
-  Name: CMD_248
+  Name: AnimatePlayerY2
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: direction
+      Type: ushort
+    - Name: duration
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: isYPositive
+      Type: ushort
+  Brief: "Direction = 0 -> source is procedural Y, dest is y. 1 -> source is y, dest is procedural Y."
+  PSPackage: event.actors.Player
+  PSName: AnimateY2
 
 0x249:
   Name: CMD_249
@@ -4654,8 +4864,10 @@
   Brief: "TODO"
 
 0x24c:
-  Name: CMD_24C
+  Name: SwitchToLastMusic
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: BGMReturn
 
 0x24d:
   Name: CMD_24D
@@ -4708,23 +4920,35 @@
   PSName: AttachActor
 
 0x251:
-  Name: CMD_251
+  Name: DetachFollowNPC
   Parameters:
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: scrId
+      Type: ushort
+    - Name: moveCode
+      Type: ushort
+  Brief: "moveCode and SCRID have to be manually defined because the game does not remember them from before the attachment."
+  PSPackage: event.actors.Follow
+  PSName: DetachActor
 
 0x252:
-  Name: CMD_252
+  Name: GetFollowNPCTrainerAllyID
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.actors.Follow
+  PSName: GetBattleAllyID
 
 0x253:
-  Name: CMD_253
+  Name: SetFollowNPCMovementFlag
   Parameters:
-    - Type: byte
+    - Name: enable
+      Type: byte
   Brief: "TODO"
+  PSPackage: event.actors.Follow
+  PSName: SetEnableMovement
 
 0x25a:
   Name: CMD_25A
@@ -4942,10 +5166,12 @@
   Brief: "TODO"
 
 0x28a:
-  Name: CMD_28A
+  Name: WarpToMapFlyPos
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
+    - Name: zoneId
+      Type: const ushort
+    - Name: direction
+      Type: const ushort
   Brief: "TODO"
 
 0x28b:
@@ -5026,18 +5252,26 @@
   Brief: "TODO"
 
 0x299:
-  Name: CMD_299
+  Name: AbilityToStrbuf
   Parameters:
-    - Type: byte
-    - Type: ushort
+    - Name: strbufIdx
+      Type: byte
+    - Name: abil
+      Type: ushort
   Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadAbility
 
 0x29a:
-  Name: CMD_29A
+  Name: NatureToStrbuf
   Parameters:
-    - Type: byte
-    - Type: ushort
+    - Name: strbufIdx
+      Type: byte
+    - Name: nature
+      Type: ushort
   Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadNature
 
 0x29b:
   Name: CMD_29B

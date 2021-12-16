@@ -19,6 +19,6 @@
     - Type: const ushort
     - Type: ushort
     - Type: ushort
-    - Type: const ushort
+    - Type: ref ushort
   Brief: "TODO"
 

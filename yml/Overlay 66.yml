@@ -59,8 +59,8 @@
   Brief: "TODO"
 
 0x3f4:
-  Name: CMD_3F4
-  Brief: "TODO"
+  Name: PlayLegendOrbEffect
+  Brief: "Dragonspiral tower field demo."
 
 0x3f5:
   Name: CMD_3F5
