@@ -306,7 +306,7 @@
   Parameters:
     - Name: val
       Type: const ushort
-  Brief: "Reserves the next executed SCRID to a constant value."
+  Brief: "Reserves the next executed SCRID to a constant value. Can be used across a warp as well to start another script automatically."
   PSPackage: system.Runtime
   PSName: ReserveScript
 
@@ -542,7 +542,7 @@
       Type: ushort
     - Name: y
       Type: ushort
-    - Name: type
+    - Name: uid
       Type: ushort
   Brief: "Opens a message at position (x, y). The coordinates are based on screen hardware tiles. "
   PSPackage: event.dialogs.Message
@@ -551,7 +551,7 @@
 0x3b:
   Name: ClosePositionalMessage
   Parameters:
-    - Name: unk
+    - Name: uid
       Type: const ushort
   Brief: "Closes the positional message."
   PSPackage: event.dialogs.Message
@@ -629,7 +629,7 @@
   Parameters:
     - Name: id
       Type: ushort
-    - Name: pos
+    - Name: type
       Type: const ushort
   Brief: "Opens a message with a border."
   PSPackage: event.dialogs.Message
@@ -731,7 +731,7 @@
   Parameters:
     - Name: strbufIdx
       Type: byte
-  Brief: "TODO"
+  Brief: "Stores the name of the player to a string buffer."
   PSPackage: system.text.WordSet
   PSName: LoadPlayerName
 
@@ -1014,7 +1014,7 @@
       ReturnType: ushort
     - Name: npcId
       Type: ushort
-  Brief: "TODO"
+  Brief: "Gets an Actor's MoveCode."
   PSPackage: event.actors.Actors
   PSName: GetMoveCode
 
@@ -1031,7 +1031,7 @@
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-  Brief: "Gets an Actor's MoveCode."
+  Brief: "Stores an Actor's XY grid location to two variables."
   PSPackage: event.actors.Actors
   PSName: GetGPos/GetGPosX/GetGPosZ
 
@@ -1124,7 +1124,7 @@
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-  Brief: "TODO"
+  Brief: "Gets the direction of the player."
   PSPackage: event.actors.Player
   PSName: GetDirection
 
@@ -1211,7 +1211,7 @@
       Type: ushort
     - Name: moveCode
       Type: ushort
-  Brief: "TODO"
+  Brief: "Sets an Actor's MoveCode."
   PSPackage: event.actors.Actors
   PSName: SetMoveCode
 
@@ -1244,15 +1244,19 @@
   PSName: AnimateY
 
 0x77:
-  Name: CMD_77
-  Brief: "TODO"
+  Name: TurnPlayerByTrigger
+  Brief: "If the player is currently standing in the area of a trigger with a direction value set, they will turn in that direction."
 
 0x78:
-  Name: CMD_78
+  Name: GetIsActorPerformingMovement
   Parameters:
-    - Name: arg1
+    - Name: dest
       Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.actors.Actions
+  PSName: IsActorBusy
 
 0x79:
   Name: GetActorUserParam
@@ -1342,25 +1346,32 @@
   PSName: GetTrainerClass
 
 0x80:
-  Name: CMD_80
+  Name: BtlTrainerEventInit
   Parameters:
-    - Type: ushort
+    - Name: trSlotId
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.Trainer
+  PSName: EventInit
 
 0x81:
-  Name: CMD_81
+  Name: BtlTrainerEventFree
   Brief: "TODO"
+  PSPackage: event.Trainer
+  PSName: EventFree
 
 0x82:
-  Name: StoreIDOfScriptParentActor
+  Name: BtlTrainerGetActorID
   Parameters:
-    - Name: index
+    - Name: trSlotId
       Type: ushort
-    - Name: pDest
+    - Name: dest
       Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
-  PSPackage: system.Runtime
-  PSName: GetExecutorActor
+  PSPackage: event.Trainer
+  PSName: GetActorID
 
 0x83:
   Name: GetScriptTrainerBtlType
@@ -1472,7 +1483,7 @@
   PSPackage: event.Battle
 
 0x8d:
-  Name: GetTrainerBattleResult
+  Name: TrainerIsVictory
   Parameters:
     - Name: storage
       Type: ref ushort
@@ -1482,8 +1493,9 @@
   PSPackage: event.Battle
 
 0x8e:
-  Name: CallTrainerVictory
+  Name: CallTrainerBattleReturn
   Brief: "TODO"
+  PSPackage: event.Battle
 
 0x8f:
   Name: TrainerClassBGMPlayPush
@@ -1518,7 +1530,7 @@
   Brief: "TODO"
 
 0x94:
-  Name: EventTrainerBattle
+  Name: TradeTrainerBattle
   Parameters:
     - Name: trId1
       Type: ushort
@@ -1526,11 +1538,11 @@
       Type: ushort
     - Name: flags
       Type: ushort
-    - Name: evPkmIdx
+    - Name: savePkmIdx
       Type: ushort
-  Brief: "Starts a trainer battle using a special event Pokémon."
+  Brief: "Starts a trainer battle using a previously traded Pokémon as the opponent."
   PSPackage: event.Battle
-  PSName: CallEventTrainerBattle
+  PSName: CallTradedBattle
 
 0x95:
   Name: TrainerFlagSet
@@ -1598,6 +1610,8 @@
 0xa0:
   Name: WaitForSequencePlayer
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: WaitFinish
 
 0xa1:
   Name: CMD_A1
@@ -1614,23 +1628,29 @@
   Brief: "TODO"
 
 0xa3:
-  Name: CMD_A3
+  Name: EnableSndChannel
   Parameters:
     - Type: ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: UnmuteChannel
 
 0xa4:
-  Name: CMD_A4
+  Name: DisableSndChannel
   Parameters:
     - Type: ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: MuteChannel
 
 0xa5:
-  Name: CMD_A5
+  Name: GetSndChannelStatus
   Parameters:
     - Type: ref ushort
     - Type: ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: GetChannelStatus
 
 0xa6:
   Name: SEPlay
@@ -1671,9 +1691,9 @@
 0xab:
   Name: PVPlay
   Parameters:
-    - Name: pokeNo
+    - Name: monsNo
       Type: ushort
-    - Name: voiceNo
+    - Name: formeNo
       Type: ushort
   Brief: "Plays a cry corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
@@ -1741,6 +1761,8 @@
 0xb1:
   Name: PauseAndClose2
   Brief: "TODO"
+  PSPackage: event.dialogs.ListMenu
+  PSName: ShowDialog_
 
 0xb2:
   Name: MultiboxTopRightAnchor
@@ -1768,9 +1790,9 @@
       Type: const ushort
     - Name: endCol
       Type: const ushort
-    - Name: interval
+    - Name: slowness
       Type: const ushort
-  Brief: "Mode - 1=Engine A/Black, 2=Engine B/Black, 4=Engine A/White, 8=Engine B/White. Can be ORed together."
+  Brief: "Mode - 1=Engine A/Black, 2=Engine B/Black, 4=Engine A/White, 8=Engine B/White. Can be ORed together. Slowness = amount of frames between each fade tick. Negative values allow for more fade ticks per update, but are not attainable in the unsigned scripting paradigma."
   PSPackage: system.Fade
   PSName: FadeEx
 
@@ -1867,7 +1889,7 @@
   PSName: ItemIsTM
 
 0xbb:
-  Name: CheckNaturalGiftType
+  Name: StoreItemPocketID
   Parameters:
     - Name: item
       Type: ushort
@@ -1877,16 +1899,19 @@
       ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
-  PSName: ItemGetNaturalGiftID
+  PSName: ItemGetPocket
 
 0xbc:
-  Name: CMD_BC
+  Name: GetFieldPhenomenonItemID
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
 
 0xbd:
-  Name: GetItemStatChange
+  Name: StoreItemClassification
   Parameters:
     - Name: item
       Type: ushort
@@ -1896,7 +1921,7 @@
       ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.Bag
-  PSName: ItemGetStatChange
+  PSName: ItemGetClass
 
 0xbe:
   Name: Warp
@@ -1909,7 +1934,7 @@
       Type: const ushort
     - Name: dir
       Type: const ushort
-  Brief: "TODO"
+  Brief: "A warp. Seems to detach followers, however."
 
 0xbf:
   Name: SpinWarp
@@ -1948,11 +1973,15 @@
 0xc2:
   Name: FastWarp
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-  Brief: "TODO"
+    - Name: zoneId
+      Type: const ushort
+    - Name: x
+      Type: const ushort
+    - Name: z
+      Type: const ushort
+    - Name: dir
+      Type: const ushort
+  Brief: "The warp that's generally used when in a script"
 
 0xc3:
   Name: UnionRoomWarp
@@ -2180,28 +2209,33 @@
   PSName: ReserveWorkGet
 
 0xd9:
-  Name: CMD_D9
+  Name: SetTeleportZoneID
   Parameters:
-    - Type: ushort
+    - Name: tpZoneSlot
+      Type: ushort
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: SetRespawnZone
 
 0xda:
-  Name: CMD_DA
+  Name: SetReservedWorkVal
   Parameters:
-    - Name: arg1
+    - Name: id
       Type: ushort
-    - Name: arg2
+    - Name: isEnabled
       Type: ushort
-    - Name: arg3
+    - Name: doReload
       Type: ushort
   Brief: "TODO"
 
 0xdb:
-  Name: CMD_DB
+  Name: SetNextZoneHere
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: SetNextZoneHere
 
 0xdc:
-  Name: SetDiveOutTargetLocation
+  Name: SetNextZone
   Parameters:
     - Name: zoneId
       Type: ushort
@@ -2214,6 +2248,8 @@
     - Name: z
       Type: ushort
   Brief: "TODO"
+  PSPackage: system.FieldControl
+  PSName: SetNextZone
 
 0xdd:
   Name: StoreDexCount
@@ -2276,9 +2312,12 @@
   PSName: GetSex
 
 0xe2:
-  Name: CMD_E2
+  Name: CheckNeedsSaveData
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
 
 0xe3:
@@ -2319,9 +2358,12 @@
   Brief: "TODO"
 
 0xea:
-  Name: CMD_EA
+  Name: CheckHOFDataIntegrity
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
 
 0xeb:
@@ -2631,13 +2673,23 @@
   Brief: "TODO"
 
 0x107:
-  Name: SelectEggForSpinTrade
+  Name: CallPokemonSelect
   Parameters:
-    - Type: const ushort
-    - Type: ref ushort
-    - Type: ref ushort
-    - Type: ushort
+    - Name: wantEgg
+      Type: const ushort
+    - Name: pSpecies
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: pDlgSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: unused
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.dialogs.PokemonDialog
+  PSName: CallPokeSelect
 
 0x108:
   Name: StoreLearnedMovesCount
@@ -2877,14 +2929,14 @@
     - Name: success
       Type: ref ushort
       IsReturn: true
-      ReturnType: ushort
-    - Name: storage
+      ReturnType: bool
+    - Name: partyIdx
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "Gets the index of the first Pokémon of a species in the party."
   PSPackage: pokemon.PokeParty
-  PSName: GetPokeBySpecies
+  PSName: FindPokemon
 
 0x119:
   Name: StoreIsPokemonFromWhiteForest
@@ -2949,30 +3001,46 @@
   Brief: "TODO"
 
 0x11d:
-  Name: CMD_11D
+  Name: SetFavePokemon
   Parameters:
-    - Type: ushort
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: player.TrainerCard
+  PSName: SetFavePokemon
 
 0x11e:
-  Name: CMD_11E
+  Name: SaveGymVictoryParty
   Parameters:
-    - Type: ushort
+    - Name: badgeNo
+      Type: ushort
   Brief: "TODO"
+  PSPackage: player.TrainerCard
+  PSName: SaveGymVictoryParty
 
 0x11f:
-  Name: CMD_11F
+  Name: PrepareGymVictoryPartyText
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
+    - Name: badgeNo
+      Type: ushort
+    - Name: pPartyCount
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadGymVictoryParty
 
 0x120:
-  Name: CMD_120
+  Name: SaveFieldTradePokemonData
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: partyIdx
+      Type: ushort
+    - Name: savePkmIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.FieldTrade
+  PSName: RememberPkmAs
 
 0x121:
   Name: StorePokeBoxCount
@@ -3041,7 +3109,7 @@
   PSName: HndPlayAnm
 
 0x125:
-  Name: CMD_125
+  Name: DendouMachineAnmPlay
   Brief: "TODO"
   PSPackage: event.StaticProp
 
@@ -3153,11 +3221,13 @@
   PSName: PlayAnmDefault
 
 0x12f:
-  Name: CMD_12F
+  Name: SpawnPokecenMonsballs
   Parameters:
-    - Type: ushort
+    - Name: count
+      Type: ushort
   Brief: "TODO"
-  PSPackage: event.StaticProp
+  PSPackage: event.PC
+  PSName: SpawnMonsballs
 
 0x130:
   Name: PlayPCLogonSFX
@@ -3317,7 +3387,7 @@
       Type: const ushort
   Brief: "Resets the camera to data read from the default camera NARC."
   PSPackage: event.EVCamera
-  PSName: Reset
+  PSName: MoveToDefault
 
 0x148:
   Name: ShakeCamera
@@ -3363,11 +3433,15 @@
   Brief: "TODO"
 
 0x14d:
-  Name: CMD_14D
+  Name: CallRecordSystem
   Parameters:
     - Type: ushort
-    - Type: ref ushort
+    - Name: dlgResult
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.PC
 
 0x14e:
   Name: CMD_14E
@@ -3384,6 +3458,7 @@
     - Name: type
       Type: ushort
   Brief: "TODO"
+  PSPackage: event.PC
 
 0x150:
   Name: ShowMailbox
@@ -3599,7 +3674,7 @@
   PSPackage: event.Battle
 
 0x175:
-  Name: CallWildVictory
+  Name: CallWildBattleReturn
   Brief: "TODO"
   PSPackage: event.Battle
 
@@ -3909,13 +3984,19 @@
   Brief: "TODO"
 
 0x1c5:
-  Name: CMD_1C5
+  Name: StoreDexEvaluationDialogueParams
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: evalType
+      Type: ushort
+    - Name: destMsgId
+      Type: ref ushort
+    - Name: destCaughtNo
+      Type: ref ushort
+    - Name: destMEId
+      Type: ref ushort
   Brief: "TODO"
+  PSPackage: pokemon.Pokedex
+  PSName: GetEvaluationParams
 
 0x1c6:
   Name: GiveNationalPokedex
@@ -3941,20 +4022,29 @@
   PSName: DexEnableRegional
 
 0x1c9:
-  Name: ShowGlowing
+  Name: NDemoStart
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
+    - Name: backgroundId
+      Type: const ushort
+    - Name: unusedArg
+      Type: const ushort
+    - Name: fadeBothScreens
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: event.NDemo
+  PSName: Start
 
 0x1ca:
-  Name: CMD_1CA
+  Name: NDemoEnd
   Brief: "TODO"
+  PSPackage: event.NDemo
+  PSName: End
 
 0x1cb:
-  Name: CMD_1CB
+  Name: NDemoReadyTalkMotion
   Brief: "TODO"
+  PSPackage: event.NDemo
+  PSName: ReadyTalkMotion
 
 0x1cc:
   Name: CMD_1CC
@@ -4025,15 +4115,23 @@
 0x1d5:
   Name: StoreUpcomingLevelUpMove
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
+    - Name: result
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: HasRememberableMoves
 
 0x1d6:
-  Name: CMD_1D6
+  Name: CallMoveRemindSelect
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
+    - Name: dest
+      Type: ref ushort
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
 
 0x1d7:
@@ -4420,13 +4518,23 @@
   Brief: "TODO"
 
 0x20d:
-  Name: StoreSpecialPokeForm
+  Name: StorePokemonBySpeciesAndForme
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: species
+      Type: ushort
+    - Name: forme
+      Type: ushort
+    - Name: partyIdx
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: success
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: FindPokemonEx
 
 0x20e:
   Name: CMD_20E
@@ -4548,7 +4656,7 @@
   Brief: "TODO"
 
 0x21e:
-  Name: PrepareFieldForEnvironmentChange
+  Name: GetRandomFishingChallengePkm
   Parameters:
     - Type: ref ushort
   Brief: "TODO"
@@ -4604,7 +4712,7 @@
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-  Brief: "TODO"
+  Brief: "statNo = sum/max/hp/atk/def/spe/spa/spd (0 - 7)"
   PSPackage: pokemon.PokeParty
   PSName: GetIV
 
@@ -4661,11 +4769,15 @@
   Brief: "TODO"
 
 0x22f:
-  Name: CMD_22F
+  Name: StorePastTradeNicknameToStrbuf
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: savePkmIdx
+      Type: ushort
+    - Name: strbufIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPastTradeNickname
 
 0x230:
   Name: CMD_230
@@ -4908,14 +5020,17 @@
 0x250:
   Name: AttachFollowNPC
   Parameters:
-    - Name: id
+    - Name: actorId
       Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: pairId
+      Type: ushort
+    - Name: global
+      Type: ushort
+    - Name: btlTrId
+      Type: ushort
     - Name: scrId
       Type: ushort
-  Brief: "scrId can be 0 to keep current script ID."
+  Brief: "Actor ID is the unique ID of the field actor to attach. The Pair ID is a general identifier of the pair used in gameplay, it does not have any visible effects apart from setting work 16451, which can be used to turn off multi battles if set to 255 - not that this value, however, must not be higher than 7. If the \"global\" flag is set, the actor will persist when changing zones, BUT it will also not return to its original actor state when detached, so measures have to be taken to ensure the actor is properly deleted. The btlTrId is a trainer ID to use when in a multi battle, but most trainers will not work as they do not have a back sprite, so keep that in mind. ScrId can be 0 to keep current script ID and it will NOT be automatically restored on detach if changed."
   PSPackage: event.actors.Follow
   PSName: AttachActor
 
@@ -5191,10 +5306,13 @@
   Brief: "TODO"
 
 0x290:
-  Name: CMD_290
+  Name: LoadRivalNameToStrbuf
   Parameters:
-    - Type: byte
+    - Name: strbufIdx
+      Type: byte
   Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadRivalName
 
 0x291:
   Name: CMD_291
@@ -5296,13 +5414,17 @@
   PSName: Register
 
 0x2a0:
-  Name: CMD_2A0
+  Name: CheckMedalStatus
   Parameters:
     - Name: arg1
       Type: ref ushort
-    - Name: arg2
+      IsReturn: true
+      ReturnType: bool
+    - Name: medalId
       Type: ushort
   Brief: "TODO"
+  PSPackage: player.Medals
+  PSName: IsObtained
 
 0x2a1:
   Name: CMD_2A1
