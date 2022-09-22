@@ -59,7 +59,7 @@
   PSName: PopAndDeref
 
 0x8:
-  Name: PushValue
+  Name:  0x1
   Parameters:
     - Name: var
       Type: const ushort
