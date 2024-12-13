@@ -1,32 +1,33 @@
 0x0:
-  Name: Nop
+  Name: VMNop
   Brief: "Does nothing."
   PSPackage: pokescript.vm.VM
   PSName: Nop
 
 0x1:
-  Name: Nop2
+  Name: VMNop2
   Brief: "Does nothing."
   PSPackage: pokescript.vm.VM
+  PSName: Nop2
 
 0x2:
-  Name: EndScript
+  Name: VMHalt
   CommandType: End
   Brief: "Ends a script."
   PSPackage: pokescript.vm.VM
-  PSName: Terminate
+  PSName: Halt
 
 0x3:
-  Name: ReturnAfterDelay
+  Name: VMSleep
   Parameters:
     - Name: num
       Type: const ushort
   Brief: "Pauses execution for num frames. (30 frames in the overworld = 1 second)."
   PSPackage: system.Runtime
-  PSName: Suspend
+  PSName: Sleep
 
 0x4:
-  Name: Call
+  Name: VMCall
   Parameters:
     - Name: addr
       Type: int
@@ -36,39 +37,41 @@
   PSName: _Call
 
 0x5:
-  Name: End
+  Name: VMReturn
   CommandType: Return
   Brief: "Ends the current script branch and returns the program counter to the original script (?)."
   PSPackage: pokescript.vm.VM
   PSName: _Return
 
 0x6:
-  Name: DerefAndReturn
+  Name: DebugPrint
   Parameters:
-    - Type: ushort
+    - Name: unused
+      Type: ushort
   Brief: "TODO"
   PSPackage: pokescript.vm.VM
+  PSName: DebugPrint
 
 0x7:
-  Name: PopDeref
+  Name: DebugStack
   Parameters:
     - Name: unused
       Type: ushort
   Brief: "TODO"
   PSPackage: pokescript.vm.StackCtrl
-  PSName: PopAndDeref
+  PSName: DebugStack
 
 0x8:
-  Name:  0x1
+  Name: StackPushConst
   Parameters:
-    - Name: var
+    - Name: value
       Type: const ushort
   Brief: "Pushes a variable onto the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: PushConst
 
 0x9:
-  Name: Push
+  Name: StackPush
   Parameters:
     - Name: var
       Type: ushort
@@ -77,16 +80,16 @@
   PSName: Push
 
 0xa:
-  Name: PopTo
+  Name: StackPop
   Parameters:
-    - Name: var
+    - Name: dest
       Type: ref ushort
   Brief: "Removes a variable from the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: PopTo
 
 0xb:
-  Name: Pop
+  Name: StackDiscard
   Brief: "Clears the stack (?)."
   PSPackage: pokescript.vm.StackCtrl
   PSName: Pop
@@ -110,13 +113,13 @@
   PSName: StackMul
 
 0xf:
-  Name: StackDivision
+  Name: StackDiv
   Brief: "Divides two variables on the stack."
   PSPackage: pokescript.vm.StackCtrl
   PSName: StackDiv
 
 0x10:
-  Name: PushFlag
+  Name: StackPushFlag
   Parameters:
     - Name: flag
       Type: ushort
@@ -134,7 +137,7 @@
   PSName: StackCmp
 
 0x12:
-  Name: UpdateVarAnd
+  Name: WorkAnd
   Parameters:
     - Name: var
       Type: ref ushort
@@ -142,10 +145,10 @@
       Type: ushort
   Brief: "var &= operand"
   PSPackage: pokescript.vm.Math
-  PSName: UpdateVarAnd
+  PSName: And
 
 0x13:
-  Name: UpdateVarOr
+  Name: WorkOr
   Parameters:
     - Name: var
       Type: ref ushort
@@ -153,71 +156,71 @@
       Type: ushort
   Brief: "var |= operand"
   PSPackage: pokescript.vm.Math
-  PSName: UpdateVarOr
+  PSName: Or
 
 0x14:
-  Name: SetGlobal8
+  Name: VMRegSet8
   Parameters:
-    - Name: targetVar
+    - Name: dstReg
       Type: byte
     - Name: val
       Type: byte
   Brief: "Stores an 8-bit integer in a global variable (referenced by id)."
-  PSPackage: pokescript.vm.VMVars
-  PSName: SetVar8
+  PSPackage: pokescript.vm.VM
+  PSName: RegSet8
 
 0x15:
-  Name: SetGlobal32
+  Name: VMRegSet32
   Parameters:
-    - Name: targetVar
+    - Name: dstReg
       Type: byte
     - Name: val
       Type: int
   Brief: "Stores a 32-bit integer in a global variable (referenced by id)."
-  PSPackage: pokescript.vm.VMVars
-  PSName: SetVar32
+  PSPackage: pokescript.vm.VM
+  PSName: RegSet32
 
 0x16:
-  Name: CopyGlobalVar
+  Name: VMRegMov
   Parameters:
-    - Name: targetVar
+    - Name: dstReg
       Type: byte
-    - Name: sourceVar
+    - Name: srcReg
       Type: byte
   Brief: "TODO"
-  PSPackage: pokescript.vm.VMVars
-  PSName: CopyVar
+  PSPackage: pokescript.vm.VM
+  PSName: RegMov
 
 0x17:
-  Name: CmpGlobals
+  Name: VMRegCmp8
   Parameters:
-    - Name: var1
+    - Name: lhsReg
       Type: byte
-    - Name: var2
+    - Name: rhsReg
       Type: byte
   WritesCondition: true
   Brief: "Compares the values of two global variables (referenced by id)."
-  PSPackage: pokescript.vm.VMVars
-  PSName: CmpGVarGVar
+  PSPackage: pokescript.vm.VM
+  PSName: RegCmp8
 
 0x18:
-  Name: CmpGlobalConst
+  Name: VMRegCmpConst8
   Parameters:
-    - Name: var
+    - Name: reg
       Type: byte
     - Name: value
       Type: byte
   WritesCondition: true
   Brief: "Compares the values of a global variable and a user supplied variable."
-  PSPackage: pokescript.vm.VMVars
-  PSName: CmpGVarConst
+  PSPackage: pokescript.vm.VM
+  PSName: RegCmpConst8
 
 0x19:
-  Name: CmpVarConst
+  Name: WorkCmpConst
   Parameters:
     - Name: var
       Type: ref ushort
-    - Name: param
+    - Name: value
       Type: const ushort
   WritesCondition: true
   Brief: "Compares the values of a variable and a user supplied number."
@@ -225,11 +228,11 @@
   PSName: CmpVarConst
 
 0x1a:
-  Name: CmpVars
+  Name: WorkCmpWork
   Parameters:
-    - Name: var1
+    - Name: lhsVar
       Type: ref ushort
-    - Name: var2
+    - Name: rhsVar
       Type: ref ushort
   WritesCondition: true
   Brief: "Compares the values of two variables."
@@ -237,9 +240,9 @@
   PSName: CmpVarVar
 
 0x1b:
-  Name: CallGlobalAsync
+  Name: RTCallGlobalAsync
   Parameters:
-    - Name: id
+    - Name: scrId
       Type: const ushort
   CommandType: Call
   ExternCall: true
@@ -248,9 +251,9 @@
   PSName: GlobalCallAsync
 
 0x1c:
-  Name: CallGlobal
+  Name: RTCallGlobal
   Parameters:
-    - Name: id
+    - Name: scrId
       Type: const ushort
   CommandType: Call
   ExternCall: true
@@ -259,14 +262,14 @@
   PSName: GlobalCall
 
 0x1d:
-  Name: EndGlobal
+  Name: RTEndGlobal
   CommandType: End
   Brief: "Stops the standard function."
   PSPackage: system.Runtime
   PSName: GlobalEnd
 
 0x1e:
-  Name: UnconditionalJump
+  Name: VMJump
   Parameters:
     - Name: addr
       Type: int
@@ -276,7 +279,7 @@
   PSName: _Jump
 
 0x1f:
-  Name: ConditionalJump
+  Name: VMJumpIf
   Parameters:
     - Name: cond
       Type: byte
@@ -289,7 +292,7 @@
   PSName: _JumpIf
 
 0x20:
-  Name: ConditionalCall
+  Name: VMCallIf
   Parameters:
     - Name: cond
       Type: byte
@@ -302,25 +305,25 @@
   PSName: _CallIf
 
 0x21:
-  Name: ReserveScript
+  Name: RTReserveScript
   Parameters:
-    - Name: val
+    - Name: scrId
       Type: const ushort
   Brief: "Reserves the next executed SCRID to a constant value. Can be used across a warp as well to start another script automatically."
   PSPackage: system.Runtime
   PSName: ReserveScript
 
 0x22:
-  Name: StoreMapTypeChange
+  Name: FieldGetContinueFlag
   Parameters:
-    - Name: var
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "TODO"
 
 0x23:
-  Name: SetFlag
+  Name: FlagSet
   Parameters:
     - Name: flag
       Type: ushort
@@ -329,7 +332,7 @@
   PSName: Set
 
 0x24:
-  Name: ClearFlag
+  Name: FlagReset
   Parameters:
     - Name: flag
       Type: ushort
@@ -338,11 +341,11 @@
   PSName: Clear
 
 0x25:
-  Name: GetFlag
+  Name: FlagGet
   Parameters:
     - Name: flag
       Type: ushort
-    - Name: var
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
@@ -351,33 +354,33 @@
   PSName: Get
 
 0x26:
-  Name: AddToVar
+  Name: WorkAdd
   Parameters:
     - Name: var
       Type: ref ushort
-    - Name: val
+    - Name: operand
       Type: ushort
   Brief: "Accesses the second variable, grabs the value of the variable, then adds it to the value in the first variable."
   PSPackage: pokescript.vm.Math
   PSName: Add
 
 0x27:
-  Name: SubFromVar
+  Name: WorkSub
   Parameters:
     - Name: var
       Type: ref ushort
-    - Name: val
+    - Name: operand
       Type: ushort
   Brief: "Accesses the second variable, grabs the value of the variable, then subtracts it from the value in the first variable."
   PSPackage: pokescript.vm.Math
   PSName: Sub
 
 0x28:
-  Name: SetVar
+  Name: WorkSetConst
   Parameters:
     - Name: var
       Type: ref ushort
-    - Name: val
+    - Name: value
       Type: const ushort
   Brief: "Stores val in the specified variable."
   PSPackage: pokescript.vm.Math
@@ -408,107 +411,107 @@
   PSName: WorkSet
 
 0x2b:
-  Name: UpdateVarMul
+  Name: WorkMul
   Parameters:
     - Name: var
       Type: ref ushort
-    - Name: val
+    - Name: operand
       Type: ushort
   Brief: "Multiplies the value of var by val. Also known as: var.value *= val"
   PSPackage: pokescript.vm.Math
   PSName: Mul
 
 0x2c:
-  Name: UpdateVarDiv
+  Name: WorkDiv
   Parameters:
     - Name: var
       Type: ref ushort
-    - Name: val
+    - Name: operand
       Type: ushort
   Brief: "Divides the value of var by val. Also known as: var.value /= val"
   PSPackage: pokescript.vm.Math
   PSName: Div
 
 0x2d:
-  Name: UpdateVarModulus
+  Name: WorkMod
   Parameters:
     - Name: var
       Type: ref ushort
-    - Name: val
+    - Name: operand
       Type: ushort
   Brief: "Divides the value of var by val and returns the remainder of the operation. Also known as: var.value %= val"
   PSPackage: pokescript.vm.Math
   PSName: Mod
 
 0x2e:
-  Name: LockAll
+  Name: ActorPauseAll
   Brief: "Freezes all NPCs."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: PauseAll
 
 0x2f:
-  Name: UnlockAll
+  Name: ActorUnlockAll
   Brief: "Unfreezes all NPCs."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: UnpauseAll
 
 0x30:
-  Name: FinishAllEvents
+  Name: RTFinishSubEvents
   Brief: "TODO"
   PSPackage: system.Runtime
-  PSName: FinishAllEvents
+  PSName: FinishSubEvents
 
 0x31:
-  Name: WaitKeypressAB
+  Name: InputWaitAB
   Brief: "Waits until \"A\" or \"B\" is pressed."
-  PSPackage: system.Interact
+  PSPackage: system.Input
   PSName: ABKeyWait
 
 0x32:
-  Name: WaitKeypress
+  Name: InputWaitLast
   Brief: "Waits until any key is pressed."
-  PSPackage: system.Interact
+  PSPackage: system.Input
   PSName: LastKeyWait
 
 0x33:
-  Name: MusicalMessage
+  Name: MsgSetAutoscrolls
   Parameters:
-    - Name: id
+    - Name: enabled
       Type: const ushort
   Brief: "Opens a message with music."
   PSPackage: event.dialogs.Message
-  PSName: Musical
+  PSName: SetAutoscrolls
 
 0x34:
-  Name: EventGrayMessage
+  Name: MsgSystem
   Parameters:
-    - Name: id
+    - Name: msgId
       Type: ushort
     - Name: pos
       Type: const ushort
   Brief: "Opens an event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: InfoMsg
+  PSName: System
 
 0x35:
-  Name: NextEventGrayMessage
+  Name: MsgSystemAsync
   Parameters:
-    - Name: id
+    - Name: msgId
       Type: ushort
     - Name: pos
       Type: const ushort
   Brief: "Opens another event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: InfoMsgAlt
+  PSName: SystemAsync
 
 0x36:
-  Name: CloseEventGrayMessage
+  Name: MsgSystemClose
   Brief: "Closes an event-gray message box."
   PSPackage: event.dialogs.Message
-  PSName: CloseInfoMsg
+  PSName: CloseSystem
 
 0x37:
-  Name: SetLoadingIcon
+  Name: MsgSetLoadingSpinner
   Parameters:
     - Name: hide
       Type: ushort
@@ -517,54 +520,54 @@
   PSName: SetLoadingSpinner
 
 0x38:
-  Name: UnassociatedMessage
+  Name: MsgInfo
   Parameters:
-    - Name: id
+    - Name: msgId
       Type: ushort
     - Name: pos
       Type: byte
   Brief: "Opens a message which isn't associated with an NPC."
   PSPackage: event.dialogs.Message
-  PSName: UnboundMsg
+  PSName: Info
 
 0x39:
-  Name: CloseUnassociatedMessage
+  Name: MsgInfoClose
   Brief: "Closes the message which isn't associated with an NPC."
   PSPackage: event.dialogs.Message
-  PSName: CloseUnboundMsg
+  PSName: CloseInfo
 
 0x3a:
-  Name: PositionalMessage
+  Name: MsgMulti
   Parameters:
-    - Name: id
+    - Name: msgId
       Type: ushort
     - Name: x
       Type: ushort
     - Name: y
       Type: ushort
-    - Name: uid
+    - Name: handle
       Type: ushort
   Brief: "Opens a message at position (x, y). The coordinates are based on screen hardware tiles. "
   PSPackage: event.dialogs.Message
-  PSName: PositionalMsg
+  PSName: Multi
 
 0x3b:
-  Name: ClosePositionalMessage
+  Name: MsgWinCloseNo
   Parameters:
-    - Name: uid
+    - Name: handle
       Type: const ushort
   Brief: "Closes the positional message."
   PSPackage: event.dialogs.Message
-  PSName: ClosePositionalMsg
+  PSName: CloseWin
 
 0x3c:
-  Name: NPCMessageEx
+  Name: MsgActorEx
   Parameters:
     - Name: textFile
       Type: ushort
     - Name: msgId
       Type: ushort
-    - Name: npc
+    - Name: actorId
       Type: ushort
     - Name: pos
       Type: ushort
@@ -572,10 +575,10 @@
       Type: ushort
   Brief: "Prints a message with a tail for an NPC. The NPC is manually determined."
   PSPackage: event.dialogs.Message
-  PSName: NPCMsgEx
+  PSName: ActorEx
 
 0x3d:
-  Name: NPCMessage
+  Name: MsgActor
   Parameters:
     - Name: textFile
       Type: ushort
@@ -587,100 +590,102 @@
       Type: ushort
   Brief: "Prints a message with a tail for an NPC. The NPC is automatically determined."
   PSPackage: event.dialogs.Message
-  PSName: NPCMsg
+  PSName: Actor
 
 0x3e:
-  Name: CloseMessage
+  Name: MsgActorClose
   Brief: "Closes a message when a key is pressed."
   PSPackage: event.dialogs.Message
-  PSName: CloseNPCMsg
+  PSName: CloseActor
 
 0x3f:
-  Name: CloseAllMessages
+  Name: MsgWinCloseAll
   Brief: "Closes a message when a key is pressed. Not sure what makes this different just yet."
   PSPackage: event.dialogs.Message
   PSName: CloseAll
 
 0x40:
-  Name: ShowMoneyBox
+  Name: MoneyWinDisp
   Parameters:
     - Name: x
       Type: ushort
     - Name: y
       Type: ushort
   Brief: "Shows the money box at coords (x, y)."
-  PSPackage: event.dialogs.MoneyBox
+  PSPackage: event.dialogs.MoneyWin
   PSName: Show
 
 0x41:
-  Name: CloseMoneyBox
+  Name: MoneyWinClose
   Brief: "Closes the money box."
-  PSPackage: event.dialogs.MoneyBox
+  PSPackage: event.dialogs.MoneyWin
   PSName: Close
 
 0x42:
-  Name: UpdateMoneyBox
+  Name: MoneyWinUpdate
   Brief: "Updates the values in the money box."
-  PSPackage: event.dialogs.MoneyBox
+  PSPackage: event.dialogs.MoneyWin
   PSName: Update
 
 0x43:
-  Name: BorderedMessage
+  Name: MsgPlaceSign
   Parameters:
-    - Name: id
+    - Name: msgId
       Type: ushort
     - Name: type
       Type: const ushort
   Brief: "Opens a message with a border."
   PSPackage: event.dialogs.Message
-  PSName: BorderedMsg
+  PSName: PlaceSign
 
 0x44:
-  Name: CloseBorderedMessage
+  Name: MsgPlaceSignClose
   Brief: "Closes the bordered message."
   PSPackage: event.dialogs.Message
-  PSName: CloseBorderedMsg
+  PSName: ClosePlaceSign
 
 0x45:
-  Name: CheckerMessage
+  Name: MsgCheckerBG
   Parameters:
     - Name: msgId
       Type: const ushort
-    - Name: type
+    - Name: posX
       Type: byte
-    - Type: byte
-    - Type: const ushort
+    - Name: posY
+      Type: byte
+    - Name: unused
+      Type: const ushort
   Brief: "Opens a message with a checkerboard background."
   PSPackage: event.dialogs.Message
   PSName: CheckerMsg
 
 0x46:
-  Name: CloseCheckerMessage
+  Name: MsgCheckerBGClose
   Brief: "Closes the checkerboard message."
   PSPackage: event.dialogs.Message
   PSName: CloseCheckerMsg
 
 0x47:
-  Name: YesNoBox
+  Name: YesNoWin
   Parameters:
-    - Name: var
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "Opens a box with two options, yes or no. The result of the choice made by the player is stored in var."
-  PSPackage: event.dialogs.YesNoBox
-  PSName: GetYesNoSelection
+  PSPackage: event.dialogs.YesNoWin
+  PSName: Show
 
 0x48:
-  Name: GenderSpecificMessage
+  Name: MsgActorGendered
   Parameters:
     - Name: textFile
       Type: ushort
-    - Name: id_m
+    - Name: msgIdM
       Type: ushort
-    - Name: id_f
+    - Name: msgIdF
       Type: ushort
-    - Name: npc
+    - Name: actorId
       Type: ushort
     - Name: pos
       Type: ushort
@@ -688,18 +693,18 @@
       Type: ushort
   Brief: "A message which changes depending on the player's gender."
   PSPackage: event.dialogs.Message
-  PSName: NPCMsgGendered
+  PSName: ActorGendered
 
 0x49:
-  Name: VersionMessage
+  Name: MsgActorVersioned
   Parameters:
     - Name: textFile
       Type: ushort
-    - Name: id_b
+    - Name: msgIdW
       Type: ushort
-    - Name: id_w
+    - Name: msgIdB
       Type: ushort
-    - Name: npc
+    - Name: actorId
       Type: ushort
     - Name: pos
       Type: ushort
@@ -707,10 +712,10 @@
       Type: ushort
   Brief: "A message which changes depending on whether the game is Black or White."
   PSPackage: event.dialogs.Message
-  PSName: NPCMsgVersioned
+  PSName: ActorVersioned
 
 0x4a:
-  Name: SpikedMessage
+  Name: MsgScream
   Parameters:
     - Name: id
       Type: ushort
@@ -718,204 +723,275 @@
       Type: byte
   Brief: "Opens a message with a spiked border. Known as the angry message by some."
   PSPackage: event.dialogs.Message
-  PSName: SpikedMsg
+  PSName: Spiked
 
 0x4b:
-  Name: CloseAllMessages2
+  Name: MsgWaitAdvance
   Brief: "Closes all messages on screen."
   PSPackage: event.dialogs.Message
   PSName: WaitAdvance
 
 0x4c:
-  Name: CMD_4c
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-  Brief: "TODO"
-
-0x4d:
-  Name: CMD_4d
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x4e:
-  Name: CMD_4e
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-    - Type: ushort
-    - Type: byte
-  Brief: "TODO"
-
-0x4f:
-  Name: CMD_4f
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x50:
-  Name: CMD_50
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x51:
-  Name: CMD_51
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x52:
-  Name: CMD_52
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x53:
-  Name: CMD_53
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x54:
-  Name: CMD_54
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x55:
-  Name: CMD_55
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x56:
-  Name: CMD_56
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x57:
-  Name: CMD_57
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x58:
-  Name: CMD_58
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x59:
-  Name: CMD_59
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x5a:
-  Name: CMD_5a
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x5b:
-  Name: CMD_5b
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x5c:
-  Name: CMD_5c
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
-
-0x5d:
-  Name: CMD_5d
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x5e:
-  Name: CMD_5e
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x5f:
-  Name: CMD_5f
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x60:
-  Name: CMD_60
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x61:
-  Name: CMD_61
-  Parameters:
-    - Name: strbufIdx
-      Type: byte
-    - Type: ushort
-  Brief: "TODO"
-
-0x62:
-  Name: TrainerTypeAndArticleToStrbuf
+  Name: WordSetPlayerName
   Parameters:
     - Name: strbufIdx
       Type: byte
   Brief: "TODO"
   PSPackage: system.text.WordSet
+  PSName: LoadPlayerName
+
+0x4d:
+  Name: WordSetItemName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: itemId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadItemName
+
+0x4e:
+  Name: WordSetItemNameEx
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: itemId
+      Type: ushort
+    - Name: amount
+      Type: ushort
+    - Name: article
+      Type: byte
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadItemNameEx
+
+0x4f:
+  Name: WordSetItemNameWithArticle
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: itemId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadItemNameWithArticle
+
+0x50:
+  Name: WordSetTMMoveName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: itemId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadTMMoveName
+
+0x51:
+  Name: WordSetMoveName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: moveId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadMoveName
+
+0x52:
+  Name: WordSetItemPocketName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: itemId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadItemPocketName
+
+0x53:
+  Name: WordSetPartyPokeSpecies
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: partyIdx
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPartyPokeSpecies
+
+0x54:
+  Name: WordSetPartyPokeName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: partyIdx
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPartyPokeName
+
+0x55:
+  Name: WordSetDaycarePokeSpecies
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: daycareSlot
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadDaycarePokeSpecies
+
+0x56:
+  Name: WordSetPokeTypeName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: typeId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPokeTypeName
+
+0x57:
+  Name: WordSetPokeSpecies
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: species
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPokeSpecies
+
+0x58:
+  Name: WordSetPokeSpeciesWithArticle
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: species
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPokeSpeciesWithArticle
+
+0x59:
+  Name: WordSetPlaceName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: zoneId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPlaceName
+
+0x5a:
+  Name: WordSetTrendName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: trendId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadTrendName
+
+0x5b:
+  Name: WordSetDaycarePokeName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: species
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadDaycarePokeName
+
+0x5c:
+  Name: WordSetNumber
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: value
+      Type: ushort
+    - Name: magnitude
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadNumber
+
+0x5d:
+  Name: WordSetMusicalInfo
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: type
+      Type: byte
+    - Name: index
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadMusicalInfo
+
+0x5e:
+  Name: WordSetCountry
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: countryId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadCountry
+
+0x5f:
+  Name: WordSetHobbyName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: hobbyId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadHobbyName
+
+0x60:
+  Name: WordSetPassPowerName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: passPowerId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadPassPowerName
+
+0x61:
+  Name: WordSetTrainerClassName
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: classId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadTrainerClassName
+
+0x62:
+  Name: WordSetTrainerClassNameWithArticle
+  Parameters:
+    - Name: strbufIdx
+      Type: byte
+    - Name: classId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
   PSName: LoadTrainerClassWithArticle
 
 0x63:
-  Name: QuestionnaireAnswerToStrbuf
+  Name: WordSetSurveyAnswer
   Parameters:
     - Name: strbufIdx
       Type: byte
@@ -926,9 +1002,9 @@
   PSName: LoadSurveyAnswer
 
 0x64:
-  Name: ExecuteActions
+  Name: ActorCmdExec
   Parameters:
-    - Name: id
+    - Name: actorId
       Type: ushort
     - Name: addr
       Type: int
@@ -938,49 +1014,49 @@
   PSName: _ActionBranch
 
 0x65:
-  Name: WaitActionsFinish
+  Name: ActorCmdWait
   Brief: "Waits for any NPC movement to stop before continuing script execution."
-  PSPackage: event.actors.Actions
+  PSPackage: event.actors.Actor
   PSName: WaitActionFinish
 
 0x66:
-  Name: GetActorMoveCode
+  Name: ActorGetMoveCode
   Parameters:
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: npcId
+    - Name: actorId
       Type: ushort
   Brief: "Gets an Actor's MoveCode."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: GetMoveCode
 
 0x67:
-  Name: StoreActorPosition
+  Name: ActorGetGPos
   Parameters:
-    - Name: npcId
+    - Name: actorId
       Type: ushort
-    - Name: xStorage
+    - Name: pX
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: yStorage
+    - Name: pZ
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "Stores an Actor's XY grid location to two variables."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: GetGPos/GetGPosX/GetGPosZ
 
 0x68:
-  Name: StoreHeroPosition
+  Name: PlayerGetGPos
   Parameters:
-    - Name: xStorage
+    - Name: pX
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: yStorage
+    - Name: pZ
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -989,59 +1065,59 @@
   PSName: GetGPos/GetGPosX/GetGPosZ
 
 0x69:
-  Name: SpawnActor
+  Name: ActorNew
   Parameters:
     - Name: x
       Type: ushort
-    - Name: y
+    - Name: z
       Type: ushort
     - Name: dir
       Type: ushort
-    - Name: uid
+    - Name: actorId
       Type: ushort
     - Name: objCode
       Type: ushort
     - Name: moveCode
       Type: ushort
   Brief: "Spawns a new NPC with $id and $objcode at $x $y $z with MoveCode $moveCode."
-  PSPackage: event.actors.Actors
-  PSName: AddActor
+  PSPackage: event.actors.Actor
+  PSName: New
 
 0x6a:
-  Name: GetActorSpawnFlagNo
+  Name: ActorGetSpawnFlag
   Parameters:
-    - Name: npcId
+    - Name: actorId
       Type: ushort
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: GetSpawnFlag
 
 0x6b:
-  Name: ShowActor
+  Name: ActorAdd
   Parameters:
-    - Name: id
+    - Name: actorId
       Type: ushort
   Brief: "Shows the hidden NPC with the id ID."
-  PSPackage: event.actors.Actors
-  PSName: ShowActor
+  PSPackage: event.actors.Actor
+  PSName: Show
 
 0x6c:
-  Name: HideActor
+  Name: ActorDelete
   Parameters:
-    - Name: id
+    - Name: actorId
       Type: ushort
   Brief: "Hides the NPC with the id ID."
-  PSPackage: event.actors.Actors
-  PSName: HideActor
+  PSPackage: event.actors.Actor
+  PSName: Hide
 
 0x6d:
-  Name: SetActorGPos
+  Name: ActorSetGPos
   Parameters:
-    - Name: npcId
+    - Name: actorId
       Type: ushort
     - Name: x
       Type: ushort
@@ -1052,13 +1128,13 @@
     - Name: dir
       Type: ushort
   Brief: "Sets an Actor's grid position and direction."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: SetGPos
 
 0x6e:
-  Name: GetPlayerDirection
+  Name: PlayerGetDir
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -1067,7 +1143,7 @@
   PSName: GetDirection
 
 0x6f:
-  Name: GetActorInFrontOfPlayer
+  Name: PlayerGetActorInFront
   Parameters:
     - Name: pActorId
       Type: ref ushort
@@ -1082,7 +1158,7 @@
   PSName: GetFacingActor/GetFacingActorID/HasFacingActor
 
 0x70:
-  Name: GetActorByGPos
+  Name: ActorFindByGPos
   Parameters:
     - Name: pActorId
       Type: ref ushort
@@ -1099,21 +1175,21 @@
     - Name: z
       Type: ushort
   Brief: "TODO"
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: FindByGPos/FindIDByGPos/IsActorAtGPos
 
 0x71:
   Name: PlayerGetRailPos
   Parameters:
-    - Name: lineId
+    - Name: pLineId
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: posFront
+    - Name: pPosFront
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: posSide
+    - Name: pPosSide
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -1124,56 +1200,58 @@
 0x72:
   Name: ActorGetRailPos
   Parameters:
-    - Name: id
+    - Name: actorId
       Type: ushort
-    - Name: lineId
+    - Name: pLineId
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: posFront
+    - Name: pPosFront
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: posSide
+    - Name: pPosSide
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "Gets an Actor's rail position. Behavior is undefined if the actor is on grid."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: GetRailPos/GetRailLineID/GetRailPosFront/GetRailPosSide
 
 0x73:
-  Name: SetActorMoveCode
+  Name: ActorSetMoveCode
   Parameters:
-    - Name: npcId
+    - Name: actorId
       Type: ushort
     - Name: moveCode
       Type: ushort
   Brief: "Sets an Actor's MoveCode."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: SetMoveCode
 
 0x74:
-  Name: FacePlayer
+  Name: ActorSetEyeToEye
   Brief: "Causes both the player and the NPC that this script is assigned to face each other."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: FacePlayer
 
 0x75:
-  Name: WaitActorMovement
+  Name: PlayerSetSpecialSequence
   Parameters:
-    - Name: arg1
+    - Name: seqId
       Type: const ushort
   Brief: "TODO"
+  PSPackage: event.actors.Player
+  PSName: SetSpecialSequence
 
 0x76:
-  Name: AnimatePlayerY
+  Name: PlayerMoveToYAsync
   Parameters:
     - Name: direction
       Type: ushort
-    - Name: duration
+    - Name: interval
       Type: ushort
-    - Name: y
+    - Name: destY
       Type: ushort
     - Name: isYPositive
       Type: ushort
@@ -1182,24 +1260,26 @@
   PSName: AnimateY
 
 0x77:
-  Name: TurnPlayerByTrigger
+  Name: PlayerTurnByTrigger
   Brief: "If the player is currently standing in the area of a trigger with a direction value set, they will turn in that direction."
+  PSPackage: event.actors.Player
+  PSName: TurnByTrigger
 
 0x78:
-  Name: GetIsActorPerformingMovement
+  Name: PlayerGetExState
   Parameters:
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "TODO"
-  PSPackage: event.actors.Actions
-  PSName: IsActorBusy
+  PSPackage: event.actors.Player
+  PSName: GetExState
 
 0x79:
-  Name: GetActorUserParam
+  Name: ActorGetUserParam
   Parameters:
-    - Name: npcId
+    - Name: actorId
       Type: ushort
     - Name: paramIdx
       Type: ushort
@@ -1208,20 +1288,22 @@
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: GetUserParam
 
 0x7a:
-  Name: CMD_7A
+  Name: ActorPlayRailSlipdown
   Parameters:
-    - Name: npcId
+    - Name: actorId
       Type: ushort
   Brief: "Overlay 131 - rail_slipdown.c"
+  PSPackage: event.actors.ActorSequences
+  PSName: RailSlipdown
 
 0x7b:
-  Name: JumpActorToPosition
+  Name: ActorJumpToGPos
   Parameters:
-    - Name: id
+    - Name: actorId
       Type: ushort
     - Name: x
       Type: ushort
@@ -1230,11 +1312,11 @@
     - Name: z
       Type: ushort
   Brief: "Moves NPC to specified XYZ coordinates on map (in that order)."
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: JumpToGPos
 
 0x7c:
-  Name: SetPlayerRailPos
+  Name: PlayerSetRailPos
   Parameters:
     - Name: lineId
       Type: ushort
@@ -1247,9 +1329,9 @@
   PSName: SetRailPos
 
 0x7d:
-  Name: SetActorRailPos
+  Name: ActorSetRailPos
   Parameters:
-    - Name: id
+    - Name: actorId
       Type: ushort
     - Name: lineId
       Type: ushort
@@ -1258,48 +1340,48 @@
     - Name: posSide
       Type: ushort
   Brief: "TODO"
-  PSPackage: event.actors.Actors
+  PSPackage: event.actors.Actor
   PSName: SetRailPos
 
 0x7e:
-  Name: TeleportEffect
+  Name: ActorPlayTeleportSeq
   Parameters:
-    - Name: npcId
+    - Name: actorId
       Type: ushort
   Brief: "TODO"
   PSPackage: event.actors.ActorSequences
   PSName: Teleport
 
 0x7f:
-  Name: StoreTrainerID
+  Name: TrainerEyeGetTrainerID
   Parameters:
-    - Name: trId
+    - Name: trSlotId
       Type: ushort
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Battle
-  PSName: GetTrainerClass
+  PSPackage: event.TrainerEye
+  PSName: GetTrainerID
 
 0x80:
-  Name: BtlTrainerEventInit
+  Name: TrainerEyeEventInit
   Parameters:
     - Name: trSlotId
       Type: ushort
   Brief: "TODO"
-  PSPackage: event.Trainer
-  PSName: EventInit
+  PSPackage: event.TrainerEye
+  PSName: InitEvent
 
 0x81:
-  Name: BtlTrainerEventFree
+  Name: TrainerEyeEventStart
   Brief: "TODO"
-  PSPackage: event.Trainer
-  PSName: EventFree
+  PSPackage: event.TrainerEye
+  PSName: StartEvent
 
 0x82:
-  Name: BtlTrainerGetActorID
+  Name: TrainerEyeGetActorID
   Parameters:
     - Name: trSlotId
       Type: ushort
@@ -1308,33 +1390,33 @@
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Trainer
+  PSPackage: event.TrainerEye
   PSName: GetActorID
 
 0x83:
-  Name: GetScriptTrainerBtlType
+  Name: TrainerEyeGetBattleType
   Parameters:
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Trainer
+  PSPackage: event.TrainerEye
   PSName: GetBtlType
 
 0x84:
-  Name: GetScriptTrainerID
+  Name: ActorGetTrainerID
   Parameters:
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Trainer
+  PSPackage: event.actors.Actor
   PSName: GetTrainerID
 
 0x85:
-  Name: TrainerBattle
+  Name: CallTrainerBattle
   Parameters:
     - Name: trId1
       Type: ushort
@@ -1347,7 +1429,7 @@
   PSName: CallTrainerBattle
 
 0x86:
-  Name: MultiTrainerBattle
+  Name: CallTrainerMultiBattle
   Parameters:
     - Name: allyId
       Type: ushort
@@ -1362,20 +1444,20 @@
   PSName: CallTrainerMultiBattle
 
 0x87:
-  Name: DispTrainerFieldMessage
+  Name: TrainerEyeSayMessage
   Parameters:
-    - Name: trId
+    - Name: trSlotId
       Type: ushort
     - Name: msgType
       Type: ushort
-    - Name: npcId
+    - Name: actorId
       Type: ushort
   Brief: "TODO"
-  PSPackage: event.Trainer
-  PSName: DispFieldMessage
+  PSPackage: event.TrainerEye
+  PSName: SayMessage
 
 0x88:
-  Name: GetTrainerFieldMessageIDs
+  Name: TrainerEyeGetMessageTypes
   Parameters:
     - Name: pIdBeforeBtl
       Type: ref ushort
@@ -1390,15 +1472,15 @@
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Trainer
+  PSPackage: event.TrainerEye
   PSName: GetFieldMessageIDs/GetClashMsgID/GetDefeatMsgID/GetRejectBtlMsgID
 
 0x8a:
-  Name: GetBattleType
+  Name: TrainerGetBattleType
   Parameters:
     - Name: trId
       Type: ushort
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -1412,63 +1494,60 @@
     - Name: trId
       Type: ushort
   Brief: "TODO"
-  PSPackage: system.Sound
-  PSName: BGMPlayTrainerPush
+  PSPackage: event.Trainer
+  PSName: PlayBGMPush
 
 0x8c:
   Name: CallTrainerLose
   Brief: "Calls the blackout sequence after the player is defeated in a Trainer battle."
   PSPackage: event.Battle
+  PSName: CallTrainerLose
 
 0x8d:
-  Name: TrainerIsVictory
+  Name: TrainerBattleIsVictory
   Parameters:
-    - Name: storage
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+  Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: IsTrainerVictory
+
+0x8e:
+  Name: CallTrainerBattleEnd
+  Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: EndTrainerBattle
+
+0x92:
+  Name: TrainerGetFieldAction
+  Parameters:
+    - Name: trId
+      Type: ushort
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: event.Battle
-
-0x8e:
-  Name: CallTrainerBattleReturn
-  Brief: "TODO"
-  PSPackage: event.Battle
-
-0x8f:
-  Name: TrainerClassBGMPlayPush
-  Parameters:
-    - Name: classId
-      Type: ushort
-  Brief: "Plays a trainer eye clash BGM by a trainer class ID."
-  PSPackage: system.Sound
-  PSName: BGMPlayTrainerClass
-
-0x90:
-  Name: TrainerBGMPlay
-  Parameters:
-    - Name: trID
-      Type: ushort
-  Brief: "Plays a trainer eye clash BGM by a trainer ID."
-  PSPackage: system.Sound
-  PSName: BGMPlayTrainer
-
-0x92:
-  Name: GetTrainerHasDefeatAction
-  Parameters:
-    - Type: ushort
-    - Type: ref ushort
-  Brief: "TODO"
+  PSPackage: event.Trainer
+  PSName: GetFieldAction
 
 0x93:
-  Name: StoreItemGiftToVar
+  Name: TrainerGetPrizeItem
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
+    - Name: trId
+      Type: ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.Trainer
+  PSName: GetPrizeItem
 
 0x94:
-  Name: TradeTrainerBattle
+  Name: CallTradedPokemonBattle
   Parameters:
     - Name: trId1
       Type: ushort
@@ -1478,7 +1557,7 @@
       Type: ushort
     - Name: savePkmIdx
       Type: ushort
-  Brief: "Starts a trainer battle using a previously traded Pokémon as the opponent."
+  Brief: "Starts a trainer battle using a previously traded PokÃ©mon as the opponent."
   PSPackage: event.Battle
   PSName: CallTradedBattle
 
@@ -1488,40 +1567,44 @@
     - Name: trId
       Type: ushort
   Brief: "TODO"
-  PSPackage: system.EventFlags
+  PSPackage: event.Trainer
+  PSName: FlagGet
 
 0x96:
-  Name: TrainerFlagClear
+  Name: TrainerFlagReset
   Parameters:
     - Name: trId
       Type: ushort
   Brief: "TODO"
-  PSPackage: system.EventFlags
+  PSPackage: event.Trainer
+  PSName: FlagReset
 
 0x97:
   Name: TrainerFlagGet
   Parameters:
     - Name: trId
       Type: ushort
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "TODO"
-  PSPackage: system.EventFlags
+  PSPackage: event.Trainer
+  PSName: FlagSet
 
 0x98:
   Name: BGMPlay
   Parameters:
-    - Name: id
+    - Name: sndId
       Type: const ushort
   Brief: "Plays a music track corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
+  PSName: BGMPlay
 
 0x9b:
   Name: BGMIsPlaying
   Parameters:
-    - Name: unused_id
+    - Name: sndId
       Type: const ushort
     - Name: dest
       Type: ref ushort
@@ -1529,71 +1612,84 @@
       ReturnType: bool
   Brief: "TODO"
   PSPackage: system.Sound
+  PSName: BGMIsPlaying
 
 0x9e:
-  Name: SwitchToMapMusic
+  Name: BGMChangeMap
   Brief: "Fades out currently playing BGM track and plays the track assigned to the current map."
-  PSPackage: system.Sound
-  PSName: BGMChangeMap
+  PSPackage: system.Field
+  PSName: PlayMapBGM
 
 0x9f:
   Name: BGMPlayPush
   Parameters:
-    - Name: bgmId
+    - Name: sndId
       Type: ushort
   Brief: "TODO"
   PSPackage: system.Sound
   PSName: BGMPlayPush
 
 0xa0:
-  Name: WaitForSequencePlayer
+  Name: BGMWait
   Brief: "TODO"
   PSPackage: system.Sound
-  PSName: WaitFinish
+  PSName: BGMWait
 
 0xa1:
-  Name: CMD_A1
+  Name: BGMPush
   Parameters:
-    - Name: arg1
+    - Name: fadeOutTime
       Type: ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: BGMPush
 
 0xa2:
-  Name: CMD_A2
+  Name: BGMPop
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: fadeOutTime
+      Type: ushort
+    - Name: fadeInTime
+      Type: ushort
   Brief: "TODO"
+  PSPackage: system.Sound
+  PSName: BGMPop
 
 0xa3:
-  Name: EnableSndChannel
+  Name: ISSSwitchEnable
   Parameters:
-    - Type: ushort
+    - Name: switchIndex
+      Type: ushort
   Brief: "TODO"
   PSPackage: system.Sound
-  PSName: UnmuteChannel
+  PSName: ISSSwitchEnable
 
 0xa4:
-  Name: DisableSndChannel
+  Name: ISSSwitchDisable
   Parameters:
-    - Type: ushort
+    - Name: switchIndex
+      Type: ushort
   Brief: "TODO"
   PSPackage: system.Sound
-  PSName: MuteChannel
+  PSName: ISSSwitchDisable
 
 0xa5:
-  Name: GetSndChannelStatus
+  Name: ISSSwitchQuery
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: switchIndex
+      Type: ushort
   Brief: "TODO"
   PSPackage: system.Sound
-  PSName: GetChannelStatus
+  PSName: ISSSwitchQuery
 
 0xa6:
   Name: SEPlay
   Parameters:
-    - Name: id
+    - Name: sndId
       Type: ushort
   Brief: "Plays a sound effect corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
@@ -1614,7 +1710,7 @@
 0xa9:
   Name: MEPlay
   Parameters:
-    - Name: id
+    - Name: sndId
       Type: ushort
   Brief: "Plays a fanfare corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
@@ -1629,22 +1725,22 @@
 0xab:
   Name: PVPlay
   Parameters:
-    - Name: monsNo
+    - Name: species
       Type: ushort
-    - Name: formeNo
+    - Name: forme
       Type: ushort
   Brief: "Plays a cry corresponding to id in swan_sound_data.sdat."
   PSPackage: system.Sound
-  PSName: VoicePlay
+  PSName: PVPlay
 
 0xac:
   Name: PVWait
   Brief: "Pauses execution until the cry being played ends."
   PSPackage: system.Sound
-  PSName: VoiceWait
+  PSName: PVWait
 
 0xad:
-  Name: MultiboxCommonTopLeftAnchor
+  Name: ListMenuInitCommon
   Parameters:
     - Name: x
       Type: byte
@@ -1661,7 +1757,7 @@
   PSName: InitCommon
 
 0xae:
-  Name: MultiboxTopLeftAnchor
+  Name: ListMenuInitTL
   Parameters:
     - Name: x
       Type: byte
@@ -1675,14 +1771,14 @@
       Type: ref ushort
   Brief: "TODO"
   PSPackage: event.dialogs.ListMenu
-  PSName: InitLocalLeftAnchor
+  PSName: InitLeftAnchor
 
 0xaf:
-  Name: SetMultiboxText
+  Name: ListMenuAdd
   Parameters:
-    - Name: optionMsg
+    - Name: optionMsgId
       Type: const ushort
-    - Name: hintMsg
+    - Name: hintMsgId
       Type: const ushort
     - Name: uid
       Type: ushort
@@ -1691,19 +1787,19 @@
   PSName: AddItem
 
 0xb0:
-  Name: PauseAndClose
+  Name: ListMenuShow
   Brief: "TODO"
   PSPackage: event.dialogs.ListMenu
   PSName: ShowDialog
 
 0xb1:
-  Name: PauseAndClose2
+  Name: ListMenuShow2
   Brief: "TODO"
   PSPackage: event.dialogs.ListMenu
   PSName: ShowDialog_
 
 0xb2:
-  Name: MultiboxTopRightAnchor
+  Name: ListMenuInitTR
   Parameters:
     - Name: x
       Type: byte
@@ -1717,16 +1813,16 @@
       Type: ref ushort
   Brief: "TODO"
   PSPackage: event.dialogs.ListMenu
-  PSName: InitLocalRightAnchor
+  PSName: InitRightAnchor
 
 0xb3:
-  Name: FadeScreen
+  Name: FadeEx
   Parameters:
     - Name: mode
       Type: const ushort
-    - Name: startCol
+    - Name: brightnessStart
       Type: const ushort
-    - Name: endCol
+    - Name: brightnessEnd
       Type: const ushort
     - Name: slowness
       Type: const ushort
@@ -1735,19 +1831,19 @@
   PSName: FadeEx
 
 0xb4:
-  Name: WaitForFadeScreen
+  Name: FadeExWait
   Brief: "TODO"
   PSPackage: system.Fade
   PSName: FadeExWait
 
 0xb5:
-  Name: AddItem
+  Name: ItemAdd
   Parameters:
-    - Name: item
+    - Name: itemId
       Type: ushort
     - Name: amount
       Type: ushort
-    - Name: success
+    - Name: pSuccess
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
@@ -1756,13 +1852,13 @@
   PSName: GiveItem
 
 0xb6:
-  Name: RemoveItem
+  Name: ItemSub
   Parameters:
-    - Name: item
+    - Name: itemId
       Type: ushort
     - Name: amount
       Type: ushort
-    - Name: success
+    - Name: pSuccess
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
@@ -1771,98 +1867,100 @@
   PSName: TakeItem
 
 0xb7:
-  Name: CheckItemBagSpace
+  Name: ItemCheckSpace
   Parameters:
-    - Name: item
+    - Name: itemId
       Type: ushort
     - Name: amount
       Type: ushort
-    - Name: result
+    - Name: pSuccess
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
-  PSName: CheckCapacity
+  PSName: CheckSpace
 
 0xb8:
-  Name: CheckItemQuantity
+  Name: ItemCheckCount
   Parameters:
-    - Name: item
+    - Name: itemId
       Type: ushort
     - Name: amount
       Type: ushort
-    - Name: result
+    - Name: pSuccess
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "TODO"
   PSPackage: player.Bag
-  PSName: CheckItemQuantity
+  PSName: CheckItemCount
 
 0xb9:
-  Name: CheckItem
+  Name: ItemGetCount
   Parameters:
-    - Name: item
+    - Name: itemId
       Type: ushort
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
-      ReturnType: bool
+      ReturnType: ushort
   Brief: "TODO"
   PSPackage: player.Bag
-  PSName: CheckItem
+  PSName: GetItemQuantity
 
 0xba:
-  Name: CheckTechnicalMachine
+  Name: ItemIsTMHM
   Parameters:
-    - Name: item
+    - Name: itemId
       Type: ushort
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "TODO"
-  PSPackage: player.Bag
-  PSName: ItemIsTM
+  PSPackage: pokemon.Item
+  PSName: IsTMHM
 
 0xbb:
-  Name: StoreItemPocketID
+  Name: ItemGetPocket
   Parameters:
-    - Name: item
+    - Name: itemId
       Type: ushort
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
-      ReturnType: bool
+      ReturnType: ushort
   Brief: "TODO"
-  PSPackage: player.Bag
-  PSName: ItemGetPocket
+  PSPackage: pokemon.Item
+  PSName: GetPocket
 
 0xbc:
-  Name: GetFieldPhenomenonItemID
+  Name: PhenomenonGetItemID
   Parameters:
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.Phenomenon
+  PSName: MakeItemID
 
 0xbd:
-  Name: StoreItemClassification
+  Name: ItemGetClass
   Parameters:
     - Name: item
       Type: ushort
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: player.Bag
-  PSName: ItemGetClass
+  PSPackage: pokemon.Item
+  PSName: GetClass
 
 0xbe:
-  Name: Warp
+  Name: MapChangeFake
   Parameters:
     - Name: zoneId
       Type: const ushort
@@ -1873,22 +1971,30 @@
     - Name: dir
       Type: const ushort
   Brief: "A warp. Seems to detach followers, however."
+  PSPackage: system.Field
+  PSName: ChangeMapFake
 
 0xbf:
-  Name: SpinWarp
-  Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
-  Brief: "TODO"
-
-0xc0:
-  Name: EntranceWarpRail
+  Name: MapChangeWarpPad
   Parameters:
     - Name: zoneId
       Type: const ushort
-    - Name: railNo
+    - Name: x
+      Type: const ushort
+    - Name: z
+      Type: const ushort
+    - Name: dir
+      Type: const ushort
+  Brief: "TODO"
+  PSPackage: system.Field
+  PSName: ChangeMapWarpPad
+
+0xc0:
+  Name: MapChangeWarpRail
+  Parameters:
+    - Name: zoneId
+      Type: const ushort
+    - Name: lineId
       Type: const ushort
     - Name: posFront
       Type: const ushort
@@ -1897,19 +2003,24 @@
     - Name: dir
       Type: const ushort
   Brief: "TODO"
-  PSPackage: system.FieldControl
-  PSName: ChangeMapRail
+  PSPackage: system.Field
+  PSName: ChangeMapWarpRail
 
 0xc1:
-  Name: FallSwirlWarp
+  Name: MapChangeQuicksand
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
-    - Type: const ushort
+    - Name: zoneId
+      Type: const ushort
+    - Name: x
+      Type: const ushort
+    - Name: z
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: system.Field
+  PSName: ChangeMapQuicksand
 
 0xc2:
-  Name: FastWarp
+  Name: MapChangeWarp
   Parameters:
     - Name: zoneId
       Type: const ushort
@@ -1920,13 +2031,17 @@
     - Name: dir
       Type: const ushort
   Brief: "The warp that's generally used when in a script"
+  PSPackage: system.Field
+  PSName: ChangeMapWarp
 
 0xc3:
-  Name: UnionRoomWarp
+  Name: MapChangeUnionRoom
   Brief: "TODO"
+  PSPackage: system.Field
+  PSName: ChangeMapUnionRoom
 
 0xc4:
-  Name: TeleportWarp
+  Name: MapChangeCore
   Parameters:
     - Name: zoneId
       Type: const ushort
@@ -1939,31 +2054,32 @@
     - Name: dir
       Type: const ushort
   Brief: "TODO"
-  PSPackage: system.FieldControl
+  PSPackage: system.Field
   PSName: ChangeMap
 
 0xc5:
-  Name: SurfAnimation
+  Name: HMCallSurf
   Brief: "TODO"
   PSPackage: event.actors.HMSequences
   PSName: Surf
 
 0xc6:
-  Name: WaterfallAnimation
+  Name: HMCallWaterfall
   Parameters:
-    - Type: ushort
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
   PSPackage: event.actors.HMSequences
   PSName: Waterfall
 
 0xc7:
-  Name: CutAnimation
+  Name: HMCallCut
   Brief: "TODO"
   PSPackage: event.actors.HMSequences
   PSName: Cut
 
 0xc8:
-  Name: DiveAnimation
+  Name: HMCallDiving
   Parameters:
     - Name: isOut
       Type: ushort
@@ -1982,22 +2098,22 @@
   Brief: "TODO"
 
 0xcb:
-  Name: StoreRandomNumber
+  Name: Random
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: range
+    - Name: bound
       Type: ushort
   Brief: "TODO"
   PSPackage: system.System
   PSName: Random
 
 0xcc:
-  Name: StoreScrEnvTextFileNo
+  Name: RTGetTextFile
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2006,9 +2122,9 @@
   PSName: GetTextFile
 
 0xcd:
-  Name: StoreDayPart
+  Name: RTCGetDayPart
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2023,9 +2139,9 @@
   Brief: "TODO"
 
 0xcf:
-  Name: StoreDayOfWeek
+  Name: RTCGetWeekDay
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2034,13 +2150,13 @@
   PSName: GetDayOfWeek
 
 0xd0:
-  Name: StoreMonthAndDay
+  Name: RTCGetDate
   Parameters:
-    - Name: month
+    - Name: pMonth
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: day
+    - Name: pDay
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2049,13 +2165,13 @@
   PSName: GetDate/GetMonthOfYear/GetDayOfMonth
 
 0xd1:
-  Name: StoreHourAndMinute
+  Name: RTCGetTime
   Parameters:
-    - Name: hour
+    - Name: pHour
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: minute
+    - Name: pMinute
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2064,9 +2180,9 @@
   PSName: GetTime/GetHourOfDay/GetMinuteOfHour
 
 0xd2:
-  Name: StoreSeason
+  Name: RTCGetSeason
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2075,24 +2191,24 @@
   PSName: GetSeason
 
 0xd3:
-  Name: StoreZoneID
+  Name: FieldGetZoneID
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: system.FieldControl
+  PSPackage: system.Field
   PSName: GetZoneID
 
 0xd4:
-  Name: StorePlayerBirthdate
+  Name: TrainerCardGetBirthDate
   Parameters:
-    - Name: month
+    - Name: pMonth
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: day
+    - Name: pDay
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2101,31 +2217,31 @@
   PSName: GetBirthDate/GetBirthMonth/GetBirthDay
 
 0xd5:
-  Name: StoreGymBadgeStatus
+  Name: TrainerCardHasBadge
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
-    - Name: badgeId
+    - Name: badgeNo
       Type: ushort
   Brief: "TODO"
   PSPackage: player.TrainerCard
   PSName: HasBadge
 
 0xd6:
-  Name: GivePlayerBadge
+  Name: TrainerCardAddBadge
   Parameters:
-    - Name: badgeId
+    - Name: badgeNo
       Type: ushort
   Brief: "TODO"
   PSPackage: player.TrainerCard
   PSName: AddBadge
 
 0xd7:
-  Name: StoreCountPlayerBadges
+  Name: TrainerCardGetBadgeCount
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
@@ -2134,29 +2250,29 @@
   PSName: GetBadgeCount
 
 0xd8:
-  Name: GetReservedWorkVal
+  Name: MapReplaceIsEventSet
   Parameters:
-    - Name: wkNo
+    - Name: id
       Type: ushort
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
-  PSPackage: system.EventWorks
-  PSName: ReserveWorkGet
+  PSPackage: system.Field
+  PSName: GetMapReplaceState
 
 0xd9:
-  Name: SetTeleportZoneID
+  Name: FieldSetTeleportZone
   Parameters:
     - Name: tpZoneSlot
       Type: ushort
   Brief: "TODO"
-  PSPackage: system.FieldControl
+  PSPackage: system.Field
   PSName: SetRespawnZone
 
 0xda:
-  Name: SetReservedWorkVal
+  Name: MapReplaceSetEvent
   Parameters:
     - Name: id
       Type: ushort
@@ -2165,19 +2281,21 @@
     - Name: doReload
       Type: ushort
   Brief: "TODO"
+  PSPackage: system.Field
+  PSName: SetMapReplace
 
 0xdb:
-  Name: SetNextZoneHere
+  Name: FieldSetNextZoneHere
   Brief: "TODO"
-  PSPackage: system.FieldControl
+  PSPackage: system.Field
   PSName: SetNextZoneHere
 
 0xdc:
-  Name: SetNextZone
+  Name: FieldSetNextZone
   Parameters:
     - Name: zoneId
       Type: ushort
-    - Name: invDir
+    - Name: dir
       Type: ushort
     - Name: x
       Type: ushort
@@ -2186,11 +2304,11 @@
     - Name: z
       Type: ushort
   Brief: "TODO"
-  PSPackage: system.FieldControl
+  PSPackage: system.Field
   PSName: SetNextZone
 
 0xdd:
-  Name: StoreDexCount
+  Name: PokeDexGetCount
   Parameters:
     - Name: caughtOnly
       Type: ushort
@@ -2203,9 +2321,10 @@
   PSName: GetDexCount
 
 0xde:
-  Name: StoreDexForm
+  Name: PokeDexRegist
   Parameters:
-    - Type: ushort
+    - Name: mode
+      Type: ushort
     - Name: species
       Type: ushort
   Brief: "TODO"
@@ -2213,7 +2332,7 @@
   PSName: RegisterSpecies
 
 0xdf:
-  Name: CheckDex
+  Name: PokeDexIsRegist
   Parameters:
     - Name: caughtOnly
       Type: ushort
@@ -2228,7 +2347,7 @@
   PSName: IsSpeciesRegistered
 
 0xe0:
-  Name: StoreVersion
+  Name: GameGetVersion
   Parameters:
     - Name: dest
       Type: ref ushort
@@ -2239,7 +2358,7 @@
   PSName: GetVersion
 
 0xe1:
-  Name: StoreGender
+  Name: TrainerCardGetSex
   Parameters:
     - Name: dest
       Type: ref ushort
@@ -2250,17 +2369,21 @@
   PSName: GetSex
 
 0xe2:
-  Name: CheckNeedsSaveData
+  Name: SaveDataCheckRequired
   Parameters:
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
   Brief: "TODO"
+  PSPackage: system.SaveData
+  PSName: CheckRequired
 
 0xe3:
-  Name: GiveRunningShoes
+  Name: PlayerEnableRunningShoes
   Brief: "TODO"
+  PSPackage: event.actors.Player
+  PSName: EnableRunningShoes
 
 0xe4:
   Name: CMD_E4
@@ -2302,163 +2425,170 @@
   Brief: "TODO"
 
 0xea:
-  Name: CheckHOFDataIntegrity
+  Name: HOFCheckIntegrity
   Parameters:
     - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
+  PSPackage: player.TrainerCard
+  PSName: CheckHOFDataIntegrity
 
 0xeb:
-  Name: StoreDaycareEggSeedStatus
+  Name: DayCareCheckSpawnFlag
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
-      ReturnType: ushort
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetEggSeedStatus
+  PSName: CheckSpawnFlag
 
 0xec:
-  Name: BreedDaycarePokemon
+  Name: DayCareBreed
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: BreedCurrent
+  PSName: Breed
 
 0xed:
-  Name: GenerateEggSeedToDaycare
+  Name: DayCareResetSeed
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GenEggSeed
+  PSName: ResetSeed
 
 0xee:
-  Name: StoreDaycarePokemonCount
+  Name: DayCareGetPkmCount
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetPokemonCount
+  PSName: GetPkmCount
 
 0xef:
-  Name: StoreDaycareSpawnProbability
+  Name: DayCareCalcEggSpawnChance
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetConceptionChance
+  PSName: CalcEggSpawnChance
 
 0xf0:
-  Name: DepositPartyPokeToDaycare
+  Name: DayCareDeposit
   Parameters:
-    - Name: poke
+    - Name: partyIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: DepositPokemon
+  PSName: DepositPkm
 
 0xf1:
-  Name: WithdrawDaycarePokeToParty
+  Name: DayCareWithdraw
   Parameters:
-    - Name: dcPoke
+    - Name: daycareSlot
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: WithdrawPokemon
+  PSName: WithdrawPkm
 
 0xf2:
-  Name: StoreDaycareSpecies
+  Name: DayCareGetSpecies
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: dcPoke
+    - Name: daycareSlot
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetPokemonSpecies
+  PSName: GetPkmSpecies
 
 0xf3:
-  Name: StoreDaycareForme
+  Name: DayCareGetForme
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: dcPoke
+    - Name: daycareSlot
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetPokemonForme
+  PSName: GetPkmForme
 
 0xf4:
-  Name: StoreDaycareLevel
+  Name: DayCareCalcNewLevel
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: dcPoke
+    - Name: daycareSlot
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetPokemonGrowLevel
+  PSName: GetPkmGrowLevel
 
 0xf5:
-  Name: StoreDaycareLevelDiff
+  Name: DayCareCalcLevelGain
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: dcPoke
+    - Name: daycareSlot
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetPokemonGrowLvDelta
+  PSName: GetPkmLevelGain
 
 0xf6:
-  Name: StoreDaycareFee
+  Name: DayCareCalcWithdrawCost
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: dcPoke
+    - Name: daycareSlot
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
   PSName: GetWithdrawalFee
 
 0xf7:
-  Name: SetupDaycareEnvironment
+  Name: DayCareCallPokeSelect
   Parameters:
-    - Type: ref ushort
-  Brief: "TODO"
-
-0xf8:
-  Name: StoreDaycareGender
-  Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: dcPoke
+  Brief: "TODO"
+  PSPackage: pokemon.Daycare
+  PSName: CallPokeSelect
+
+0xf8:
+  Name: DayCareGetSex
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: daycareSlot
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.Daycare
-  PSName: GetPokemonGender
+  PSName: GetPkmSex
 
 0xf9:
-  Name: AddMoney
+  Name: MoneyAdd
   Parameters:
     - Name: amount
       Type: ushort
@@ -2467,7 +2597,7 @@
   PSName: AddMoney
 
 0xfa:
-  Name: TakeMoney
+  Name: MoneySub
   Parameters:
     - Name: amount
       Type: ushort
@@ -2476,9 +2606,9 @@
   PSName: SubMoney
 
 0xfb:
-  Name: CheckMoney
+  Name: MoneyCheck
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
@@ -2489,509 +2619,222 @@
   PSName: CanAfford
 
 0xfc:
-  Name: GetHappiness
+  Name: PokePartySetHappiness
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: poke
+    - Name: partyIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetHappiness
 
 0xfd:
-  Name: AdjustHappiness
+  Name: PokePartyAdjustHappiness
   Parameters:
-    - Name: poke
+    - Name: partyIdx
       Type: ushort
     - Name: mode
       Type: ushort
     - Name: value
       Type: const ushort
-  Brief: "Manipulates a Pokémon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
+  Brief: "Manipulates a PokÃ©mon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
   PSPackage: pokemon.PokeParty
-  PSName: SetHappiness
+  PSName: AdjustHappiness
 
 0xfe:
-  Name: StoreSpecies
+  Name: PokePartyGetSpecies
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: poke
+    - Name: partyIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetSpecies
 
 0xff:
-  Name: StoreForme
+  Name: PokePartyGetForme
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: poke
+    - Name: partyIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetForme
 
 0x100:
-  Name: CheckPartyPokerus
+  Name: PokePartyCheckPokerus
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
-      ReturnType: ushort
+      ReturnType: bool
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: IsPokerusAny
 
 0x101:
-  Name: CheckPokeHPFull
+  Name: PokePartyIsFullHP
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
-      ReturnType: ushort
-    - Name: poke
+      ReturnType: bool
+    - Name: partyIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
-  PSName: IsFullHealth
+  PSName: IsFullHP
 
 0x102:
-  Name: CheckPokeIsEgg
+  Name: PokePartyIsEgg
   Parameters:
-    - Name: result
+    - Name: dest
       Type: ref ushort
       IsReturn: true
-      ReturnType: ushort
-    - Name: poke
+      ReturnType: bool
+    - Name: partyIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: IsEgg
 
 0x103:
-  Name: CheckPartyCountByType
+  Name: PokePartyGetCount
   Parameters:
-    - Name: storage
+    - Name: dest
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: type
+    - Name: mode
       Type: ushort
-  Brief: "Returns the number of Pokémon in the party that match a certain conditon. (All/NonEgg/Battling-capable/Eggs/SanityEggs)"
+  Brief: "Returns the number of PokÃ©mon in the party that match a certain conditon. (All/NonEgg/Battling-capable/Eggs/SanityEggs)"
   PSPackage: pokemon.PokeParty
-  PSName: GetPokeCountByAttribute
+  PSName: GetPkmCount
 
 0x104:
-  Name: HealPokemon
+  Name: PokePartyRecoverAll
   Brief: "Fully heals the player's party."
   PSPackage: pokemon.PokeParty
   PSName: RecoverAll
 
 0x105:
-  Name: RenamePokemon
+  Name: CallPokeNameInput
   Parameters:
-    - Name: result
+    - Name: pSuccess
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
     - Name: poke
       Type: ushort
-    - Type: ushort
-  Brief: "Pops up a dialog for renaming a party Pokémon and stores its result."
-  PSPackage: event.dialogs.PokemonDialog
+    - Name: transition
+      Type: ushort
+  Brief: "Pops up a dialog for renaming a party PokÃ©mon and stores its result."
+  PSPackage: event.app.PokeApp
   PSName: CallRename
 
 0x106:
-  Name: StoreEggHatchSlot
+  Name: CallEggHatch
   Parameters:
-    - Type: ref ushort
+    - Name: pPartyIdx
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.FieldDemo
+  PSName: CallEggHatch
 
 0x107:
-  Name: CMD_107
+  Name: CallPokeSelect
   Parameters:
-    - Type: const ushort
-    - Type: ref ushort
-    - Type: ref ushort
-  Brief: "TODO"
-
-0x108:
-  Name: StoreLearnedMovesCount
-  Parameters:
-    - Name: storage
+    - Name: wantEgg
+      Type: const ushort
+    - Name: pDlgSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: pPartyIdx
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: poke
+    - Name: unused
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: event.app.PokeApp
+  PSName: CallPokeSelect
+
+0x108:
+  Name: PokePartyGetMoveCount
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: partyIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetLearnedMoveCount
 
 0x109:
-  Name: ShowPokemonSummary
+  Name: CallPokeMoveReplace
   Parameters:
-    - Type: ref ushort
-    - Type: ref ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
-  PSPackage: event.dialogs.PokemonDialog
-  PSName: CallSummary
-
-0x10a:
-  Name: StoreMove
-  Parameters:
-    - Name: storage
+    - Name: pDlgSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: pForgetMoveIdx
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-    - Name: poke
+    - Name: partyIdx
       Type: ushort
-    - Name: moveIdx
+    - Name: newMoveId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: event.app.PokeApp
+  PSName: CallMoveReplace
+
+0x10a:
+  Name: PokePartyGetMove
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: partyIdx
+      Type: ushort
+    - Name: moveId
       Type: ushort
   Brief: "TODO"
   PSPackage: pokemon.PokeParty
   PSName: GetMove
 
 0x10b:
-  Name: LearnMove
+  Name: PokePartyLearnMove
   Parameters:
-    - Name: poke
+    - Name: partyIdx
       Type: ushort
     - Name: moveIdx
       Type: ushort
-    - Name: moveNo
+    - Name: moveId
       Type: ushort
-  Brief: "Teaches a move to a Pokémon. (wazaID == 0 > unlearn)"
+  Brief: "Teaches a move to a PokÃ©mon. (wazaID == 0 > unlearn)"
   PSPackage: pokemon.PokeParty
-  PSName: SetMove
+  PSName: LearnMove
 
 0x10c:
-  Name: GivePokemon
+  Name: PokePartyAdd
   Parameters:
-    - Name: success
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: species
-      Type: ushort
-    - Name: forme
-      Type: ushort
-    - Name: lvl
-      Type: ushort
-  Brief: "A convenience method for AddPoke."
-  PSPackage: pokemon.PokeParty
-  PSName: AddPoke
-
-0x10d:
-  Name: CheckPartyHasCondition
-  Parameters:
-    - Name: storage
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: cond
-      Type: ushort
-  Brief: "Returns the index of the first Pokémon that is either an egg (1) or fainted (2)."
-  PSPackage: pokemon.PokeParty
-  PSName: GetPokeByCondition
-
-0x10e:
-  Name: GivePokemonEx
-  Parameters:
-    - Name: success
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: species
-      Type: ushort
-    - Name: forme
-      Type: ushort
-    - Name: lvl
-      Type: ushort
-    - Name: abil
-      Type: ushort
-    - Name: gender
-      Type: ushort
-    - Name: shiny
-      Type: ushort
-    - Name: item
-      Type: ushort
-    - Name: ball
-      Type: ushort
-  Brief: "Adds a Pokémon to the player's party. Fails if the party is full."
-  PSPackage: pokemon.PokeParty
-  PSName: AddPokeEx
-
-0x10f:
-  Name: GiveEgg
-  Parameters:
-    - Name: success
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: species
-      Type: ushort
-    - Name: forme
-      Type: ushort
-  Brief: "Adds a Pokémon Egg to the player's party. Fails if the party is full."
-  PSPackage: pokemon.PokeParty
-  PSName: AddEgg
-
-0x110:
-  Name: StorePokemonField
-  Parameters:
-    - Name: storage
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: poke
-      Type: ushort
-    - Name: fieldID
-      Type: ushort
-  Brief: "TODO"
-  PSPackage: pokemon.PokeParty
-  PSName: GetParam
-
-0x111:
-  Name: SetPokeIV
-  Parameters:
-    - Name: poke
-      Type: ushort
-    - Name: fieldID
-      Type: ushort
-    - Name: value
-      Type: ushort
-  Brief: "Sets the IV of a Pokémon to a given value. The IV field is 70 to 75."
-  PSPackage: pokemon.PokeParty
-  PSName: SetIV
-
-0x112:
-  Name: GetPokeEVTotal
-  Parameters:
-    - Name: storage
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: poke
-      Type: ushort
-  Brief: "Returns the sum of all EVs of a party Pokémon."
-  PSPackage: pokemon.PokeParty
-  PSName: GetEVTotal
-
-0x113:
-  Name: GetIsPokeFromThisCartridge
-  Parameters:
-    - Name: result
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: poke
-      Type: ushort
-  Brief: "Checks if the party Pokémon belongs to the player and was caught in this game version."
-  PSPackage: pokemon.PokeParty
-  PSName: IsFromThisGame
-
-0x114:
-  Name: StoreSpeciesCountInParty
-  Parameters:
-    - Name: species
-      Type: ushort
-    - Name: storage
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-  Brief: "TODO"
-  PSPackage: pokemon.PokeParty
-  PSName: GetPokeCountBySpecies
-
-0x115:
-  Name: StorePokemonHasMove
-  Parameters:
-    - Name: storage
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: moveNo
-      Type: ushort
-    - Name: poke
-      Type: ushort
-  Brief: "Checks if a party Pokémon knows a given move."
-  PSPackage: pokemon.PokeParam
-  PSName: HasMove
-
-0x116:
-  Name: StorePartyHasMove
-  Parameters:
-    - Name: storage
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: moveNo
-      Type: ushort
-  Brief: "Checks if any party Pokémon knows a given move."
-  PSPackage: pokemon.PokeParty
-  PSName: HasMoveAny
-
-0x117:
-  Name: SetPokemonForme
-  Parameters:
-    - Name: poke
-      Type: ushort
-    - Name: forme
-      Type: ushort
-  Brief: "Changes a party Pokémon's forme."
-  PSPackage: pokemon.PokeParty
-  PSName: SetForme
-
-0x118:
-  Name: GetFirstPartyPokeOfSpecies
-  Parameters:
-    - Name: species
-      Type: ushort
-    - Name: success
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: bool
-    - Name: partyIdx
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-  Brief: "Gets the index of the first Pokémon of a species in the party."
-  PSPackage: pokemon.PokeParty
-  PSName: FindPokemon
-
-0x119:
-  Name: StoreIsPokemonFromWhiteForest
-  Parameters:
-    - Name: result
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: bool
-    - Name: poke
-      Type: ushort
-    - Type: ushort
-  Brief: "TODO"
-  PSPackage: pokemon.PokeParty
-  PSName: IsFromWhiteForest
-
-0x11a:
-  Name: StorePokemonHatchDate
-  Parameters:
-    - Name: year
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: month
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: day
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Type: ushort
-  Brief: "TODO"
-  PSPackage: pokemon.PokeParty
-  PSName: GetHatchDate/GetHatchYear/GetHatchMonth/GetHatchDay
-
-0x11b:
-  Name: StorePokemonTypes
-  Parameters:
-    - Name: type1
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: type2
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: poke
-      Type: ushort
-  Brief: "TODO"
-  PSPackage: pokemon.PokeParty
-  PSName: GetTypes/GetPrimaryType/GetSecondaryType
-
-0x11c:
-  Name: SetRotomForme
-  Parameters:
-    - Name: poke
-      Type: ushort
-    - Name: moveIdx
-      Type: ushort
-    - Name: forme
-      Type: ushort
-  Brief: "TODO"
-
-0x11d:
-  Name: SetFavePokemon
-  Parameters:
-    - Name: partyIdx
-      Type: ushort
-  Brief: "TODO"
-  PSPackage: player.TrainerCard
-  PSName: SetFavePokemon
-
-0x11e:
-  Name: SaveGymVictoryParty
-  Parameters:
-    - Name: badgeNo
-      Type: ushort
-  Brief: "TODO"
-  PSPackage: player.TrainerCard
-  PSName: SaveGymVictoryParty
-
-0x11f:
-  Name: PrepareGymVictoryPartyText
-  Parameters:
-    - Name: badgeNo
-      Type: ushort
-    - Name: pPartyCount
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-  Brief: "TODO"
-  PSPackage: system.text.WordSet
-  PSName: LoadGymVictoryParty
-
-0x120:
-  Name: SaveFieldTradePokemonData
-  Parameters:
-    - Name: partyIdx
-      Type: ushort
-    - Name: savePkmIdx
-      Type: ushort
-  Brief: "TODO"
-  PSPackage: event.FieldTrade
-  PSName: RememberPkmAs
-
-0x121:
-  Name: StorePokeBoxCount
-  Parameters:
-    - Name: dest
-      Type: ref ushort
-      IsReturn: true
-      ReturnType: ushort
-    - Name: cond
-      Type: ushort
-  Brief: "Gets the number of Pokémon in the PC box that match a certain criteria. (0/1/2/3/4/5=All/Normal/Ditto/Non-normal/Free slots/0)"
-  PSPackage: pokemon.PSS
-  PSName: GetCount
-
-0x122:
-  Name: AddMonToBoxAndStore
-  Parameters:
-    - Name: success
+    - Name: pSuccess
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
@@ -3001,14 +2844,27 @@
       Type: ushort
     - Name: level
       Type: ushort
-  Brief: "Adds a Pokémon to the Pokémon Storage System Box and registers it in the Pokédex. Fails if box is full (cap at 720)."
-  PSPackage: pokemon.PSS
-  PSName: UploadPokemon
+  Brief: "A convenience method for AddPoke."
+  PSPackage: pokemon.PokeParty
+  PSName: AddPkm
 
-0x123:
-  Name: AddMonToBoxFromVariables
+0x10d:
+  Name: PokePartyGetMemberByType
   Parameters:
-    - Name: success
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: cond
+      Type: ushort
+  Brief: "Returns the index of the first PokÃ©mon that is either an egg (1) or fainted (2)."
+  PSPackage: pokemon.PokeParty
+  PSName: GetMemberByType
+
+0x10e:
+  Name: PokePartyAddEx
+  Parameters:
+    - Name: pSuccess
       Type: ref ushort
       IsReturn: true
       ReturnType: bool
@@ -3022,29 +2878,335 @@
       Type: ushort
     - Name: gender
       Type: ushort
-    - Name: shiny
+    - Name: isShiny
+      Type: ushort
+    - Name: heldItem
+      Type: ushort
+    - Name: ball
+      Type: ushort
+  Brief: "Adds a PokÃ©mon to the player's party. Fails if the party is full."
+  PSPackage: pokemon.PokeParty
+  PSName: AddPkmEx
+
+0x10f:
+  Name: PokePartyAddEgg
+  Parameters:
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: species
+      Type: ushort
+    - Name: forme
+      Type: ushort
+  Brief: "Adds a PokÃ©mon Egg to the player's party. Fails if the party is full."
+  PSPackage: pokemon.PokeParty
+  PSName: AddEgg
+
+0x110:
+  Name: PokePartyGetParam
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: partyIdx
+      Type: ushort
+    - Name: paramId
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: GetParam
+
+0x111:
+  Name: PokePartySetIV
+  Parameters:
+    - Name: partyIdx
+      Type: ushort
+    - Name: paramId
+      Type: ushort
+    - Name: value
+      Type: ushort
+  Brief: "Sets the IV of a PokÃ©mon to a given value. The IV field is 70 to 75."
+  PSPackage: pokemon.PokeParty
+  PSName: SetIV
+
+0x112:
+  Name: PokePartyGetEVTotal
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: partyIdx
+      Type: ushort
+  Brief: "Returns the sum of all EVs of a party PokÃ©mon."
+  PSPackage: pokemon.PokeParty
+  PSName: GetEVTotal
+
+0x113:
+  Name: PokePartyIsOriginGame
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: partyIdx
+      Type: ushort
+  Brief: "Checks if the party PokÃ©mon belongs to the player and was caught in this game version."
+  PSPackage: pokemon.PokeParty
+  PSName: IsOriginGame
+
+0x114:
+  Name: PokePartyGetCountBySpecies
+  Parameters:
+    - Name: species
+      Type: ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+  Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: GetPkmCountBySpecies
+
+0x115:
+  Name: PokePartyHasMove
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: moveId
+      Type: ushort
+    - Name: partyIdx
+      Type: ushort
+  Brief: "Checks if a party PokÃ©mon knows a given move."
+  PSPackage: pokemon.PokeParty
+  PSName: HasMove
+
+0x116:
+  Name: PokePartyHasMoveAny
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: moveId
+      Type: ushort
+  Brief: "Checks if any party PokÃ©mon knows a given move."
+  PSPackage: pokemon.PokeParty
+  PSName: HasMoveAny
+
+0x117:
+  Name: PokePartySetForme
+  Parameters:
+    - Name: poke
+      Type: ushort
+    - Name: forme
+      Type: ushort
+  Brief: "Changes a party PokÃ©mon's forme."
+  PSPackage: pokemon.PokeParty
+  PSName: SetForme
+
+0x118:
+  Name: PokePartyFind
+  Parameters:
+    - Name: species
+      Type: ushort
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: pPartyIdx
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+  Brief: "Gets the index of the first PokÃ©mon of a species in the party."
+  PSPackage: pokemon.PokeParty
+  PSName: FindPkm
+
+0x119:
+  Name: PokePartyIsFromWhiteForest
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: poke
+      Type: ushort
+    - Name: locIndex
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: IsFromWhiteForest
+
+0x11a:
+  Name: PokePartyGetMetDate
+  Parameters:
+    - Name: pYear
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: pMonth
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: pDay
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: partyIdx
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: GetMetDate/GetMetYear/GetMetMonth/GetMetDay
+
+0x11b:
+  Name: PokePartyGetTypes
+  Parameters:
+    - Name: pType1
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: pType2
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: partyIdx
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: GetTypes/GetPrimaryType/GetSecondaryType
+
+0x11c:
+  Name: PokePartyChangeRotomForme
+  Parameters:
+    - Name: partyIdx
+      Type: ushort
+    - Name: signatureMoveSlot
+      Type: ushort
+    - Name: forme
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: ChangeRotomForme
+
+0x11d:
+  Name: TrainerCardSetFavePokemon
+  Parameters:
+    - Name: partyIdx
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: player.TrainerCard
+  PSName: SetFavePokemon
+
+0x11e:
+  Name: TrainerCardSaveGymVictoryParty
+  Parameters:
+    - Name: badgeNo
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: player.TrainerCard
+  PSName: SaveGymVictoryParty
+
+0x11f:
+  Name: WordSetGymVictoryParty
+  Parameters:
+    - Name: badgeNo
+      Type: ushort
+    - Name: pPartyCount
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+  Brief: "TODO"
+  PSPackage: system.text.WordSet
+  PSName: LoadGymVictoryParty
+
+0x120:
+  Name: FieldTradeSavePokemon
+  Parameters:
+    - Name: partyIdx
+      Type: ushort
+    - Name: savePkmIdx
+      Type: ushort
+  Brief: "TODO"
+  PSPackage: event.FieldTrade
+  PSName: RememberPkmAs
+
+0x121:
+  Name: BoxGetCount
+  Parameters:
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: mode
+      Type: ushort
+  Brief: "Gets the number of PokÃ©mon in the PC box that match a certain criteria. (0/1/2/3/4/5=All/Normal/Ditto/Non-normal/Free slots/0)"
+  PSPackage: pokemon.Box
+  PSName: GetPkmCount
+
+0x122:
+  Name: BoxAdd
+  Parameters:
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: species
+      Type: ushort
+    - Name: forme
+      Type: ushort
+    - Name: level
+      Type: ushort
+  Brief: "Adds a PokÃ©mon to the PokÃ©mon Storage System Box and registers it in the PokÃ©dex. Fails if box is full (cap at 720)."
+  PSPackage: pokemon.Box
+  PSName: AddPkm
+
+0x123:
+  Name: BoxAddEx
+  Parameters:
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: species
+      Type: ushort
+    - Name: forme
+      Type: ushort
+    - Name: level
+      Type: ushort
+    - Name: abilChoice
+      Type: ushort
+    - Name: gender
+      Type: ushort
+    - Name: isShiny
       Type: ushort
     - Name: heldItem
       Type: ushort
     - Name: ball
       Type: ushort
   Brief: "TODO"
-  PSPackage: pokemon.PSS
-  PSName: UploadPokemonEx
+  PSPackage: pokemon.Box
+  PSName: AddPkmEx
 
 0x124:
   Name: BMHndAnmPlay
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: handle
+      Type: ushort
+    - Name: anmIdx
+      Type: ushort
   Brief: "TODO"
   PSPackage: event.StaticProp
   PSName: HndPlayAnm
 
 0x125:
-  Name: DendouMachineAnmPlay
+  Name: BMPlayHOFMachineSeq
   Brief: "TODO"
   PSPackage: event.StaticProp
+  PSName: PlayHOFMachineSeq
 
 0x126:
   Name: BMChangeMdlID
@@ -3092,7 +3254,7 @@
   Parameters:
     - Name: handle
       Type: ushort
-    - Name: anmId
+    - Name: anmIdx
       Type: ushort
   Brief: "TODO"
   PSPackage: event.StaticProp
@@ -3108,13 +3270,17 @@
   PSName: HndWaitAnm
 
 0x12b:
-  Name: CMD_12B
+  Name: BMAnmPlayInv
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: bmType
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: z
+      Type: ushort
   Brief: "TODO"
   PSPackage: event.StaticProp
+  PSName: PlayAnmInv
 
 0x12c:
   Name: BMHndAnmPause
@@ -3141,7 +3307,7 @@
   PSName: SetVisible
 
 0x12e:
-  Name: BMAnmPlayDefault
+  Name: BMAnmPlay
   Parameters:
     - Name: bmType
       Type: ushort
@@ -3151,77 +3317,116 @@
       Type: ushort
   Brief: "TODO"
   PSPackage: event.StaticProp
-  PSName: PlayAnmDefault
+  PSName: PlayAnm
 
 0x12f:
-  Name: SpawnPokecenMonsballs
+  Name: PokecenPlayHealingSequence
   Parameters:
-    - Name: count
+    - Name: healPkmCount
       Type: ushort
   Brief: "TODO"
-  PSPackage: event.PC
-  PSName: SpawnMonsballs
+  PSPackage: event.facilities.Pokecen
+  PSName: PlayHealingSeq
 
 0x130:
-  Name: PlayPCLogonSFX
+  Name: PokecenPCOpen
   Brief: "TODO"
-  PSPackage: event.PC
-  PSName: PlaySFXLogon
+  PSPackage: event.facilities.Pokecen
+  PSName: PCOpen
 
 0x131:
-  Name: ShowPCText
+  Name: PokecenPCIdle
   Brief: "TODO"
-  PSPackage: event.PC
-  PSName: SetPCAnimation
+  PSPackage: event.facilities.Pokecen
+  PSName: PCIdle
 
 0x132:
-  Name: PlayPCLogoffSFX
+  Name: PokecenPCClose
   Parameters:
-    - Type: ushort
+    - Name: skipWaitForSfx
+      Type: ushort
   Brief: "TODO"
-  PSPackage: event.PC
-  PSName: PlaySFXLogoff
+  PSPackage: event.facilities.Pokecen
+  PSName: PCClose
 
 0x134:
-  Name: CMD_134
+  Name: CasteliaRushInit
   Brief: "TODO"
+  PSPackage: event.gimmick.C03
+  PSName: StreetRushInit
 
 0x135:
-  Name: CMD_135
+  Name: FieldSetWeather
+  Parameters:
+    - Name: type
+      Type: ushort
+    - Type: ushort
   Brief: "TODO"
+  PSPackage: system.Field
+  PSName: SetWeather
 
 0x136:
-  Name: CMD_136
+  Name: SaveDataWrite
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: system.SaveData
+  PSName: Write
 
 0x137:
-  Name: CMD_137
+  Name: SaveDataGetStatus
   Parameters:
-    - Type: ref ushort
+    - Name: pAnotherSavePresent
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: pSaveStatus
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: pLotsOfData
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: system.SaveData
+  PSName: GetStatus
 
 0x138:
-  Name: CMD_138
+  Name: GameCommDisconnect
   Parameters:
-    - Type: ref ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: pResult
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: system.GameComm
+  PSName: Disconnect
 
 0x139:
-  Name: CMD_139
+  Name: GameCommGetStatus
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: system.GameComm
+  PSName: GetStatus
 
 0x13a:
-  Name: CMD_13a
+  Name: GameCommCheckDSiWiFi
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: system.GameComm
+  PSName: CheckDSiWiFi
 
 0x13b:
   Name: CMD_13b
@@ -3242,152 +3447,248 @@
   Brief: "TODO"
 
 0x13f:
-  Name: CMD_13f
+  Name: EVCameraInit
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: Init
 
 0x140:
-  Name: CMD_140
+  Name: EVCameraEnd
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: End
 
 0x141:
-  Name: CMD_141
+  Name: EVCameraUnbind
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: Unbind
 
 0x142:
-  Name: CMD_142
+  Name: EVCameraRebind
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: Rebind
 
 0x143:
-  Name: CMD_143
+  Name: EVCameraMoveTo
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: int
-    - Type: int
-    - Type: int
-    - Type: int
-    - Type: ushort
+    - Name: pitch
+      Type: fx16
+    - Name: yaw
+      Type: fx16
+    - Name: distance
+      Type: fx32
+    - Name: targetX
+      Type: fx32
+    - Name: targetY
+      Type: fx32
+    - Name: targetZ
+      Type: fx32
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: MoveTo
 
 0x144:
-  Name: CMD_144
+  Name: EVCameraReturn
   Parameters:
-    - Type: const ushort
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: Return
 
 0x145:
-  Name: CMD_145
+  Name: EVCameraWait
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: Wait
 
 0x146:
-  Name: CMD_146
+  Name: EVCameraMoveToCommon
   Parameters:
-    - Type: const ushort
-    - Type: const ushort
+    - Name: id
+      Type: const ushort
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: MoveToCommon
 
 0x147:
-  Name: CMD_147
+  Name: EVCameraMoveToDefault
   Parameters:
-    - Type: const ushort
+    - Name: interval
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: MoveToDefault
 
 0x148:
-  Name: CMD_148
+  Name: EVCameraShake
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: intensityH
+      Type: ushort
+    - Name: intensityW
+      Type: ushort
+    - Name: loopLength
+      Type: ushort
+    - Name: loopCount
+      Type: ushort
+    - Name: decayX
+      Type: ushort
+    - Name: decayY
+      Type: ushort
+    - Name: decayStartLoop
+      Type: ushort
+    - Name: decayStepLength
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.EVCamera
+  PSName: Shake
 
 0x149:
-  Name: CMD_149
+  Name: CallFriendlyShopBuy
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
+    - Name: shopId
+      Type: ushort
+    - Name: unused
+      Type: ref ushort
   Brief: "TODO"
+  PSPackage: event.Shop
+  PSName: Call
 
 0x14a:
-  Name: CMD_14a
+  Name: FieldOpen
   Brief: "TODO"
+  PSPackage: system.Field
+  PSName: Open
 
 0x14b:
-  Name: CMD_14b
+  Name: FieldClose
   Brief: "TODO"
+  PSPackage: system.Field
+  PSName: Close
 
 0x14c:
-  Name: CMD_14c
+  Name: RTFreeUserHeap
   Brief: "TODO"
+  PSPackage: system.Runtime
+  PSName: FreeUserHeap
 
 0x14d:
-  Name: CMD_14d
+  Name: CallRecordSystem
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
+    - Name: mode
+      Type: ushort
+    - Name: pForceQuit
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.app.AppCall
+  PSName: CallRecordSystem
 
 0x14e:
-  Name: CMD_14e
+  Name: CallBag
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: mode
+      Type: ushort
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: pSelectedItem
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.app.AppCall
+  PSName: CallBag
 
 0x14f:
-  Name: CMD_14f
+  Name: CallPC
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
+    - Name: pForceQuit
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: mode
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.app.AppCall
+  PSName: CallPC
 
 0x150:
-  Name: CMD_150
+  Name: CallMailbox
   Parameters:
-    - Type: ref ushort
+    - Name: pForceQuit
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.app.AppCall
+  PSName: CallMailbox
 
 0x151:
-  Name: CMD_151
+  Name: CallPokedexDiploma
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: diplomaId
+      Type: ushort
+    - Name: soundOff
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.app.AppCall
+  PSName: CallPokedexDiploma
 
 0x152:
-  Name: CMD_152
+  Name: CallGeonet
   Brief: "TODO"
+  PSPackage: event.app.AppCall
+  PSName: CallGeonet
 
 0x153:
-  Name: CMD_153
+  Name: CallPoke3Select
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.app.PokeApp
+  PSName: CallPoke3Select
 
 0x154:
-  Name: CMD_154
+  Name: Call3DDemo
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: seqId
+      Type: ushort
+    - Name: userParam
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.FieldDemo
+  PSName: Call3DDemo
 
 0x155:
-  Name: CMD_155
+  Name: CallXTransceiver
   Parameters:
-    - Type: ushort
+    - Name: sceneId
+      Type: ushort
     - Type: const ushort
   Brief: "TODO"
+  PSPackage: event.FieldDemo
+  PSName: CallXTransceiver
 
 0x156:
-  Name: CMD_156
+  Name: CallGameClear
   Parameters:
-    - Type: ushort
+    - Name: repeated
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.FieldDemo
+  PSName: CallGameClear
 
 0x157:
   Name: CMD_157
@@ -3424,33 +3725,43 @@
   Brief: "TODO"
 
 0x15d:
-  Name: CMD_15d
+  Name: NetConnectWiFiClub
   Brief: "TODO"
+  PSPackage: event.app.NetApp
+  PSName: ConnectWiFiClub
 
 0x15e:
-  Name: CMD_15e
+  Name: NetConnectGTS
   Brief: "TODO"
+  PSPackage: event.app.NetApp
+  PSName: ConnectGTS
 
 0x15f:
-  Name: CMD_15f
+  Name: CMD_15F
   Brief: "TODO"
 
 0x160:
-  Name: CMD_160
+  Name: NetConnectWiFiBattle
   Parameters:
     - Type: ushort
     - Type: ushort
   Brief: "TODO"
+  PSPackage: event.app.NetApp
+  PSName: ConnectWiFiBattle
 
 0x161:
-  Name: CMD_161
+  Name: NetConnectBattleVideo
   Parameters:
     - Type: ushort
   Brief: "TODO"
+  PSPackage: event.app.NetApp
+  PSName: ConnectBattleVideo
 
 0x162:
-  Name: CMD_162
+  Name: NetConnectGTSNegotiation
   Brief: "TODO"
+  PSPackage: event.app.NetApp
+  PSName: ConnectGTSNegotiation
 
 0x163:
   Name: CMD_163
@@ -3589,38 +3900,59 @@
   Brief: "TODO"
 
 0x178:
-  Name: CMD_178
+  Name: CallWildBattle
   Parameters:
-    - Type: ref ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: species
+      Type: ushort
+    - Name: level
+      Type: ushort
+    - Name: flags
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: CallWildBattle
 
 0x179:
-  Name: CMD_179
+  Name: CallWildBattleEnd
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: EndWildBattle
 
 0x17a:
-  Name: CMD_17a
+  Name: CallWildLose
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: CallWildLose
 
 0x17b:
-  Name: CMD_17b
+  Name: WildBattleIsVictory
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: IsWildVictory
 
 0x17c:
-  Name: CMD_17c
+  Name: WildBattleGetResult
   Parameters:
-    - Type: const ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: GetWildBattleResult
 
 0x17d:
   Name: CMD_17d
   Parameters:
     - Type: const ushort
   Brief: "TODO"
+  PSPackage: event.Battle
+  PSName: CallCaptureDemo
 
 0x17e:
   Name: CMD_17e
@@ -3823,22 +4155,31 @@
   Brief: "TODO"
 
 0x19f:
-  Name: CMD_19f
+  Name: PlayFieldEffect
   Parameters:
-    - Type: ushort
+    - Name: effectNo
+      Type: const ushort
   Brief: "TODO"
+  PSPackage: event.Effects
+  PSName: Play
 
 0x1a0:
-  Name: CMD_1a0
+  Name: PlayHMCutInEffect
   Parameters:
-    - Type: ushort
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.HMSequences
+  PSName: PlayCutIn
 
 0x1a1:
-  Name: CMD_1a1
+  Name: PlayAlderFlyEffect
   Parameters:
-    - Type: ushort
+    - Name: actorId
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.actors.ActorSequences
+  PSName: AlderFly
 
 0x1a2:
   Name: CMD_1a2
@@ -3996,69 +4337,105 @@
   Brief: "TODO"
 
 0x1be:
-  Name: CMD_1be
+  Name: FieldTradeStart
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: tradeNo
+      Type: ushort
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.FieldTrade
+  PSName: Start
 
 0x1bf:
-  Name: CMD_1bf
+  Name: FieldTradeCheck
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: tradeNo
+      Type: ushort
+    - Name: partyIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.FieldTrade
+  PSName: IsEligible
 
 0x1c1:
-  Name: CMD_1c1
+  Name: ElevatorSetTablePtr
   Parameters:
-    - Type: int
+    - Name: offset
+      Type: int
   Brief: "TODO"
+  PSPackage: event.Elevator
+  PSName: SetTablePtr
 
 0x1c2:
-  Name: CMD_1c2
+  Name: ElevatorBuildListMenu
   Brief: "TODO"
+  PSPackage: event.Elevator
+  PSName: BuildListMenu
 
 0x1c3:
-  Name: CMD_1c3
+  Name: ElevatorChangeMap
   Parameters:
-    - Type: ushort
+    - Name: floorIdx
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.Elevator
+  PSName: CallWarp
 
 0x1c4:
-  Name: CMD_1c4
+  Name: PokeDexIsComplete
   Parameters:
-    - Type: ref ushort
-    - Type: ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
+    - Name: mode
+      Type: ushort
   Brief: "TODO"
+  PSPackage: pokemon.Pokedex
+  PSName: IsComplete
 
 0x1c5:
-  Name: CMD_1c5
+  Name: PokeDexGetEvaluationParams
   Parameters:
-    - Type: ushort
-    - Type: ref ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: mode
+      Type: ushort
+    - Name: destMsgId
+      Type: ref ushort
+    - Name: destCaughtNo
+      Type: ref ushort
+    - Name: destMEId
+      Type: ref ushort
   Brief: "TODO"
+  PSPackage: pokemon.Pokedex
+  PSName: GetEvaluationParams
 
 0x1c6:
-  Name: CMD_1c6
-  Parameters:
-    - Type: ushort
-    - Type: ref ushort
-    - Type: ref ushort
+  Name: PokeDexGiveNational
   Brief: "TODO"
+  PSPackage: pokemon.Pokedex
+  PSName: EnableNational
 
 0x1c7:
-  Name: CMD_1c7
+  Name: PokeDexHaveNational
   Parameters:
-    - Type: ref ushort
+    - Name: dest
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: pokemon.Pokedex
+  PSName: IsNationalEnabled
 
 0x1c8:
-  Name: CMD_1c8
+  Name: PokeDexEnable
   Brief: "TODO"
+  PSPackage: pokemon.Pokedex
+  PSName: EnableRegional
 
 0x1c9:
   Name: CMD_1c9
@@ -4148,41 +4525,69 @@
   Brief: "TODO"
 
 0x1d7:
-  Name: CMD_1d7
+  Name: ObjInitProxyGPos
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: proxyIndex
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: z
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.ObjInit
+  PSName: SetProxyGPos
 
 0x1d8:
-  Name: CMD_1d8
+  Name: ObjInitWarpGPos
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: warpIndex
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: z
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.ObjInit
+  PSName: SetWarpGPos
 
 0x1d9:
-  Name: CMD_1d9
+  Name: ObjInitNPCGPos
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
+    - Name: npcIndex
+      Type: ushort
+    - Name: dir
+      Type: ushort
+    - Name: x
+      Type: ushort
+    - Name: y
+      Type: ushort
+    - Name: z
+      Type: ushort
   Brief: "TODO"
+  PSPackage: event.ObjInit
+  PSName: SetNPCGPos
 
 0x1da:
-  Name: CMD_1da
+  Name: CallPhraseSelect
   Parameters:
-    - Type: ushort
+    - Name: questionId
+      Type: ushort
+    - Name: pAnswerId
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
     - Type: ref ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: event.app.AppCall
+  PSName: CallPhraseSelect
 
 0x1db:
   Name: CMD_1db
@@ -4652,13 +5057,23 @@
   Brief: "TODO"
 
 0x220:
-  Name: CMD_220
+  Name: PokePartyFindEx
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ref ushort
-    - Type: ref ushort
+    - Name: species
+      Type: ushort
+    - Name: forme
+      Type: ushort
+    - Name: pPartyIdx
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: ushort
+    - Name: pSuccess
+      Type: ref ushort
+      IsReturn: true
+      ReturnType: bool
   Brief: "TODO"
+  PSPackage: pokemon.PokeParty
+  PSName: FindPkmEx
 
 0x221:
   Name: CMD_221
@@ -4695,18 +5110,22 @@
 0x225:
   Name: CMD_225
   Parameters:
-    - Type: ref ushort
+    - Type: ushort
+    - Type: ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x226:
   Name: CMD_226
   Parameters:
-    - Type: ref ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x227:
   Name: CMD_227
   Parameters:
+    - Type: ushort
+    - Type: ushort
     - Type: ushort
     - Type: ushort
   Brief: "TODO"
@@ -4715,7 +5134,7 @@
   Name: CMD_228
   Parameters:
     - Type: ushort
-    - Type: ref ushort
+    - Type: ushort
   Brief: "TODO"
 
 0x229:
@@ -4729,14 +5148,13 @@
   Name: CMD_22a
   Parameters:
     - Type: ushort
-    - Type: ref ushort
   Brief: "TODO"
 
 0x22b:
   Name: CMD_22b
   Parameters:
     - Type: ushort
-    - Type: ushort
+    - Type: ref ushort
   Brief: "TODO"
 
 0x22d:

@@ -1424,7 +1424,7 @@
       Type: ushort
     - Name: flags
       Type: ushort
-  Brief: "TODO"
+  Brief: "TODO - Flags: 1 - Continue after lose"
   PSPackage: event.Battle
   PSName: CallTrainerBattle
 
@@ -1575,7 +1575,7 @@
       Type: ushort
     - Name: savePkmIdx
       Type: ushort
-  Brief: "Starts a trainer battle using a previously traded PokÈmon as the opponent."
+  Brief: "Starts a trainer battle using a previously traded Pok√©mon as the opponent."
   PSPackage: event.Battle
   PSName: CallTradedBattle
 
@@ -2652,7 +2652,7 @@
       Type: ushort
     - Name: value
       Type: const ushort
-  Brief: "Manipulates a PokÈmon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
+  Brief: "Manipulates a Pok√©mon's Happiness value. Mode 0/1/2 means Set/Add/Subtract."
   PSPackage: pokemon.PokeParty
   PSName: AdjustHappiness
 
@@ -2728,7 +2728,7 @@
       ReturnType: ushort
     - Name: mode
       Type: ushort
-  Brief: "Returns the number of PokÈmon in the party that match a certain conditon. (All/NonEgg/Battling-capable/Eggs/SanityEggs)"
+  Brief: "Returns the number of Pok√©mon in the party that match a certain conditon. (All/NonEgg/Battling-capable/Eggs/SanityEggs)"
   PSPackage: pokemon.PokeParty
   PSName: GetPkmCount
 
@@ -2749,7 +2749,7 @@
       Type: ushort
     - Name: transition
       Type: ushort
-  Brief: "Pops up a dialog for renaming a party PokÈmon and stores its result."
+  Brief: "Pops up a dialog for renaming a party Pok√©mon and stores its result."
   PSPackage: event.app.PokeApp
   PSName: CallRename
 
@@ -2839,7 +2839,7 @@
       Type: ushort
     - Name: moveId
       Type: ushort
-  Brief: "Teaches a move to a PokÈmon. (wazaID == 0 > unlearn)"
+  Brief: "Teaches a move to a Pok√©mon. (wazaID == 0 > unlearn)"
   PSPackage: pokemon.PokeParty
   PSName: LearnMove
 
@@ -2869,7 +2869,7 @@
       ReturnType: ushort
     - Name: cond
       Type: ushort
-  Brief: "Returns the index of the first PokÈmon that is either an egg (1) or fainted (2)."
+  Brief: "Returns the index of the first Pok√©mon that is either an egg (1) or fainted (2)."
   PSPackage: pokemon.PokeParty
   PSName: GetMemberByType
 
@@ -2896,7 +2896,7 @@
       Type: ushort
     - Name: ball
       Type: ushort
-  Brief: "Adds a PokÈmon to the player's party. Fails if the party is full."
+  Brief: "Adds a Pok√©mon to the player's party. Fails if the party is full."
   PSPackage: pokemon.PokeParty
   PSName: AddPkmEx
 
@@ -2911,7 +2911,7 @@
       Type: ushort
     - Name: forme
       Type: ushort
-  Brief: "Adds a PokÈmon Egg to the player's party. Fails if the party is full."
+  Brief: "Adds a Pok√©mon Egg to the player's party. Fails if the party is full."
   PSPackage: pokemon.PokeParty
   PSName: AddEgg
 
@@ -2939,7 +2939,7 @@
       Type: ushort
     - Name: value
       Type: ushort
-  Brief: "Sets the IV of a PokÈmon to a given value. The IV field is 70 to 75."
+  Brief: "Sets the IV of a Pok√©mon to a given value. The IV field is 70 to 75."
   PSPackage: pokemon.PokeParty
   PSName: SetIV
 
@@ -2952,7 +2952,7 @@
       ReturnType: ushort
     - Name: partyIdx
       Type: ushort
-  Brief: "Returns the sum of all EVs of a party PokÈmon."
+  Brief: "Returns the sum of all EVs of a party Pok√©mon."
   PSPackage: pokemon.PokeParty
   PSName: GetEVTotal
 
@@ -2965,7 +2965,7 @@
       ReturnType: bool
     - Name: partyIdx
       Type: ushort
-  Brief: "Checks if the party PokÈmon belongs to the player and was caught in this game version."
+  Brief: "Checks if the party Pok√©mon belongs to the player and was caught in this game version."
   PSPackage: pokemon.PokeParty
   PSName: IsOriginGame
 
@@ -2993,7 +2993,7 @@
       Type: ushort
     - Name: partyIdx
       Type: ushort
-  Brief: "Checks if a party PokÈmon knows a given move."
+  Brief: "Checks if a party Pok√©mon knows a given move."
   PSPackage: pokemon.PokeParty
   PSName: HasMove
 
@@ -3006,7 +3006,7 @@
       ReturnType: bool
     - Name: moveId
       Type: ushort
-  Brief: "Checks if any party PokÈmon knows a given move."
+  Brief: "Checks if any party Pok√©mon knows a given move."
   PSPackage: pokemon.PokeParty
   PSName: HasMoveAny
 
@@ -3017,7 +3017,7 @@
       Type: ushort
     - Name: forme
       Type: ushort
-  Brief: "Changes a party PokÈmon's forme."
+  Brief: "Changes a party Pok√©mon's forme."
   PSPackage: pokemon.PokeParty
   PSName: SetForme
 
@@ -3034,7 +3034,7 @@
       Type: ref ushort
       IsReturn: true
       ReturnType: ushort
-  Brief: "Gets the index of the first PokÈmon of a species in the party."
+  Brief: "Gets the index of the first Pok√©mon of a species in the party."
   PSPackage: pokemon.PokeParty
   PSName: FindPkm
 
@@ -3155,7 +3155,7 @@
       ReturnType: ushort
     - Name: mode
       Type: ushort
-  Brief: "Gets the number of PokÈmon in the PC box that match a certain criteria. (0/1/2/3/4/5=All/Normal/Ditto/Non-normal/Free slots/0)"
+  Brief: "Gets the number of Pok√©mon in the PC box that match a certain criteria. (0/1/2/3/4/5=All/Normal/Ditto/Non-normal/Free slots/0)"
   PSPackage: pokemon.Box
   PSName: GetPkmCount
 
@@ -3172,7 +3172,7 @@
       Type: ushort
     - Name: level
       Type: ushort
-  Brief: "Adds a PokÈmon to the PokÈmon Storage System Box and registers it in the PokÈdex. Fails if box is full (cap at 720)."
+  Brief: "Adds a Pok√©mon to the Pok√©mon Storage System Box and registers it in the Pok√©dex. Fails if box is full (cap at 720)."
   PSPackage: pokemon.Box
   PSName: AddPkm
 
@@ -3569,13 +3569,13 @@
 0x14a:
   Name: FieldOpen
   Brief: "Closes the Field module to free up resources for standalone events such as 3D cutscenes."
-  PSPackage: system.FieldControl
+  PSPackage: system.Field
   PSName: Open
 
 0x14b:
   Name: FieldClose
   Brief: "Re-opens the Field module."
-  PSPackage: system.FieldControl
+  PSPackage: system.Field
   PSName: Close
 
 0x14c:
@@ -3899,7 +3899,7 @@
 
 0x179:
   Name: CallCaptureDemo
-  Brief: "Calls the game-specific PokÈmon catching tutorial."
+  Brief: "Calls the game-specific Pok√©mon catching tutorial."
   PSPackage: event.Battle
   PSName: CallCaptureDemo
 
@@ -3907,7 +3907,7 @@
   Name: CMD_17A
   Parameters:
     - Type: ushort
-  Brief: "TODO"
+  Brief: "Used for gatehouse electric board gimmick."
 
 0x17b:
   Name: CMD_17B
@@ -4953,33 +4953,45 @@
 0x20e:
   Name: CMD_20E
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: isReturning
+      Type: ushort
+    - Name: targetX
+      Type: ushort
+    - Name: targetY
+      Type: ushort
+    - Name: targetZ
+      Type: ushort
+    - Name: arcYMaxPos
+      Type: ushort
+    - Name: speed
+      Type: ushort
+  Brief: "Plays an animation of tossing a Pok√© Ball to specified co-ordinates. Needs the gimmick from places like Pledge Grove or Caf√© Sonata in Castelia City to work."
 
 0x20f:
   Name: CMD_20F
   Parameters:
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-    - Type: ushort
-  Brief: "TODO"
+    - Name: isReturning
+      Type: ushort
+    - Name: targetX
+      Type: ushort
+    - Name: targetY
+      Type: ushort
+    - Name: targetZ
+      Type: ushort
+  Brief: "Plays an animation of opening a Pok√© Ball at specified co-ordinates. Needs the gimmick from places like Pledge Grove or Caf√© Sonata in Castelia City to work."
 
 0x210:
   Name: CMD_210
   Parameters:
-    - Type: ushort
+    - Name: isReturning
+      Type: ushort
   Brief: "TODO"
 
 0x211:
   Name: CMD_211
   Parameters:
-    - Type: ushort
+    - Name: isReturning
+      Type: ushort
   Brief: "TODO"
 
 0x212:
@@ -5362,14 +5374,17 @@
 0x240:
   Name: CMD_240
   Parameters:
-    - Type: ushort
-    - Type: ushort
+    - Name: vol (?)
+      Type: ushort
+    - Name: interval (?)
+      Type: ushort
   Brief: "TODO"
 
 0x241:
   Name: CMD_241
   Parameters:
-    - Type: ushort
+    - Name: interval (?)
+      Type: ushort
   Brief: "TODO"
 
 0x245:
@@ -5483,7 +5498,7 @@
       Type: ushort
     - Name: pathfindingType
       Type: ushort
-  Brief: "TODO"
+  Brief: "Flags - 1=Ignore NPCs, 2=Ignore Collisions, 4=??? (Might be related to matrix patches?)"
   PSPackage: event.actors.Actor
   PSName: WalkRoute
 
