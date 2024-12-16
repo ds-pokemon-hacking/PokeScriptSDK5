@@ -397,7 +397,7 @@
       Type: ref ushort
   Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value"
   PSPackage: system.EventWorks
-  PSName: WorkGet
+  PSName: Get
 
 0x2a:
   Name: WorkSet
@@ -408,7 +408,7 @@
       Type: ushort
   Brief: "Copies the value in src to the variable dest. Also known as: var.value = src.value (?)"
   PSPackage: system.EventWorks
-  PSName: WorkSet
+  PSName: Set
 
 0x2b:
   Name: WorkMul
