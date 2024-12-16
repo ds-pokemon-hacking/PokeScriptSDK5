@@ -5374,16 +5374,16 @@
 0x240:
   Name: CMD_240
   Parameters:
-    - Name: vol (?)
+    - Name: vol
       Type: ushort
-    - Name: interval (?)
+    - Name: interval
       Type: ushort
   Brief: "TODO"
 
 0x241:
   Name: CMD_241
   Parameters:
-    - Name: interval (?)
+    - Name: interval
       Type: ushort
   Brief: "TODO"
 
